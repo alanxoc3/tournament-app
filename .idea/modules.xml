@@ -3,13 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-<<<<<<< HEAD
       <module fileurl="file://$PROJECT_DIR$/fencing-tournament.iml" filepath="$PROJECT_DIR$/fencing-tournament.iml" />
-=======
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/tournament-app.iml" filepath="$PROJECT_DIR$/tournament-app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/tournament-app.iml" filepath="$PROJECT_DIR$/tournament-app.iml" />
->>>>>>> 74dcf691864e047434d3324125d21fcc00994e64
     </modules>
   </component>
 </project>
