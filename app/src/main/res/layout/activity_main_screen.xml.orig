@@ -7,7 +7,8 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="cs246.fencing_tournament.MainScreen">
+    tools:context="cs246.fencing_tournament.MainScreen"
+    android:id="@+id/it">
 
     <TextView
         android:layout_width="wrap_content"
@@ -15,9 +16,12 @@
 <<<<<<< HEAD
         android:text="NO DONT DO IT"
 =======
-        android:text="Hello no one!"
->>>>>>> d236fef1229332d40f448182e99dd57922962783
+        android:text="Goodbye No One!"
+>>>>>>> cb43752c92953fc7ca5f8452809ed852ffb8ef37
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="139dp" />
+        android:layout_marginTop="139dp"
+        android:id="@+id/textView2" />
+
+
 </RelativeLayout>
