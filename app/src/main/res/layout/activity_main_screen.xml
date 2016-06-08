@@ -41,5 +41,6 @@
         android:text="Enter Contestants"
         android:id="@+id/enterContestant"
         android:layout_below="@+id/poolView"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:onClick="setContestants" />
 </RelativeLayout>

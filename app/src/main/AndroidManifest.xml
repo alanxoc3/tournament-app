@@ -15,7 +15,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".EnterContestant"></activity>
+        <activity android:name=".EnterContestant" />
     </application>
 
 </manifest>

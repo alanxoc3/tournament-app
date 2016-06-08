@@ -37,14 +37,18 @@ public class MainScreen extends AppCompatActivity {
 
             }
         });
-        enterContestant.setOnClickListener(new View.OnClickListener() {
+        /*enterContestant.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent action = new Intent(MainScreen.this,EnterContestant.class);
-
                 startActivity (action);
             }
-        });
+        });*/
+    }
+
+    public void setContestants(View v){
+        Intent action = new Intent(MainScreen.this,EnterContestant.class);
+        startActivity (action);
     }
 
     @Override
