@@ -1,5 +1,6 @@
 package cs246.fencing_tournament;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -39,7 +40,9 @@ public class MainScreen extends AppCompatActivity {
         enterContestant.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent action = new Intent(MainScreen.this,EnterContestant.class);
 
+                startActivity (action);
             }
         });
     }
