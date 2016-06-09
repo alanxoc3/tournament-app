@@ -17,7 +17,8 @@
         android:text="View Contestants"
         android:id="@+id/viewContestant"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:onClick="viewContestants" />
 
     <Button
         android:layout_width="wrap_content"
@@ -26,14 +27,16 @@
         android:id="@+id/bracketView"
         android:layout_below="@+id/viewContestant"
 
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:onClick="startPool" />
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Pool View"
         android:id="@+id/poolView"
         android:layout_below="@+id/bracketView"
-        android:layout_alignStart="@+id/enterContestant" />
+        android:layout_alignStart="@+id/enterContestant"
+        android:onClick="startBracket" />
 
     <Button
         android:layout_width="wrap_content"
