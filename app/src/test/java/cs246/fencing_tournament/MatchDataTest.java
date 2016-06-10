@@ -1,17 +1,11 @@
 package cs246.fencing_tournament;
 
-import android.test.InstrumentationTestCase;
-
 import org.junit.Test;
+import static org.junit.Assert.*;
 
-/**
- * Created by alanxoc3 on 6/8/16.
- */
-@Test
-public class MatchDataTest extends InstrumentationTestCase {
+public class MatchDataTest {
+	@Test
     public void test() throws Exception {
-        int bob = 3;
-        int reality = 4;
-        assertEquals(bob, 7);
+
     }
 }
