@@ -19,23 +19,25 @@ public class MatchData {
     }
 
     public void setId1(int x){
-
+        id1 = x;
     }
 
-    public void setP1Score(){
-
+    public void setP1Score(int x){
+        p1Score = x;
     }
 
-    public void setId2(){
-
+    public void setId2(int x){
+        id2 = x;
     }
 
-    public void setP2Score(){
-
+    public void setP2Score(int x){
+        p2Score = x;
     }
-    public void setVicId(){
 
+    public void setVicId(int x){
+        vicId = x;
     }
+
     public int getId1(){
         return id1;
     }
