@@ -2,9 +2,7 @@ package cs246.fencing_tournament;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 
 public class MainScreen extends AppCompatActivity {
 
@@ -12,7 +10,7 @@ public class MainScreen extends AppCompatActivity {
 
     }
 
-    public void startPool(View v){
+    public void startPool(View v) {
 
     }
 
@@ -20,7 +18,8 @@ public class MainScreen extends AppCompatActivity {
 
     }
 
-    public void setContestants(View v){
-        Intent action = new Intent(MainScreen.this,EnterContestant.class);
-        startActivity (action);
+    public void setContestants(View v) {
+        Intent action = new Intent(MainScreen.this, EnterContestant.class);
+        startActivity(action);
     }
+}
