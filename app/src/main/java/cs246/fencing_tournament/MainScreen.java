@@ -24,10 +24,3 @@ public class MainScreen extends AppCompatActivity {
         Intent action = new Intent(MainScreen.this,EnterContestant.class);
         startActivity (action);
     }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_screen);
-    }
-}
