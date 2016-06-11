@@ -4,7 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/canvastest/canvastest.iml" filepath="$PROJECT_DIR$/canvastest/canvastest.iml" />
-      <module fileurl="file://$PROJECT_DIR$/fencing-tournament.iml" filepath="$PROJECT_DIR$/fencing-tournament.iml" />
+      <module fileurl="file://$PROJECT_DIR$/tournament-app.iml" filepath="$PROJECT_DIR$/tournament-app.iml" />
     </modules>
   </component>
 </project>
