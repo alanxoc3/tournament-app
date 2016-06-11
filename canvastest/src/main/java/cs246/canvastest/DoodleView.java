@@ -4,7 +4,9 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Path;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.View;
 
 /**
@@ -12,6 +14,7 @@ import android.view.View;
  */
 public class DoodleView extends View {
     private Paint _paintDoodle;
+    private Path _path;
 
     public DoodleView(Context context) {
         super(context);
@@ -30,7 +33,9 @@ public class DoodleView extends View {
 
     private void init(AttributeSet attrs, int defStyleAttr) {
         _paintDoodle = new Paint();
+        _path = new Path();
         _paintDoodle.setColor(Color.RED);
+        _paintDoodle.setAntiAlias(true);
 
     }
 
@@ -38,5 +43,29 @@ public class DoodleView extends View {
     public void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         canvas.drawLine(0, 0, getWidth(), getHeight(), _paintDoodle);
+        canvas.drawPath(_path, _paintDoodle);
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent motionEvent) {
+        float touchX = motionEvent.getX();
+        float touchY = motionEvent.getY();
+
+        switch(motionEvent.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                _path.moveTo(touchX, touchY);
+                break;
+            case MotionEvent.ACTION_MOVE:
+                _path.lineTo(touchX, touchY);
+                break;
+            case MotionEvent.ACTION_UP:
+                break;
+        }
+
+        // Forces a view draw.
+        invalidate();
+
+        // Because we handled the touch event.
+        return true;
     }
 }
