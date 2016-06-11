@@ -1,4 +1,4 @@
-package cs246.fencing_tournament;
+package cs246.canvastest;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;
