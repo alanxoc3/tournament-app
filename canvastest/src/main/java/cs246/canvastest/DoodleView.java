@@ -14,6 +14,7 @@ import android.view.View;
  */
 public class DoodleView extends View {
     private Paint _paintDoodle;
+    private Paint _paintRect;
     private Path _path;
 
     public DoodleView(Context context) {
@@ -33,15 +34,26 @@ public class DoodleView extends View {
 
     private void init(AttributeSet attrs, int defStyleAttr) {
         _paintDoodle = new Paint();
+        _paintRect = new Paint();
+
         _path = new Path();
         _paintDoodle.setColor(Color.RED);
         _paintDoodle.setAntiAlias(true);
+        _paintDoodle.setStyle(Paint.Style.STROKE);
+
+        _paintRect.setColor(Color.BLUE);
+        _paintRect.setAntiAlias(true);
+        _paintRect.setStyle(Paint.Style.FILL);
 
     }
 
     @Override
     public void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+
+        float pad = 30;
+        canvas.drawRect(0 + pad, 0 + pad, getWidth() - pad, getHeight() - pad, _paintRect);
+
         canvas.drawLine(0, 0, getWidth(), getHeight(), _paintDoodle);
         canvas.drawPath(_path, _paintDoodle);
     }
