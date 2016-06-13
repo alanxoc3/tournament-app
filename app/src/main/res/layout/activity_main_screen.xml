@@ -7,7 +7,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="cs246.fencing_tournament.MainScreen"
+    tools:context=".views.MainScreen"
     android:id="@+id/it">
 
     <Button
@@ -28,7 +28,7 @@
         android:layout_below="@+id/viewContestant"
 
         android:layout_alignParentStart="true"
-        android:onClick="startPool"
+        android:onClick="startBracket"
         android:enabled="true" />
     <Button
         android:layout_width="wrap_content"
@@ -37,7 +37,7 @@
         android:id="@+id/poolView"
         android:layout_below="@+id/bracketView"
         android:layout_alignStart="@+id/enterContestant"
-        android:onClick="startBracket"
+        android:onClick="startPool"
         android:enabled="true" />
 
     <Button

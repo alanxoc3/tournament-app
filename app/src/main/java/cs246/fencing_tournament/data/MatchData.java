@@ -1,4 +1,4 @@
-package cs246.fencing_tournament;
+package cs246.fencing_tournament.data;
 
 /**
  * Created by alanxoc3 on 6/8/16.

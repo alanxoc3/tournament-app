@@ -1,6 +1,9 @@
 package cs246.fencing_tournament;
 
 import org.junit.Test;
+
+import cs246.fencing_tournament.data.ContestantData;
+
 import static org.junit.Assert.*;
 
 /**

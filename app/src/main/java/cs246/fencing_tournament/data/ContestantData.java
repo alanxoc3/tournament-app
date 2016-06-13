@@ -1,4 +1,4 @@
-package cs246.fencing_tournament;
+package cs246.fencing_tournament.data;
 
 import java.util.List;
 import java.util.ArrayList;

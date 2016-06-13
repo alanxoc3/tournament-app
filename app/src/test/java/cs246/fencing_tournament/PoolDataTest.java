@@ -3,7 +3,8 @@ package cs246.fencing_tournament;
 import org.junit.Test;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import cs246.fencing_tournament.data.MatchData;
+import cs246.fencing_tournament.data.PoolData;
 
 /**
  * Created by Austin on 6/10/2016.

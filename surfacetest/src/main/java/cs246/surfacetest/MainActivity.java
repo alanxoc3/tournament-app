@@ -121,7 +121,5 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
             t = new Thread(this);
             t.start();
         }
-
     }
-
 }

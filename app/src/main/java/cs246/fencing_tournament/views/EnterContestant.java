@@ -1,9 +1,11 @@
-package cs246.fencing_tournament;
+package cs246.fencing_tournament.views;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
+
+import cs246.fencing_tournament.R;
 
 public class EnterContestant extends AppCompatActivity {
 
