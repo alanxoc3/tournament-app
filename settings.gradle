@@ -1,1 +1,1 @@
-include ':app', ':canvastest'
+include ':app', ':canvastest', ':surfacetest'
