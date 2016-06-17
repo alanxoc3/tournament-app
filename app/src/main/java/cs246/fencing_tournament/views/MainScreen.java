@@ -9,6 +9,8 @@ import cs246.fencing_tournament.R;
 
 public class MainScreen extends AppCompatActivity {
 
+
+
     public void viewContestants(View v) {
 
     }
