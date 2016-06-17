@@ -5,7 +5,11 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import cs246.fencing_tournament.R;
+import cs246.fencing_tournament.data.ContestantData;
 
 public class MainScreen extends AppCompatActivity {
 
@@ -26,6 +30,9 @@ public class MainScreen extends AppCompatActivity {
 
     public void setContestants(View v) {
         Intent action = new Intent(MainScreen.this, EnterContestant.class);
+        List<ContestantData> transfer = new ArrayList<ContestantData>();
+        Bundle b = new Bundle();
+        b.putSerializable("List_Contestant",new ContestantData());
         startActivity(action);
     }
 

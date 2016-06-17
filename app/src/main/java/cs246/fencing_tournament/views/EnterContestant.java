@@ -22,6 +22,7 @@ public class EnterContestant extends AppCompatActivity {
         List<ContestantData> contestants = new ArrayList<ContestantData>();
         Intent action = new Intent(EnterContestant.this, MainScreen.class);
 
+        action.putExtra("ActivityFrom",1);
 
 
 
