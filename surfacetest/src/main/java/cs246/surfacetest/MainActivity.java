@@ -26,13 +26,9 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
-
         _v = new OurView(this);
         _v.setOnTouchListener(this);
 
-        _v.setSystemUiVisibility(uiOptions);
-        getSupportActionBar().hide();
         _spamBot = BitmapFactory.decodeResource(getResources(), R.drawable.spam_bot);
         x = y = 0;
         score = 0;

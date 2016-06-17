@@ -17,7 +17,6 @@ public class EnterContestant extends AppCompatActivity {
 
     public Button finished;
 
-
     public void done(View v){
         List<ContestantData> contestants = new ArrayList<ContestantData>();
         Intent action = new Intent(EnterContestant.this, MainScreen.class);
