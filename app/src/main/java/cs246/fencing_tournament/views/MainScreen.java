@@ -30,7 +30,7 @@ public class MainScreen extends AppCompatActivity {
 
     }
 
-    List<ContestantData> transfer;
+    List<ContestantData> transfer;              //THIS IS JUST UNTIL WE HAVE TOURNAMENTDATA UP AND RUNNING
 
     public void setContestants(View v) {
         Intent action = new Intent(MainScreen.this, EnterContestant.class);
@@ -48,13 +48,5 @@ public class MainScreen extends AppCompatActivity {
         setContentView(R.layout.activity_main_screen);
 
         transfer = getIntent().getParcelableArrayListExtra("ContestantsArray");
-        if (transfer != null){
-            String list = "";
-            for(int i = 0; i < transfer.size(); i++) {
-                list += transfer.size() + transfer.get(i).getName();
-            }
-            TextView refrence = (TextView) findViewById(R.id.test);
-            refrence.setText(list);
-        }
     }
 }

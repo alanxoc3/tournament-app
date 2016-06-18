@@ -26,9 +26,12 @@ public class EnterContestant extends AppCompatActivity {
         }
 
         EditText player = (EditText) findViewById(R.id.List);
-        if(player != null)
-            contestants.add(new ContestantData(player.getText().toString()));
+        if(player != null) {
+            String [] temp = player.getText().toString().split("\n");
+            for (int i = 0; i < temp.length; i++)
+                contestants.add(new ContestantData(temp[i]));
 
+        }
         //contestants.add(new ContestantData("Jenna"));
 
         Intent action = new Intent(EnterContestant.this, MainScreen.class);
