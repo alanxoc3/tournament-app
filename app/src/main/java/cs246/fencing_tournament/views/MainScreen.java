@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,9 +30,13 @@ public class MainScreen extends AppCompatActivity {
 
     }
 
+    List<ContestantData> transfer;
+
     public void setContestants(View v) {
         Intent action = new Intent(MainScreen.this, EnterContestant.class);
-        List<ContestantData> transfer = new ArrayList<ContestantData>();
+
+        if (transfer == null)
+            transfer = new ArrayList<ContestantData>();
 
         action.putParcelableArrayListExtra("ContestantsArray",(ArrayList<ContestantData>)transfer); //transfer);
         startActivity(action);
@@ -42,9 +47,14 @@ public class MainScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_screen);
 
-        List<ContestantData> contestants = getIntent().getParcelableArrayListExtra("ContestantsArray");
-        if (!contestants.isEmpty()){
-
+        transfer = getIntent().getParcelableArrayListExtra("ContestantsArray");
+        if (transfer != null){
+            String list = "";
+            for(int i = 0; i < transfer.size(); i++) {
+                list += transfer.size() + transfer.get(i).getName();
+            }
+            TextView refrence = (TextView) findViewById(R.id.test);
+            refrence.setText(list);
         }
     }
 }
