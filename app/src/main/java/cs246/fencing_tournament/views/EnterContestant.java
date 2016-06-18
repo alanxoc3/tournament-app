@@ -17,13 +17,18 @@ public class EnterContestant extends AppCompatActivity {
 
     public Button finished;
 
+    private List<ContestantData> contestants;
 
     public void done(View v){
-        List<ContestantData> contestants = new ArrayList<ContestantData>();
+        if (contestants.isEmpty()) {
+            //contestants = new ArrayList<ContestantData>();
+        }
+
+        contestants.add(new ContestantData("Jenna"));
+
         Intent action = new Intent(EnterContestant.this, MainScreen.class);
 
-        action.putExtra("ActivityFrom",1);
-
+        action.putParcelableArrayListExtra("ContestantsArray",(ArrayList<ContestantData>)contestants);
 
 
         startActivity(action);
@@ -33,6 +38,6 @@ public class EnterContestant extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enter_contestant);
-
+        contestants = getIntent().getParcelableArrayListExtra("ContestantsArray");
     }
 }
