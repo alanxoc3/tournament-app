@@ -9,6 +9,7 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
+import android.view.ScaleGestureDetector;
 import android.view.View;
 
 import cs246.fencing_tournament.R;
@@ -17,30 +18,43 @@ import cs246.fencing_tournament.R;
  * Created by alanxoc3 on 6/11/16.
  */
 public class PoolCanvas extends View {
+    // NOTES
+    // So, the idea is that I am going to have an array of rectangles. If the user touches any of
+    // them, then an activity is opened to save that pool data.
     private Paint _paintDoodle;
     private Paint _paintRect;
     private Path _path;
     private Bitmap _spamBot;
+
+    private ScaleGestureDetector mScaleDetector;
+    private float mScaleFactor = 1.f;
+    private float focusX = 0.0f;
+    private float focusY = 0.0f;
+    private float touchX = 0.0f;
+    private float touchY = 0.0f;
+    private float viewX = 0.0f;
+    private float viewY = 0.0f;
 
     int x, y;
     int incX, incY;
 
     public PoolCanvas(Context context) {
         super(context);
-        init(null, 0);
+        init(context, null, 0);
     }
 
     public PoolCanvas(Context context, AttributeSet attrs) {
         super(context, attrs);
-        init(attrs, 0);
+        init(context, attrs, 0);
     }
 
     public PoolCanvas(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        init(attrs, defStyleAttr);
+        init(context, attrs, defStyleAttr);
     }
 
-    private void init(AttributeSet attrs, int defStyleAttr) {
+    private void init(Context context, AttributeSet attrs, int defStyleAttr) {
+        mScaleDetector = new ScaleGestureDetector(context, new ScaleListener());
         _paintDoodle = new Paint();
         _paintRect = new Paint();
         _spamBot = new BitmapFactory().decodeResource(getResources(), R.drawable.spam_bot);
@@ -63,6 +77,11 @@ public class PoolCanvas extends View {
     @Override
     public void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+
+        canvas.save();
+        canvas.scale(mScaleFactor, mScaleFactor, focusX, focusY);
+        viewX = canvas.getClipBounds().exactCenterX() - canvas.getClipBounds().width() / 2;
+        viewY = canvas.getClipBounds().exactCenterY() - canvas.getClipBounds().height() / 2;
 
         float pad = 30;
         canvas.drawRect(0 + pad, 0 + pad, getWidth() - pad, getHeight() - pad, _paintRect);
@@ -95,12 +114,17 @@ public class PoolCanvas extends View {
         y += incY;
 
         canvas.drawBitmap(_spamBot, x, y, new Paint());
+
+        canvas.restore();
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent motionEvent) {
-        float touchX = motionEvent.getX();
-        float touchY = motionEvent.getY();
+        mScaleDetector.getFocusX();
+        mScaleDetector.onTouchEvent(motionEvent);
+
+        touchX = motionEvent.getX() / mScaleFactor + viewX;
+        touchY = motionEvent.getY() / mScaleFactor + viewY;
 
         switch(motionEvent.getAction()) {
             case MotionEvent.ACTION_DOWN:
@@ -118,5 +142,20 @@ public class PoolCanvas extends View {
 
         // Because we handled the touch event.
         return true;
+    }
+
+    private class ScaleListener
+            extends ScaleGestureDetector.SimpleOnScaleGestureListener {
+        @Override
+        public boolean onScale(ScaleGestureDetector detector) {
+            mScaleFactor *= detector.getScaleFactor();
+
+            // Don't let the object get too small or too large.
+            mScaleFactor = Math.max(1.0f, Math.min(mScaleFactor, 5.0f));
+            focusX = mScaleDetector.getFocusX();
+            focusY = mScaleDetector.getFocusY();
+            invalidate();
+            return true;
+        }
     }
 }
