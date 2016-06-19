@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".views.PageFragment">
+    tools:context=".adapters.PoolFragment">
 
     <TextView
         android:layout_width="wrap_content"
@@ -10,6 +10,15 @@
         android:textSize="40dp"
         android:text="Large Text"
         android:id="@+id/textView"
-        android:layout_centerVertical="true"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
+
+    <cs246.fencing_tournament.adapters.PoolCanvas
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/view"
+        android:layout_below="@+id/textView"
+        android:layout_centerHorizontal="true" />
+
+
 </RelativeLayout>

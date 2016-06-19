@@ -1,4 +1,4 @@
-package cs246.fencing_tournament.views;
+package cs246.fencing_tournament.screens;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;

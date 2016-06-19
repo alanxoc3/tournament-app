@@ -1,4 +1,4 @@
-package cs246.fencing_tournament.views;
+package cs246.fencing_tournament.adapters;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -16,7 +16,7 @@ import cs246.fencing_tournament.R;
 /**
  * Created by alanxoc3 on 6/11/16.
  */
-public class DoodleView extends View {
+public class PoolCanvas extends View {
     private Paint _paintDoodle;
     private Paint _paintRect;
     private Path _path;
@@ -25,17 +25,17 @@ public class DoodleView extends View {
     int x, y;
     int incX, incY;
 
-    public DoodleView(Context context) {
+    public PoolCanvas(Context context) {
         super(context);
         init(null, 0);
     }
 
-    public DoodleView(Context context, AttributeSet attrs) {
+    public PoolCanvas(Context context, AttributeSet attrs) {
         super(context, attrs);
         init(attrs, 0);
     }
 
-    public DoodleView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public PoolCanvas(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(attrs, defStyleAttr);
     }
