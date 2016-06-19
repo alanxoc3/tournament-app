@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,14 +18,25 @@ public class EnterContestant extends AppCompatActivity {
 
     public Button finished;
 
+    private List<ContestantData> contestants;
+
     public void done(View v){
-        List<ContestantData> contestants = new ArrayList<ContestantData>();
+        if (contestants == null) {
+            contestants = new ArrayList<ContestantData>();
+        }
+
+        EditText player = (EditText) findViewById(R.id.List);
+        if(player != null) {
+            String [] temp = player.getText().toString().split("\n");
+            for (int i = 0; i < temp.length; i++)
+                contestants.add(new ContestantData(temp[i]));
+
+        }
+        //contestants.add(new ContestantData("Jenna"));
+
         Intent action = new Intent(EnterContestant.this, MainScreen.class);
 
-        action.putExtra("ActivityFrom",1);
-
-
-
+        action.putParcelableArrayListExtra("ContestantsArray",(ArrayList<ContestantData>)contestants);
         startActivity(action);
     }
 
@@ -32,6 +44,6 @@ public class EnterContestant extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enter_contestant);
-
+        contestants = getIntent().getParcelableArrayListExtra("ContestantsArray");
     }
 }
