@@ -23,8 +23,10 @@ public class PoolData {
     }
 
     public MatchData getMatch(int matchNumber) {
-        if (matchNumber >= matches.size()) {
+        if (matchNumber >= matches.size() || matchNumber < 0) {
             Log.e(TAG, "Given Match does not exist");
+            System.out.printf("Given Match does not exist, returning match 0");
+            return matches.get(0);
         }
         return matches.get(matchNumber);
     }

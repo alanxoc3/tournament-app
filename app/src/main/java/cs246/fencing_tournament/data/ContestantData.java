@@ -55,19 +55,19 @@ public class ContestantData implements Parcelable{
     public boolean greaterThan(ContestantData contestant) {}
 
     public int getWins() {
-
+		return 1;
     }
 
     public int getTotalPoints() {
-
+		return 1;
     }
 
     public int getTotalPointsAgainst() {
-
+		return 1;
     }
 
     public int getPointDifference() {
-
+		return 1;
     }
 
 	// For making the id bigger each time.
