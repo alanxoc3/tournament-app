@@ -22,6 +22,7 @@ public class EnterContestant extends AppCompatActivity {
     private List<ContestantData> contestants;
 
     private static final String beforeTag = "#ContestentsBS";
+    private static final String afterTag = "#ContestentsAS";
 
     public void done(View v){
         if (contestants == null) {
@@ -38,6 +39,9 @@ public class EnterContestant extends AppCompatActivity {
         //contestants.add(new ContestantData("Jenna"));
 
         Intent action = new Intent(EnterContestant.this, MainScreen.class);
+
+        if (contestants != null)
+            Log.i(afterTag, Integer.toString(contestants.size()));
 
         action.putParcelableArrayListExtra("ContestantsArray",(ArrayList<ContestantData>)contestants);
         startActivity(action);

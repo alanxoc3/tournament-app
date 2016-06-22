@@ -52,22 +52,24 @@ public class ContestantData implements Parcelable{
     public void setName(String name) { this._name = name; }
 
     // Returns true if this guy is greater than that guy
-    public boolean greaterThan(ContestantData contestant) {}
+    public boolean greaterThan(ContestantData contestant) {
+		return false;
+	}
 
     public int getWins() {
-
+		return 0;
     }
 
     public int getTotalPoints() {
-
+		return 0;
     }
 
     public int getTotalPointsAgainst() {
-
+		return 0;
     }
 
     public int getPointDifference() {
-
+		return 0;
     }
 
 	// For making the id bigger each time.
@@ -78,7 +80,7 @@ public class ContestantData implements Parcelable{
 	}
 
     public static ContestantData findById(List<ContestantData> contestants, int id) {
-
+		return new ContestantData();
     }
 
 
