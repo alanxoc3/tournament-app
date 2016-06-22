@@ -34,7 +34,7 @@ public class PoolCanvas extends View {
     private float touchX = 0.0f;
     private float touchY = 0.0f;
     private float viewX = 0.0f;
-    private float viewY = 0.0f;2
+    private float viewY = 0.0f;
     private static final String TAG = "PoolCanvas";
 
     int x, y;
