@@ -3,6 +3,7 @@ package cs246.fencing_tournament.screens;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,6 +20,8 @@ public class EnterContestant extends AppCompatActivity {
     public Button finished;
 
     private List<ContestantData> contestants;
+
+    private static final String beforeTag = "#ContestentsBS";
 
     public void done(View v){
         if (contestants == null) {
@@ -45,5 +48,9 @@ public class EnterContestant extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enter_contestant);
         contestants = getIntent().getParcelableArrayListExtra("ContestantsArray");
+        if (contestants != null)
+            Log.i(beforeTag, Integer.toString(contestants.size()));
+
+
     }
 }
