@@ -157,7 +157,7 @@ public class PoolCanvas extends View {
                 Log.i(TAG, "Zoomed out");
 
             if (mScaleFactor > 5.0f)
-                Log.e(TAG, "Zoomed in too much")
+                Log.e(TAG, "Zoomed in too much");
 
             // Don't let the object get too small or too large.
             mScaleFactor = Math.max(1.0f, Math.min(mScaleFactor, 5.0f));
