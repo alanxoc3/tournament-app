@@ -15,7 +15,6 @@ public class PoolData {
     }
 
     public void addMatch(MatchData newMatch) {
-        
         matches.add(newMatch);
     }
 

@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
 import android.view.View;
@@ -33,7 +34,8 @@ public class PoolCanvas extends View {
     private float touchX = 0.0f;
     private float touchY = 0.0f;
     private float viewX = 0.0f;
-    private float viewY = 0.0f;
+    private float viewY = 0.0f;2
+    private static final String TAG = "PoolCanvas";
 
     int x, y;
     int incX, incY;
@@ -149,6 +151,12 @@ public class PoolCanvas extends View {
         @Override
         public boolean onScale(ScaleGestureDetector detector) {
             mScaleFactor *= detector.getScaleFactor();
+            if (detector.getScaleFactor() > 1.0)
+                Log.i(TAG, "Zoomed in");
+            else if (detector.getScaleFactor() < 1.0)
+                Log.i(TAG, "Zoomed out");
+            else
+                Log.e(TAG, "No zoom");
 
             // Don't let the object get too small or too large.
             mScaleFactor = Math.max(1.0f, Math.min(mScaleFactor, 5.0f));
