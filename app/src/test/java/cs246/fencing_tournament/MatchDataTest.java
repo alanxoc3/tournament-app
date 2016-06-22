@@ -1,7 +1,8 @@
 package cs246.fencing_tournament;
 
 import org.junit.Test;
-import static org.junit.Assert.*;
+
+import cs246.fencing_tournament.data.MatchData;
 
 public class MatchDataTest {
     @Test
