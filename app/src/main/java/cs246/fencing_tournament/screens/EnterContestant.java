@@ -30,12 +30,14 @@ public class EnterContestant extends AppCompatActivity {
             contestants = new ArrayList<ContestantData>();
         }
 
+        Log.e(BadNameTag, "You entered a bad name");
+
         EditText player = (EditText) findViewById(R.id.List);
         if(player != null) {
             String [] temp = player.getText().toString().split("\n");
             for (int i = 0; i < temp.length; i++) {
-                if (temp[i].equals("1"))
-                    Log.e(BadNameTag, "You entered a bad name");
+                //if (temp[i].equals("1"))
+
                 contestants.add(new ContestantData(temp[i]));
             }
 
