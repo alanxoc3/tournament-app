@@ -57,7 +57,7 @@ public class ContestantData implements Parcelable{
 	}
 
     public int getWins() {
-		return 0;
+		return 1;
     }
 
     public int getTotalPoints() {
@@ -82,11 +82,6 @@ public class ContestantData implements Parcelable{
     public static ContestantData findById(List<ContestantData> contestants, int id) {
 		return new ContestantData();
     }
-
-
-
-
-
 
 	protected ContestantData(Parcel in) {
 		_name = in.readString();
