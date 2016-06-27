@@ -9,6 +9,8 @@ import android.support.v7.app.AppCompatActivity;
 
 import cs246.fencing_tournament.R;
 import cs246.fencing_tournament.adapters.SwipeAdapter;
+import cs246.fencing_tournament.data.MatchData;
+import cs246.fencing_tournament.data.PoolData;
 
 public class PoolScreen extends AppCompatActivity {
 
@@ -19,8 +21,8 @@ public class PoolScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pool_screen);
 
-			viewPager = (ViewPager) findViewById(R.id.pager);
-			SwipeAdapter swipeAdapter = new SwipeAdapter(getSupportFragmentManager(), this);
-			viewPager.setAdapter(swipeAdapter);
+		viewPager = (ViewPager) findViewById(R.id.pager);
+		SwipeAdapter swipeAdapter = new SwipeAdapter(getSupportFragmentManager(), this);
+		viewPager.setAdapter(swipeAdapter);
     }
 }
