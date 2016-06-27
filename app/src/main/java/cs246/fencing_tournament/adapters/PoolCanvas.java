@@ -7,13 +7,17 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.support.v4.util.Pools;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
 import android.view.View;
 
+import java.util.List;
+
 import cs246.fencing_tournament.R;
+import cs246.fencing_tournament.data.PoolData;
 
 /**
  * Created by alanxoc3 on 6/11/16.
@@ -23,9 +27,8 @@ public class PoolCanvas extends View {
     // So, the idea is that I am going to have an array of rectangles. If the user touches any of
     // them, then an activity is opened to save that pool data.
     private Paint _paintDoodle;
-    private Paint _paintRect;
-    private Path _path;
     private Bitmap _spamBot;
+    private PoolData _pool;
 
     private ScaleGestureDetector mScaleDetector;
     private float mScaleFactor = 1.f;
@@ -58,22 +61,37 @@ public class PoolCanvas extends View {
     private void init(Context context, AttributeSet attrs, int defStyleAttr) {
         mScaleDetector = new ScaleGestureDetector(context, new ScaleListener());
         _paintDoodle = new Paint();
-        _paintRect = new Paint();
         _spamBot = new BitmapFactory().decodeResource(getResources(), R.drawable.spam_bot);
         x = 0;
         y = 0;
         incX = 10;
         incY = 10;
+        _pool = null;
 
-        _path = new Path();
         _paintDoodle.setColor(Color.RED);
         _paintDoodle.setAntiAlias(true);
         _paintDoodle.setStyle(Paint.Style.STROKE);
+    }
 
-        _paintRect.setColor(Color.BLUE);
-        _paintRect.setAntiAlias(true);
-        _paintRect.setStyle(Paint.Style.STROKE);
+    private Path createPath(int scrW, int scrH) {
+        // This is going to create the bounds.
+        Path path = new Path();
+        int pad = 10;
+        int altW = scrW - 2*pad; // Got to account for padding.
+        int altH = scrH - 2*pad;
+        int wl = _pool.getWL();
 
+        for (int col = 0; col < altW; col += altW / wl) {
+            path.moveTo(col + pad, pad);
+            path.lineTo(col + pad, scrH - pad);
+        }
+
+        for (int row = 0; row < altH; row += altH / wl) {
+            path.moveTo(pad, row + pad);
+            path.lineTo(scrW - pad, row + pad);
+        }
+
+        return path;
     }
 
     @Override
@@ -84,12 +102,13 @@ public class PoolCanvas extends View {
         canvas.scale(mScaleFactor, mScaleFactor, focusX, focusY);
         viewX = canvas.getClipBounds().exactCenterX() - canvas.getClipBounds().width() / 2;
         viewY = canvas.getClipBounds().exactCenterY() - canvas.getClipBounds().height() / 2;
+        //Log.e(TAG, "WL: " + _pool.getWL());
 
         float pad = 30;
-        canvas.drawRect(0 + pad, 0 + pad, getWidth() - pad, getHeight() - pad, _paintRect);
 
         canvas.drawLine(0, 0, getWidth(), getHeight(), _paintDoodle);
-        canvas.drawPath(_path, _paintDoodle);
+
+        canvas.drawPath(createPath(getWidth(), getHeight()), _paintDoodle);
 
         int bx = 0 - _spamBot.getWidth() / 2;
         int by = 0 - _spamBot.getHeight() / 2;
@@ -128,22 +147,22 @@ public class PoolCanvas extends View {
         touchX = motionEvent.getX() / mScaleFactor + viewX;
         touchY = motionEvent.getY() / mScaleFactor + viewY;
 
-        switch(motionEvent.getAction()) {
-            case MotionEvent.ACTION_DOWN:
-                _path.moveTo(touchX, touchY);
-                break;
-            case MotionEvent.ACTION_MOVE:
-                _path.lineTo(touchX, touchY);
-                break;
-            case MotionEvent.ACTION_UP:
-                break;
-        }
+
 
         // Forces a view draw.
         invalidate();
 
         // Because we handled the touch event.
         return true;
+    }
+
+    public void setPool(PoolData pool) {
+        _pool = pool;
+        Log.i(TAG, "SETTING THE POOL");
+    }
+
+    public PoolData getPool() {
+        return _pool;
     }
 
     private class ScaleListener
