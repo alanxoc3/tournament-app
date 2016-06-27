@@ -2,12 +2,15 @@ package cs246.fencing_tournament.data;
 
 import java.util.List;
 import java.util.ArrayList;
+
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Log;
 
 /**
  * Created by Austin on 6/10/2016.
  */
-public class PoolData {
+public class PoolData implements Parcelable {
     private List <MatchData> matches;
     private static final String TAG = "PoolData";
 
@@ -34,4 +37,41 @@ public class PoolData {
     public List getMatches() {
         return matches;
     }
+
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    protected PoolData(Parcel in) {
+		if (in.readByte() == 0x01) {
+			matches = new ArrayList<MatchData>();
+			in.readList(matches, MatchData.class.getClassLoader());
+		} else {
+			matches = null;
+		}
+	}
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        if (matches == null) {
+            dest.writeByte((byte) (0x00));
+        } else {
+            dest.writeByte((byte) (0x01));
+            dest.writeList(matches);
+        }
+    }
+
+    public static final Parcelable.Creator<PoolData> CREATOR = new Parcelable.Creator<PoolData>() {
+		@Override
+		public PoolData createFromParcel(Parcel in) {
+			return new PoolData(in);
+		}
+
+		@Override
+		public PoolData[] newArray(int size) {
+			return new PoolData[size];
+		}
+	};
 }

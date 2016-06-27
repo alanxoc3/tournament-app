@@ -13,7 +13,10 @@ import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
 import android.view.View;
 
+import java.util.List;
+
 import cs246.fencing_tournament.R;
+import cs246.fencing_tournament.data.PoolData;
 
 /**
  * Created by alanxoc3 on 6/11/16.
@@ -23,9 +26,9 @@ public class PoolCanvas extends View {
     // So, the idea is that I am going to have an array of rectangles. If the user touches any of
     // them, then an activity is opened to save that pool data.
     private Paint _paintDoodle;
-    private Paint _paintRect;
     private Path _path;
     private Bitmap _spamBot;
+    private List<PoolData> listOfPools;
 
     private ScaleGestureDetector mScaleDetector;
     private float mScaleFactor = 1.f;
@@ -58,7 +61,6 @@ public class PoolCanvas extends View {
     private void init(Context context, AttributeSet attrs, int defStyleAttr) {
         mScaleDetector = new ScaleGestureDetector(context, new ScaleListener());
         _paintDoodle = new Paint();
-        _paintRect = new Paint();
         _spamBot = new BitmapFactory().decodeResource(getResources(), R.drawable.spam_bot);
         x = 0;
         y = 0;
@@ -70,10 +72,12 @@ public class PoolCanvas extends View {
         _paintDoodle.setAntiAlias(true);
         _paintDoodle.setStyle(Paint.Style.STROKE);
 
-        _paintRect.setColor(Color.BLUE);
-        _paintRect.setAntiAlias(true);
-        _paintRect.setStyle(Paint.Style.STROKE);
 
+
+    }
+
+    private void createPath() {
+        // This is going to create the bounds.
     }
 
     @Override
@@ -86,7 +90,6 @@ public class PoolCanvas extends View {
         viewY = canvas.getClipBounds().exactCenterY() - canvas.getClipBounds().height() / 2;
 
         float pad = 30;
-        canvas.drawRect(0 + pad, 0 + pad, getWidth() - pad, getHeight() - pad, _paintRect);
 
         canvas.drawLine(0, 0, getWidth(), getHeight(), _paintDoodle);
         canvas.drawPath(_path, _paintDoodle);
