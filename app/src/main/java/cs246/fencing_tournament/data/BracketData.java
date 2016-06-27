@@ -1,14 +1,12 @@
 package cs246.fencing_tournament.data;
 
-import java.util.TreeSet;
+import java.util.Vector;
 
 /**
  * Created by Austin on 6/26/2016.
  */
 public class BracketData {
-    private TreeSet<MatchData> matches;
+    private Vector <MatchData> matches;
 
-    public boolean searchEmpty(){
-        return true;
-    }
+    public boolean searchEmpty() { return matches.isEmpty(); }
 }

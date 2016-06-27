@@ -7,8 +7,10 @@ import java.util.List;
 public class TournamentData {
     private List <PoolData> pool;
     private List <ContestantData> contestants;
+    private BracketData bracket;
 
-    // Function to use the information in the pool to create the bracket.
+    // Function to use the information in the contestant list to create the bracket.
     public void fillBracket(){
+
     }
 }
