@@ -12,10 +12,9 @@ import java.util.List;
 
 import cs246.fencing_tournament.R;
 import cs246.fencing_tournament.data.ContestantData;
+import cs246.fencing_tournament.data.PoolData;
 
 public class MainScreen extends AppCompatActivity {
-
-
 
     public void viewContestants(View v) {
 
@@ -23,6 +22,18 @@ public class MainScreen extends AppCompatActivity {
 
     public void startPool(View v) {
         Intent action = new Intent(MainScreen.this, PoolScreen.class);
+
+        if (pools == null)
+            pools = new ArrayList<PoolData>();
+
+        // For testing
+        if (pools != null && pools.size() < 3) {
+            pools.add(new PoolData());
+            pools.add(new PoolData());
+            pools.add(new PoolData());
+        }
+
+        action.putParcelableArrayListExtra("PoolsArray", (ArrayList<PoolData>) pools);
         startActivity(action);
     }
 
@@ -30,15 +41,15 @@ public class MainScreen extends AppCompatActivity {
 
     }
 
-    List<ContestantData> transfer;              //THIS IS JUST UNTIL WE HAVE TOURNAMENTDATA UP AND RUNNING
-
+    List<ContestantData> transfer;            //THIS IS JUST UNTIL WE HAVE TOURNAMENTDATA UP AND RUNNING
+    List<PoolData> pools;
     public void setContestants(View v) {
         Intent action = new Intent(MainScreen.this, EnterContestant.class);
 
         if (transfer == null)
             transfer = new ArrayList<ContestantData>();
 
-        action.putParcelableArrayListExtra("ContestantsArray",(ArrayList<ContestantData>)transfer); //transfer);
+        action.putParcelableArrayListExtra("ContestantsArray",(ArrayList<ContestantData>)transfer);
         startActivity(action);
     }
 
@@ -48,6 +59,8 @@ public class MainScreen extends AppCompatActivity {
         setContentView(R.layout.activity_main_screen);
 
         transfer = getIntent().getParcelableArrayListExtra("ContestantsArray");
+        pools    = getIntent().getParcelableArrayListExtra("PoolsArray");
+
 
     }
 }

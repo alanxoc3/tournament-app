@@ -38,6 +38,11 @@ public class PoolData implements Parcelable {
         return matches;
     }
 
+    // Get width or length
+    public int getWL() {
+        // Testing
+        return 5;
+    }
 
     @Override
     public int describeContents() {
