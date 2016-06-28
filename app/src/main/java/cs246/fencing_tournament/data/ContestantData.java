@@ -12,7 +12,7 @@ import java.util.ArrayList;
 /**
  * Created by alanxoc3 on 6/8/16.
  */
-public class ContestantData implements Parcelable{
+public class ContestantData implements Parcelable, Comparable <ContestantData> {
 	private String _name;
 	private int _id;
 	private List<MatchData> _matchHistory;
@@ -21,14 +21,12 @@ public class ContestantData implements Parcelable{
 	public ContestantData() {
 		this("");
 	}
-
 	// Non Default Constructor
 	public ContestantData(String name) {
 		_id = nextId();
 		_matchHistory = new ArrayList<MatchData>();
 		this._name = name;
 	}
-
 	// Copy Constructor
 	public ContestantData(ContestantData rhs) {
 		_id = rhs.getId();
@@ -75,6 +73,24 @@ public class ContestantData implements Parcelable{
 		else
 			// Tie case, return true by default
 			return true;
+	}
+
+	public int compareTo(ContestantData rhs) {
+		if (getWinRate() > rhs.getWinRate())
+			return 1;
+		else if (getWinRate() < rhs.getWinRate())
+			return -1;
+		else if (getPointDifference() > rhs.getPointDifference())
+			return 1;
+		else if (getPointDifference() < rhs.getPointDifference())
+			return -1;
+		else if (getTotalPoints() > rhs.getTotalPoints())
+			return 1;
+		else if (getTotalPoints() < rhs.getTotalPoints())
+			return -1;
+		else
+			// Tie case, return true by default
+			return 0;
 	}
 
     public int getWins() {

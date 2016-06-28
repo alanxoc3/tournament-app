@@ -9,4 +9,5 @@ public class BracketData {
     private Vector <MatchData> matches;
 
     public boolean searchEmpty() { return matches.isEmpty(); }
+    public void add(int index, MatchData match) {matches.add(index, match);}
 }

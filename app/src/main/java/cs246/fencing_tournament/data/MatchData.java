@@ -12,6 +12,15 @@ public class MatchData {
     private int p2Score;
     private int vicId;
 
+    // Default Constructor
+    public MatchData() {
+        id1 = -1;
+        id2 = -1;
+        p1Score = 0;
+        p2Score = 0;
+        vicId = -1;
+    }
+    // Non Default Constructor
     public MatchData(int Id1, int Id2) {
         id1 = Id1;
         id2 = Id2;
