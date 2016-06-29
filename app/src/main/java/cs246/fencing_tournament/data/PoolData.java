@@ -38,6 +38,15 @@ public class PoolData implements Parcelable {
         return matches;
     }
 
+    /**
+     * Get Width Length
+     * Since it is a square, width and length are the same.
+     * @return the width or the length
+     */
+    public int getWL() {
+        // Testing
+        return 5;
+    }
 
     @Override
     public int describeContents() {
