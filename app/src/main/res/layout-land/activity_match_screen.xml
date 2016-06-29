@@ -136,7 +136,7 @@
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/button11"
+        android:id="@+id/cards2"
         android:layout_alignTop="@+id/button8"
         android:layout_alignStart="@+id/editText2" />
 </RelativeLayout>

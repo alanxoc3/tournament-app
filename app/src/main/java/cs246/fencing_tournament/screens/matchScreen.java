@@ -16,13 +16,28 @@ public class matchScreen extends AppCompatActivity {
         box.setBackgroundColor(yellow);
     }
 
+    public void yellow1(View v){
+
+    }
+    public void yellow2(View v){
+
+    }
+    public void red1(View v){
+
+    }
+    public void red2(View v){
+
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_match_screen);
+
         int defalt = Color.WHITE;
         Button box = (Button) findViewById(R.id.cards);
         box.setBackgroundColor(defalt);
-
+        box = (Button) findViewById(R.id.cards2);
+        box.setBackgroundColor(defalt);
     }
 }
