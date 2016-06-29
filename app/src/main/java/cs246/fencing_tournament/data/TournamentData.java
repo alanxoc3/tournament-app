@@ -1,5 +1,7 @@
 package cs246.fencing_tournament.data;
 
+import android.support.v4.util.Pools;
+
 import java.util.Vector;
 import java.util.Deque;
 import java.util.List;
@@ -9,8 +11,12 @@ import java.util.List;
 public class TournamentData {
     private List <PoolData> pool;
     private List <ContestantData> contestants;
-    Deque <ContestantData> contestantSort;
+    private Deque <ContestantData> contestantSort;
     private BracketData bracket;
+
+    // Default Constructor
+    public TournamentData() {
+    }
 
     // Function to use the information in the contestant list to create the bracket.
     public void fillBracket(){
