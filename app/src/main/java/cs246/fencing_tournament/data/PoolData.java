@@ -11,6 +11,9 @@ import android.util.Log;
  * Created by Austin on 6/10/2016.
  */
 public class PoolData implements Parcelable {
+    /**
+     * List of MatchData that describes the Tournament Pool
+     */
     private List <MatchData> matches;
     private static final String TAG = "PoolData";
 
@@ -20,11 +23,23 @@ public class PoolData implements Parcelable {
         Log.i(TAG, "Local matches variable created");
     }
 
+    /**
+     * Add a match to the pool.
+     * @param newMatch Match to be added to the pool.
+     */
     public void addMatch(MatchData newMatch) {
         matches.add(newMatch);
         Log.i(TAG,"Match Added Succesfully");
     }
 
+    /**
+     * Get a given match.
+     * <p>
+     * Given a match number, the pool is searched for that specific match, which is returned if it
+     * exists.
+     * @param matchNumber Number for the requested match.
+     * @return The specific match requested.
+     */
     public MatchData getMatch(int matchNumber) {
         if (matchNumber >= matches.size() || matchNumber < 0) {
             Log.e(TAG, "Given Match does not exist");
@@ -34,12 +49,17 @@ public class PoolData implements Parcelable {
         return matches.get(matchNumber);
     }
 
+    /**
+     *
+     * @return The list of matches in the pool
+     */
     public List getMatches() {
         return matches;
     }
 
     /**
      * Get Width Length
+     * <p>
      * Since it is a square, width and length are the same.
      * @return the width or the length
      */
