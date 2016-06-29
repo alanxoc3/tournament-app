@@ -157,7 +157,9 @@ public class ContestantData implements Parcelable, Comparable <ContestantData> {
 		return globalId++;
 	}
 
-	// Return contestant specified by given ID
+	/**
+	 * Return contestant specified by given ID
+ 	 */
     public static ContestantData findById(List<ContestantData> contestants, int id) {
 		for (int i = 0; i < contestants.size(); ++i) {
 			if (contestants.get(i).getId() == id) {

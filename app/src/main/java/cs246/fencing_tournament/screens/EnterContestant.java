@@ -53,6 +53,9 @@ public class EnterContestant extends AppCompatActivity {
         startActivity(action);
     }
 
+    /**
+     * When EnterContestants is created it needs a list of contestants to modify
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
