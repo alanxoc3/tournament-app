@@ -55,7 +55,16 @@ public class matchScreen extends AppCompatActivity {
         update();
     }
 
-    public void update(){
+    public void pointP1(View v){
+        thisMatch.pointP1();
+        update();
+    }
+    public void pointP2(View v){
+        thisMatch.pointP2();
+        update();
+    }
+
+    public void update() {
         TextView score = (TextView) findViewById(R.id.p1Score);
         score.setText(Integer.toString(thisMatch.getP1Score()));
         score = (TextView) findViewById(R.id.p2Score);

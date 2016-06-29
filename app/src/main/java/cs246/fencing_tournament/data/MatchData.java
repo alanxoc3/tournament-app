@@ -73,14 +73,12 @@ public class MatchData {
      * Set the total score for player 1
      * @param x
      */
-    public void setP1Score(int x){
-        p1Score = x;
-    }
+    public void setP1Score(int x){if (x >= 0 && x <= 15) p1Score = x;}
     public void setId2(int x){
         id2 = x;
     }
     public void setP2Score(int x){
-        p2Score = x;
+        if (x >= 0 && x <= 15) p2Score = x;
     }
     public void setVicId(int x){
         vicId = x;
@@ -115,14 +113,7 @@ public class MatchData {
     public int getVicId(){
         return vicId;
     }
-    public void pointP1() {
-        if (getP1Score() < 15){
-            setP1Score(getP1Score() + 1);
-        }
-    }
-    public void pointP2() {
-        if (getP2Score() < 15){
-            setP2Score(getP2Score() + 1);
-        }
-    }
+    public void pointP1() {setP1Score(getP1Score() + 1);}
+    public void pointP2() {setP2Score(getP2Score() + 1);}
+
 }
