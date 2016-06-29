@@ -5,6 +5,7 @@ import android.support.v4.util.Pools;
 import java.util.Vector;
 import java.util.Deque;
 import java.util.List;
+
 /**
  * Created by Austin on 6/26/2016.
  */
@@ -18,7 +19,14 @@ public class TournamentData {
     public TournamentData() {
     }
 
-    // Function to use the information in the contestant list to create the bracket.
+    // TODO Check to make certain the bracket is filled in the proper order
+    /**
+     * Creates the Tournament Bracket based on results from the Pool
+     * <p>
+     * Copies the Contestant Data for all participants into a Deque and ranks them. The ranked
+     * deque is used to create a the tournament bracket, stored as a vector implemented binary tree
+     * of matches.
+     */
     public void fillBracket(){
         contestantSort.addAll(contestants);
         int numMatches = ((contestantSort.size() + 1) / 2);
