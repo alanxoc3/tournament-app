@@ -116,12 +116,12 @@ public class MatchData {
         return vicId;
     }
     public void pointP1() {
-        if (getP1Score() > 15){
+        if (getP1Score() < 15){
             setP1Score(getP1Score() + 1);
         }
     }
     public void pointP2() {
-        if (getP2Score() > 15){
+        if (getP2Score() < 15){
             setP2Score(getP2Score() + 1);
         }
     }

@@ -132,7 +132,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="0"
-        android:id="@+id/textView2"
+        android:id="@+id/p2Score"
         android:layout_above="@+id/button3"
         android:layout_alignStart="@+id/editText4" />
 
@@ -141,7 +141,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="0"
-        android:id="@+id/textView3"
+        android:id="@+id/p1Score"
         android:layout_alignBottom="@+id/button2"
         android:layout_alignEnd="@+id/editText3" />
 

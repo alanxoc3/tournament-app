@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import cs246.fencing_tournament.R;
 import cs246.fencing_tournament.data.MatchData;
@@ -43,13 +44,22 @@ public class matchScreen extends AppCompatActivity {
         Button box = (Button) findViewById(R.id.cards);
         box.setBackgroundColor(red);
         thisMatch.pointP1();
+        update();
     }
     public void red2(View v){
         p2Yellow = true;
         int red = Color.RED;
         Button box = (Button) findViewById(R.id.cards2);
         box.setBackgroundColor(red);
-        thisMatch.pointP1();
+        thisMatch.pointP2();
+        update();
+    }
+
+    public void update(){
+        TextView score = (TextView) findViewById(R.id.p1Score);
+        score.setText(Integer.toString(thisMatch.getP1Score()));
+        score = (TextView) findViewById(R.id.p2Score);
+        score.setText(Integer.toString(thisMatch.getP2Score()));
     }
 
     @Override
