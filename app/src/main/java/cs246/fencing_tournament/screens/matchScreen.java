@@ -43,7 +43,7 @@ public class matchScreen extends AppCompatActivity {
         int red = Color.RED;
         Button box = (Button) findViewById(R.id.cards);
         box.setBackgroundColor(red);
-        thisMatch.pointP1();
+        thisMatch.pointP2();
         update();
     }
     public void red2(View v){
@@ -51,7 +51,7 @@ public class matchScreen extends AppCompatActivity {
         int red = Color.RED;
         Button box = (Button) findViewById(R.id.cards2);
         box.setBackgroundColor(red);
-        thisMatch.pointP2();
+        thisMatch.pointP1();
         update();
     }
 
@@ -63,6 +63,15 @@ public class matchScreen extends AppCompatActivity {
         thisMatch.pointP2();
         update();
     }
+    public void decPointP1(View v){
+        thisMatch.setP1Score(thisMatch.getP1Score() - 1);
+        update();
+    }
+    public void decPointP2(View v){
+        thisMatch.setP2Score(thisMatch.getP2Score() - 1);
+        update();
+    }
+
 
     public void update() {
         TextView score = (TextView) findViewById(R.id.p1Score);
