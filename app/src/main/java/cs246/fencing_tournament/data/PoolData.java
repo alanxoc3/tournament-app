@@ -20,6 +20,10 @@ public class PoolData implements Parcelable {
         Log.i(TAG, "Local matches variable created");
     }
 
+    /**
+     * Adds a match. Pretty straight forward.
+     * @param newMatch
+     */
     public void addMatch(MatchData newMatch) {
         matches.add(newMatch);
         Log.i(TAG,"Match Added Succesfully");
