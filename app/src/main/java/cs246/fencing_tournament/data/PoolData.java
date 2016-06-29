@@ -34,6 +34,7 @@ public class PoolData implements Parcelable {
 
     /**
      * Get a given match.
+     * <p>
      * Given a match number, the pool is searched for that specific match, which is returned if it
      * exists.
      * @param matchNumber Number for the requested match.
@@ -58,6 +59,7 @@ public class PoolData implements Parcelable {
 
     /**
      * Get Width Length
+     * <p>
      * Since it is a square, width and length are the same.
      * @return the width or the length
      */
