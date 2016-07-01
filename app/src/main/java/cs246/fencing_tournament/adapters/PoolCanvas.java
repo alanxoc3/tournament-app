@@ -149,6 +149,8 @@ public class PoolCanvas extends View {
 
 
 
+
+
         // Forces a view draw.
         invalidate();
 
