@@ -13,8 +13,23 @@ import java.util.List;
 import cs246.fencing_tournament.R;
 import cs246.fencing_tournament.data.ContestantData;
 import cs246.fencing_tournament.data.PoolData;
+import cs246.fencing_tournament.data.TournamentData;
 
 public class MainScreen extends AppCompatActivity {
+    //List<ContestantData> transfer; // THIS IS JUST UNTIL WE HAVE TOURNAMENTDATA UP AND RUNNING
+    List<PoolData> pools;
+
+    TournamentData tournament;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main_screen);
+        tournament = new TournamentData();
+
+        List<ContestantData> tmpContestants = getIntent().getParcelableArrayListExtra("ContestantsArray");
+        tournament.setContestants(tmpContestants);
+    }
 
     public void viewContestants(View v) {
 
@@ -22,45 +37,23 @@ public class MainScreen extends AppCompatActivity {
 
     public void startPool(View v) {
         Intent action = new Intent(MainScreen.this, PoolScreen.class);
+        tournament.generatePools();
 
-        if (pools == null)
-            pools = new ArrayList<PoolData>();
-
-        // For testing
-        if (pools != null && pools.size() < 3) {
-            pools.add(new PoolData());
-            pools.add(new PoolData());
-            pools.add(new PoolData());
+        if(tournament.hasPools()) {
+            action.putParcelableArrayListExtra("PoolsArray", (ArrayList<PoolData>) tournament.getPools());
+            startActivity(action);
         }
-
-        action.putParcelableArrayListExtra("PoolsArray", (ArrayList<PoolData>) pools);
-        startActivity(action);
     }
 
     public void startBracket(View v) {
 
     }
 
-    List<ContestantData> transfer;            //THIS IS JUST UNTIL WE HAVE TOURNAMENTDATA UP AND RUNNING
-    List<PoolData> pools;
     public void setContestants(View v) {
         Intent action = new Intent(MainScreen.this, EnterContestant.class);
 
-        if (transfer == null)
-            transfer = new ArrayList<ContestantData>();
-
-        action.putParcelableArrayListExtra("ContestantsArray",(ArrayList<ContestantData>)transfer);
+        action.putParcelableArrayListExtra("ContestantsArray",(ArrayList<ContestantData>)tournament.getContestants());
         startActivity(action);
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_screen);
-
-        transfer = getIntent().getParcelableArrayListExtra("ContestantsArray");
-        pools    = getIntent().getParcelableArrayListExtra("PoolsArray");
-
-
-    }
 }

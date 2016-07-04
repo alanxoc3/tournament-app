@@ -1,7 +1,9 @@
 package cs246.fencing_tournament.data;
 
 import android.support.v4.util.Pools;
+import android.util.Log;
 
+import java.util.ArrayList;
 import java.util.Vector;
 import java.util.Deque;
 import java.util.List;
@@ -10,13 +12,127 @@ import java.util.List;
  * Created by Austin on 6/26/2016.
  */
 public class TournamentData {
-    private List <PoolData> pool;
+    private List <PoolData> pools;
     private List <ContestantData> contestants;
     private Deque <ContestantData> contestantSort;
     private BracketData bracket;
 
     // Default Constructor
     public TournamentData() {
+        contestants = new ArrayList<ContestantData>();
+    }
+
+    public void addContestant(ContestantData newContestant) {
+        if (contestants == null) {
+            Log.e("TournamentData", "Contestants is null");
+            return;
+        }
+
+        contestants.add(newContestant);
+    }
+
+    public void setContestants(List<ContestantData> contestants) {
+        if (contestants != null) {
+            this.contestants = contestants;
+        }
+    }
+
+    public ContestantData getContestant(int index) {
+        if (contestants == null) {
+            Log.e("TournamentData", "Contestants is null");
+            return null;
+        }
+
+        return contestants.get(index);
+    }
+
+    public List<ContestantData> getContestants() {
+        if (contestants == null)
+            Log.e("TournamentData", "Contestants is null");
+        return contestants;
+    }
+
+    public List<PoolData> getPools() {
+        return pools;
+    }
+
+    public boolean hasPools() {
+        return (pools != null);
+    }
+
+    public void deletePools() {
+        pools = null;
+    }
+
+    /**
+     * Uses the contestant list to create the pools. The more contestants there are, the more pools
+     * will be created. This will not run if there are less than 2 contestants.
+     */
+    public void generatePools() {
+        // RESET THE POOL
+        if (contestants == null) {
+            Log.e("TournamentData", "Contestants is NULL");
+            return;
+        }
+
+        if (contestants.size() < 2) {
+            Log.e("TournamentData", "Less than 2 contestants.");
+            return;
+        }
+
+        deletePools();
+        pools = new ArrayList<PoolData>();
+        final int MAX_POOL_LEN = 6;
+
+        // FIGURE OUT HOW MANY CONTESTANTS GO INTO EACH POOL.
+        int numOfPeeps = contestants.size();
+        List<Integer> poolLens = new ArrayList<Integer>();
+        // If there are 7 people, there are now 2 pools.
+        int numOfPools = numOfPeeps / (MAX_POOL_LEN + 1) + 1;
+        int averagePoolLen = numOfPeeps / numOfPools;
+
+        int remainder = numOfPeeps % numOfPools;
+        for (int i = 0; i < numOfPools; ++i) {
+            if (remainder > 0) {
+                poolLens.add(averagePoolLen + 1);
+                --remainder;
+            } else {
+                poolLens.add(averagePoolLen);
+            }
+            // We want to add a pool as well
+            pools.add(new PoolData());
+        }
+
+        // NOW POPULATE THE POOLS
+        int prevContestantCount = 0;
+        for (int poolSpot = 0; poolSpot < numOfPools; ++poolSpot) {
+            for (int i = prevContestantCount; i < poolLens.get(poolSpot) + prevContestantCount; ++i) {
+                for (int j = prevContestantCount; j < poolLens.get(poolSpot) + prevContestantCount; ++j) {
+                    // If you were to uncomment this, then there would be no me vs me matches in the
+                    // pool.
+                    //if (i != j) {
+                        int id1 = contestants.get(i).getId();
+                        int id2 = contestants.get(j).getId();
+                        MatchData newMatch = new MatchData(id1, id2);
+                        pools.get(poolSpot).addMatch(newMatch);
+                        contestants.get(i).addMatch(newMatch);
+                        contestants.get(j).addMatch(newMatch);
+                    //}
+                }
+            }
+
+            // Make sure that you are continuing on the contestant streak.
+            prevContestantCount += poolLens.get(poolSpot);
+
+            /*
+            Algorithm Explained.
+            The first part figures out how large each pool will be, and how many pools there will
+            be, based on the list of contestants.
+
+            The second part uses the data from the first part to create a match, add the match to
+            the correct pool and both contestants.
+            */
+        }
     }
 
     // TODO Check to make certain the bracket is filled in the proper order
