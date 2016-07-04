@@ -31,6 +31,7 @@ public class MainScreen extends AppCompatActivity {
         tournament.setContestants(tmpContestants);
     }
 
+    // TODO Someone needs to take charge of this activity.
     public void viewContestants(View v) {
 
     }
@@ -39,12 +40,18 @@ public class MainScreen extends AppCompatActivity {
         Intent action = new Intent(MainScreen.this, PoolScreen.class);
         tournament.generatePools();
 
-        if(tournament.hasPools()) {
-            action.putParcelableArrayListExtra("PoolsArray", (ArrayList<PoolData>) tournament.getPools());
+        if (tournament.hasPools()) {
+            action.putExtra("TOURNAMENT", tournament);
             startActivity(action);
         }
+
+        //if(tournament.hasPools()) {
+            //action.putParcelableArrayListExtra("PoolsArray", (ArrayList<PoolData>) tournament.getPools());
+            //startActivity(action);
+        //}
     }
 
+    // TODO Alan will work in this one soon.
     public void startBracket(View v) {
 
     }
