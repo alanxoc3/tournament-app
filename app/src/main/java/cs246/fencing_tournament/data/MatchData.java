@@ -1,11 +1,14 @@
 package cs246.fencing_tournament.data;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.List;
 
 /**
  * Created by alanxoc3 on 6/8/16.
  */
-public class MatchData {
+public class MatchData implements Parcelable {
     private int id1;
     private int p1Score;
     private int id2;
@@ -116,4 +119,41 @@ public class MatchData {
     public void pointP1() {setP1Score(getP1Score() + 1);}
     public void pointP2() {setP2Score(getP2Score() + 1);}
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    protected MatchData(Parcel in) {
+        int[] data = in.createIntArray();
+
+        id1 = data[0];
+        id2 = data[1];
+        p1Score = data[2];
+        p2Score = data[3];
+        vicId = data[4];
+	}
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        int[] data = new int[5];
+        data[0] = id1;
+        data[1] = id2;
+        data[2] = p1Score;
+        data[3] = p2Score;
+        data[4] = vicId;
+        dest.writeIntArray(data);
+    }
+
+    public static final Parcelable.Creator<MatchData> CREATOR = new Parcelable.Creator<MatchData>() {
+		@Override
+		public MatchData createFromParcel(Parcel in) {
+			return new MatchData(in);
+		}
+
+		@Override
+		public MatchData[] newArray(int size) {
+			return new MatchData[size];
+		}
+	};
 }

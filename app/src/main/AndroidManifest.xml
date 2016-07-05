@@ -18,7 +18,11 @@
         <activity android:name=".screens.EnterContestant" />
         <activity android:name=".screens.PoolScreen" />
         <activity android:name=".screens.EnterContestant$Run_Match" />
+<<<<<<< HEAD
         <activity android:name=".screens.matchScreen" />
+=======
+        <activity android:name=".screens.MatchScreen"></activity>
+>>>>>>> 31c6875fc05901f3ee459a9d5bc6c55cfe91044b
     </application>
 
 </manifest>
