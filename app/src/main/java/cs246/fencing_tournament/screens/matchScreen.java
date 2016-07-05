@@ -24,7 +24,8 @@ public class matchScreen extends AppCompatActivity {
             p1Yellow = true;
             int yellow = Color.YELLOW;
             Button box = (Button) findViewById(R.id.cards);
-            box.setBackgroundColor(yellow);
+            if (box != null)
+                box.setBackgroundColor(yellow);
         }
     }
     public void yellow2(View v){
@@ -35,14 +36,16 @@ public class matchScreen extends AppCompatActivity {
             p2Yellow = true;
             int yellow = Color.YELLOW;
             Button box = (Button) findViewById(R.id.cards2);
-            box.setBackgroundColor(yellow);
+            if (box != null)
+                box.setBackgroundColor(yellow);
         }
     }
     public void red1(View v){
         p1Yellow = true;
         int red = Color.RED;
         Button box = (Button) findViewById(R.id.cards);
-        box.setBackgroundColor(red);
+        if (box != null)
+            box.setBackgroundColor(red);
         thisMatch.pointP2();
         update();
     }
@@ -50,7 +53,8 @@ public class matchScreen extends AppCompatActivity {
         p2Yellow = true;
         int red = Color.RED;
         Button box = (Button) findViewById(R.id.cards2);
-        box.setBackgroundColor(red);
+        if (box != null)
+            box.setBackgroundColor(red);
         thisMatch.pointP1();
         update();
     }
@@ -75,9 +79,11 @@ public class matchScreen extends AppCompatActivity {
 
     public void update() {
         TextView score = (TextView) findViewById(R.id.p1Score);
-        score.setText(Integer.toString(thisMatch.getP1Score()));
+        if (score != null)
+            score.setText(Integer.toString(thisMatch.getP1Score()));
         score = (TextView) findViewById(R.id.p2Score);
-        score.setText(Integer.toString(thisMatch.getP2Score()));
+        if (score != null)
+            score.setText(Integer.toString(thisMatch.getP2Score()));
     }
 
     @Override
@@ -89,9 +95,11 @@ public class matchScreen extends AppCompatActivity {
 
         int defalt = Color.WHITE;
         Button box = (Button) findViewById(R.id.cards);
-        box.setBackgroundColor(defalt);
+        if (box != null)
+            box.setBackgroundColor(defalt);
         box = (Button) findViewById(R.id.cards2);
-        box.setBackgroundColor(defalt);
+        if (box != null)
+            box.setBackgroundColor(defalt);
         p1Yellow = false;
         p2Yellow = false;
 
