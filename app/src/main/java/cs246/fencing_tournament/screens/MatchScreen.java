@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import cs246.fencing_tournament.R;
 import cs246.fencing_tournament.data.MatchData;
 
 public class MatchScreen extends AppCompatActivity {
