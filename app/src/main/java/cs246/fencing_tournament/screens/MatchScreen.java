@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import cs246.fencing_tournament.R;
 import cs246.fencing_tournament.data.MatchData;
 
 public class MatchScreen extends AppCompatActivity {
@@ -24,7 +23,8 @@ public class MatchScreen extends AppCompatActivity {
             p1Yellow = true;
             int yellow = Color.YELLOW;
             Button box = (Button) findViewById(R.id.cards);
-            box.setBackgroundColor(yellow);
+            if (box != null)
+                box.setBackgroundColor(yellow);
         }
     }
     public void yellow2(View v){
@@ -35,23 +35,26 @@ public class MatchScreen extends AppCompatActivity {
             p2Yellow = true;
             int yellow = Color.YELLOW;
             Button box = (Button) findViewById(R.id.cards2);
-            box.setBackgroundColor(yellow);
+            if (box != null)
+                box.setBackgroundColor(yellow);
         }
     }
     public void red1(View v){
         p1Yellow = true;
         int red = Color.RED;
         Button box = (Button) findViewById(R.id.cards);
-        box.setBackgroundColor(red);
-        thisMatch.pointP1();
+        if (box != null)
+            box.setBackgroundColor(red);
+        thisMatch.pointP2();
         update();
     }
     public void red2(View v){
         p2Yellow = true;
         int red = Color.RED;
         Button box = (Button) findViewById(R.id.cards2);
-        box.setBackgroundColor(red);
-        thisMatch.pointP2();
+        if (box != null)
+            box.setBackgroundColor(red);
+        thisMatch.pointP1();
         update();
     }
 
@@ -63,12 +66,23 @@ public class MatchScreen extends AppCompatActivity {
         thisMatch.pointP2();
         update();
     }
+    public void decPointP1(View v){
+        thisMatch.setP1Score(thisMatch.getP1Score() - 1);
+        update();
+    }
+    public void decPointP2(View v){
+        thisMatch.setP2Score(thisMatch.getP2Score() - 1);
+        update();
+    }
+
 
     public void update() {
         TextView score = (TextView) findViewById(R.id.p1Score);
-        score.setText(Integer.toString(thisMatch.getP1Score()));
+        if (score != null)
+            score.setText(Integer.toString(thisMatch.getP1Score()));
         score = (TextView) findViewById(R.id.p2Score);
-        score.setText(Integer.toString(thisMatch.getP2Score()));
+        if (score != null)
+            score.setText(Integer.toString(thisMatch.getP2Score()));
     }
 
     @Override
@@ -80,9 +94,11 @@ public class MatchScreen extends AppCompatActivity {
 
         int defalt = Color.WHITE;
         Button box = (Button) findViewById(R.id.cards);
-        box.setBackgroundColor(defalt);
+        if (box != null)
+            box.setBackgroundColor(defalt);
         box = (Button) findViewById(R.id.cards2);
-        box.setBackgroundColor(defalt);
+        if (box != null)
+            box.setBackgroundColor(defalt);
         p1Yellow = false;
         p2Yellow = false;
 
