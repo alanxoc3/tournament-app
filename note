@@ -1,0 +1,3 @@
+template pattern defines the skeleton of an algorithm deferring some steps to
+subclasses.
+
