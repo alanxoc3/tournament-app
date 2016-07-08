@@ -1,8 +1,0 @@
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/canvas_menu_run"
-          android:title="@string/run_match"
-        android:layout_width="match_parent" />
-    <item android:id="@+id/canvas_menu_set"
-          android:title="@string/set_match"
-        android:layout_width="match_parent" />
-</menu>
