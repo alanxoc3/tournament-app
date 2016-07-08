@@ -76,7 +76,7 @@ public class PoolCanvas extends View {
     private Path createPath(int scrW, int scrH) {
         // This is going to create the bounds.
         Path path = new Path();
-        int pad = 10;
+        int pad = 100;
         int altW = scrW - 2*pad; // Got to account for padding.
         int altH = scrH - 2*pad;
         int wl = _pool.getWL();
