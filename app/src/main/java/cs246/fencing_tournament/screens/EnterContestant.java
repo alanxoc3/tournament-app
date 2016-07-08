@@ -14,7 +14,9 @@ import java.util.List;
 import cs246.fencing_tournament.R;
 import cs246.fencing_tournament.data.ContestantData;
 
-
+// TODO Hey Johnathan. When I press the back arrow, it goes back to enter contestants a bunch.
+// You need to figure out how to fix that. Probably look up like popping an activity from the stack.
+// or something like that.
 public class EnterContestant extends AppCompatActivity {
 
     public Button finished;

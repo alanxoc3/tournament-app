@@ -20,7 +20,6 @@ public class PoolData implements Parcelable {
     public PoolData()
     {
         matches = new ArrayList <MatchData>();
-        Log.i(TAG, "Local matches variable created");
     }
 
     /**
@@ -29,7 +28,6 @@ public class PoolData implements Parcelable {
      */
     public void addMatch(MatchData newMatch) {
         matches.add(newMatch);
-        Log.i(TAG,"Match Added Succesfully");
     }
 
     /**
@@ -59,13 +57,20 @@ public class PoolData implements Parcelable {
 
     /**
      * Get Width Length
-     * <p>
      * Since it is a square, width and length are the same.
+     * This should simply be the square root of the number of matches.
      * @return the width or the length
      */
     public int getWL() {
-        // Testing
-        return 5;
+        return (int) Math.sqrt(matches.size());
+    }
+
+    /**
+     * Returns the number of matches that the pool contains.
+     * @return
+     */
+    public int size() {
+        return matches.size();
     }
 
     @Override
