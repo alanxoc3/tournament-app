@@ -14,22 +14,21 @@ import cs246.fencing_tournament.R;
 import cs246.fencing_tournament.adapters.SwipeAdapter;
 import cs246.fencing_tournament.data.MatchData;
 import cs246.fencing_tournament.data.PoolData;
-import cs246.fencing_tournament.data.TournamentData;
 
 public class PoolScreen extends AppCompatActivity {
 	ViewPager viewPager;
-    // List<PoolData> pools;
-    TournamentData tournament;
+    List<PoolData> pools;
 
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pool_screen);
 
-        tournament = getIntent().getParcelableExtra("TOURNAMENT");
+        pools = getIntent().getParcelableArrayListExtra("PoolsArray");
+        Log.e("PoolScreen", "SIZE: " + pools.size());
 
 		viewPager = (ViewPager) findViewById(R.id.pager);
-		SwipeAdapter swipeAdapter = new SwipeAdapter(getSupportFragmentManager(), this, tournament);
+		SwipeAdapter swipeAdapter = new SwipeAdapter(getSupportFragmentManager(), this, pools);
 
 		viewPager.setAdapter(swipeAdapter);
     }
