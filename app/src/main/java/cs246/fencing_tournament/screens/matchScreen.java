@@ -1,10 +1,12 @@
 package cs246.fencing_tournament.screens;
 
 import android.graphics.Color;
+import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Chronometer;
 import android.widget.TextView;
 
 import cs246.fencing_tournament.R;
@@ -86,6 +88,9 @@ public class matchScreen extends AppCompatActivity {
             score.setText(Integer.toString(thisMatch.getP2Score()));
     }
 
+
+    Chronometer mChronometer;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -104,5 +109,60 @@ public class matchScreen extends AppCompatActivity {
         p2Yellow = false;
 
 
+        Button button;
+        mChronometer = (Chronometer) findViewById(R.id.chronometer);
+
+
+
+        // Watch for button clicks.
+        button = (Button) findViewById(R.id.start);
+        button.setOnClickListener(mStartListener);
+
+        button = (Button) findViewById(R.id.stop);
+        button.setOnClickListener(mStopListener);
+
+        mChronometer.setFormat(null);
+        mChronometer.setBase(SystemClock.elapsedRealtime());
+        //button = (Button) findViewById(R.id.reset);
+        //button.setOnClickListener(mResetListener);
+
+        //button = (Button) findViewById(R.id.set_format);
+        //button.setOnClickListener(mSetFormatListener);
+
+        //button = (Button) findViewById(R.id.clear_format);
+        //button.setOnClickListener(mClearFormatListener);
+
+
     }
+
+    View.OnClickListener mStartListener = new View.OnClickListener() {
+        public void onClick(View v) {
+            mChronometer.start();
+            //mChronometer.setBase(SystemClock.elapsedRealtime());
+        }
+    };
+
+    View.OnClickListener mStopListener = new View.OnClickListener() {
+        public void onClick(View v) {
+            mChronometer.stop();
+        }
+    };
+/*
+    View.OnClickListener mResetListener = new View.OnClickListener() {
+        public void onClick(View v) {
+            mChronometer.setBase(SystemClock.elapsedRealtime());
+        }
+    };
+
+    View.OnClickListener mSetFormatListener = new View.OnClickListener() {
+        public void onClick(View v) {
+            mChronometer.setFormat("(%s)");
+        }
+    };
+
+    View.OnClickListener mClearFormatListener = new View.OnClickListener() {
+        public void onClick(View v) {
+            mChronometer.setFormat(null);
+        }
+    };*/
 }
