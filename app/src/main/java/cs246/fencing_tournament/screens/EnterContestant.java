@@ -66,13 +66,4 @@ public class EnterContestant extends AppCompatActivity {
 
 
     }
-
-    public static class Run_Match extends AppCompatActivity {
-
-        @Override
-        protected void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_run__match);
-        }
-    }
 }
