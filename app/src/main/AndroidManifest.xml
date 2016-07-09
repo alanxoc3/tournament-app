@@ -18,7 +18,7 @@
         <activity android:name=".screens.EnterContestant" />
         <activity android:name=".screens.PoolScreen" />
 
-        <activity android:name=".screens.matchScreen"
+        <activity android:name=".screens.MatchScreen"
             android:screenOrientation="landscape"></activity>
     </application>
 
