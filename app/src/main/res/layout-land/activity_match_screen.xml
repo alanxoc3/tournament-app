@@ -9,6 +9,16 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".screens.MatchScreen">
 
+    <Chronometer android:id="@+id/chronometer"
+        android:format="chronometer_initial_format"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:paddingBottom="30dip"
+        android:paddingTop="30dip"
+        android:layout_alignBottom="@+id/button"
+        android:layout_toEndOf="@+id/cards" />
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -109,15 +119,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Fence"
-        android:id="@+id/button9"
+        android:id="@+id/start"
         android:layout_alignTop="@+id/button5"
-        android:layout_alignStart="@+id/button10" />
+        android:layout_alignStart="@+id/stop" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Halt"
-        android:id="@+id/button10"
+        android:id="@+id/stop"
         android:layout_alignTop="@+id/cards"
         android:layout_centerHorizontal="true" />
 
