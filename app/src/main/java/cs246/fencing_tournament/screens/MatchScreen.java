@@ -103,6 +103,21 @@ public class MatchScreen extends AppCompatActivity {
     //Declare a variable to hold CountDownTimer remaining time
     private long timeRemaining = 0;
 
+    public void setTimeText(long millisUntilFinished, TextView tView){
+        long minutes = millisUntilFinished / 60000;
+        String seconds = "";
+        if (millisUntilFinished / 1000 - minutes * 60 < 10) {
+            seconds += "0" + (millisUntilFinished / 1000 - minutes * 60);
+        }
+        else {
+            seconds += (millisUntilFinished / 1000 - minutes * 60);
+        }
+        String time = "" + minutes + ":"
+                + seconds;
+        tView.setText(time);
+    }
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -152,7 +167,7 @@ public class MatchScreen extends AppCompatActivity {
                     btnCancel.setEnabled(true);
 
                     CountDownTimer timer;
-                    long millisInFuture = 30000; //30 seconds
+                    long millisInFuture = 900000; //30 seconds
                     long countDownInterval = 1000; //1 second
 
 
@@ -169,7 +184,8 @@ public class MatchScreen extends AppCompatActivity {
                             else {
                                 //Display the remaining seconds to app interface
                                 //1 second = 1000 milliseconds
-                                tView.setText("" + millisUntilFinished / 1000);
+                                setTimeText(millisUntilFinished, tView);/*
+
                                 //Put count down timer remaining time in a variable
                                 timeRemaining = millisUntilFinished;
                             }
