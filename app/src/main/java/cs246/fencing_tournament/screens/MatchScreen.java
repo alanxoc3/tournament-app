@@ -184,7 +184,7 @@ public class MatchScreen extends AppCompatActivity {
                             else {
                                 //Display the remaining seconds to app interface
                                 //1 second = 1000 milliseconds
-                                setTimeText(millisUntilFinished, tView);/*
+                                setTimeText(millisUntilFinished, tView);
 
                                 //Put count down timer remaining time in a variable
                                 timeRemaining = millisUntilFinished;
