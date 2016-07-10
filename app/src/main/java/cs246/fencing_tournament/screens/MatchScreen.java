@@ -118,6 +118,8 @@ public class MatchScreen extends AppCompatActivity {
     }
 
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -155,7 +157,6 @@ public class MatchScreen extends AppCompatActivity {
                 @Override
                 public void onClick(View v){
 
-
                     isPaused = false;
                     isCanceled = false;
 
@@ -169,7 +170,6 @@ public class MatchScreen extends AppCompatActivity {
                     CountDownTimer timer;
                     long millisInFuture = 900000; //30 seconds
                     long countDownInterval = 1000; //1 second
-
 
                     //Initialize a new CountDownTimer instance
                     timer = new CountDownTimer(millisInFuture,countDownInterval){
@@ -217,7 +217,7 @@ public class MatchScreen extends AppCompatActivity {
                 btnResume.setEnabled(true);
                 btnCancel.setEnabled(true);
                 //Disable the start and pause button
-                btnStart.setEnabled(false);
+                btnStart.setEnabled(true);
                 btnPause.setEnabled(false);
             }
         });
@@ -249,7 +249,7 @@ public class MatchScreen extends AppCompatActivity {
                             cancel();
                         }
                         else {
-                            tView.setText("" + millisUntilFinished / 1000);
+                            setTimeText(millisUntilFinished, tView);
                             //Put count down timer remaining time in a variable
                             timeRemaining = millisUntilFinished;
                         }
@@ -302,7 +302,7 @@ public class MatchScreen extends AppCompatActivity {
                 btnStart.setEnabled(true);
 
                 //Notify the user that CountDownTimer is canceled/stopped
-                tView.setText("CountDownTimer Canceled/stopped.");
+                tView.setText("Done");
             }
         });
 

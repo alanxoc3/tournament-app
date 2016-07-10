@@ -110,7 +110,7 @@
         android:layout_height="wrap_content"
         android:text="Fence"
         android:id="@+id/start"
-        android:layout_alignTop="@+id/button5"
+        android:layout_centerVertical="true"
         android:layout_alignStart="@+id/stop" />
 
     <Button
@@ -118,7 +118,7 @@
         android:layout_height="wrap_content"
         android:text="Halt"
         android:id="@+id/stop"
-        android:layout_alignTop="@+id/cards"
+        android:layout_below="@+id/start"
         android:layout_centerHorizontal="true" />
 
     <Button
@@ -162,14 +162,14 @@
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:text="Resume"
-        android:layout_alignTop="@+id/btn_cancel"
-        android:layout_alignParentStart="true" />
+        android:layout_alignTop="@+id/p1Score"
+        android:layout_alignStart="@+id/start" />
     <Button
         android:id="@+id/btn_cancel"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:text="Cancel(Stop)"
-        android:layout_alignTop="@+id/editText3"
-        android:layout_toStartOf="@+id/start" />
+        android:layout_below="@+id/stop"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
