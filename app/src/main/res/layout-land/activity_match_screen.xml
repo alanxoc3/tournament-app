@@ -9,16 +9,6 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="cs246.fencing_tournament.screens.matchScreen">
 
-    <Chronometer android:id="@+id/chronometer"
-        android:format="chronometer_initial_format"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="0"
-        android:paddingBottom="30dip"
-        android:paddingTop="30dip"
-        android:layout_alignBottom="@+id/button"
-        android:layout_toEndOf="@+id/cards" />
-
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -156,5 +146,30 @@
         android:id="@+id/p1Score"
         android:layout_alignBottom="@+id/button2"
         android:layout_alignEnd="@+id/editText3" />
+
+    <TextView
+        android:id="@+id/tv"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="15:00"
+        android:layout_centerHorizontal="true" />
+
+
+
+
+    <Button
+        android:id="@+id/btn_resume"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="Resume"
+        android:layout_alignTop="@+id/btn_cancel"
+        android:layout_alignParentStart="true" />
+    <Button
+        android:id="@+id/btn_cancel"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="Cancel(Stop)"
+        android:layout_alignTop="@+id/editText3"
+        android:layout_toStartOf="@+id/start" />
 
 </RelativeLayout>

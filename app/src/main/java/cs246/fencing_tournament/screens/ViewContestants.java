@@ -3,6 +3,7 @@ package cs246.fencing_tournament.screens;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import cs246.fencing_tournament.R;
 import cs246.fencing_tournament.data.ContestantData;
 import java.util.List;
 
