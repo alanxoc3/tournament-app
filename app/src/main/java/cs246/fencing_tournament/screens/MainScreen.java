@@ -25,10 +25,15 @@ public class MainScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_screen);
-        tournament = new TournamentData();
 
-        List<ContestantData> tmpContestants = getIntent().getParcelableArrayListExtra("ContestantsArray");
-        tournament.setContestants(tmpContestants);
+        if (getIntent().hasExtra("Tournament"))
+            tournament = getIntent().getParcelableExtra("Tournament");
+        else tournament = new TournamentData();
+
+        if (getIntent().hasExtra("ContestantsArray")) {
+            List<ContestantData> tmpContestants = getIntent().getParcelableArrayListExtra("ContestantsArray");
+            tournament.setContestants(tmpContestants);
+        }
     }
 
     public void viewContestants(View v) {
@@ -40,7 +45,8 @@ public class MainScreen extends AppCompatActivity {
         tournament.generatePools();
 
         if(tournament.hasPools()) {
-            action.putParcelableArrayListExtra("PoolsArray", (ArrayList<PoolData>) tournament.getPools());
+            // action.putParcelableArrayListExtra("PoolsArray", (ArrayList<PoolData>) tournament.getPools());
+            action.putExtra("Tournament", tournament);
             startActivity(action);
         }
     }

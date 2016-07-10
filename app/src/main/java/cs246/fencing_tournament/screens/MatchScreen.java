@@ -19,7 +19,7 @@ import android.view.View.OnClickListener;
 import cs246.fencing_tournament.R;
 import cs246.fencing_tournament.data.MatchData;
 
-public class matchScreen extends AppCompatActivity {
+public class MatchScreen extends AppCompatActivity {
 
     private boolean p1Yellow;
     private boolean p2Yellow;

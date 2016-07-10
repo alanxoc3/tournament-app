@@ -1,20 +1,24 @@
 package cs246.fencing_tournament.data;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.support.v4.util.Pools;
 import android.util.Log;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Vector;
 import java.util.Deque;
 import java.util.List;
 
 /**
+ * The tournament data class is in charge of all the tournament logic and what not.
+ * It contains the different classes that have individual logic.
  * Created by Austin on 6/26/2016.
  */
-public class TournamentData {
+public class TournamentData implements Parcelable {
     private List <PoolData> pools;
     private List <ContestantData> contestants;
-    private Deque <ContestantData> contestantSort;
     private BracketData bracket;
 
     // Default Constructor
@@ -88,7 +92,7 @@ public class TournamentData {
         int numOfPeeps = contestants.size();
         List<Integer> poolLens = new ArrayList<Integer>();
         // If there are 7 people, there are now 2 pools.
-        int numOfPools = numOfPeeps / (MAX_POOL_LEN + 1) + 1;
+        int numOfPools = numOfPeeps / MAX_POOL_LEN + (numOfPeeps % MAX_POOL_LEN != 0 ? 1 : 0);
         int averagePoolLen = numOfPeeps / numOfPools;
 
         int remainder = numOfPeeps % numOfPools;
@@ -144,6 +148,7 @@ public class TournamentData {
      * of matches.
      */
     public void fillBracket(){
+        Deque <ContestantData> contestantSort = new ArrayDeque<ContestantData>();
         contestantSort.addAll(contestants);
         int numMatches = ((contestantSort.size() + 1) / 2);
 
@@ -168,4 +173,80 @@ public class TournamentData {
             bracket.add(numMatches + numMatches - 1 - i, newMatch);
         }
     }
+
+    // PARCELABLE STUFF
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    protected TournamentData(Parcel in) {
+        int loadStatus = in.readInt();
+
+        contestants = null;
+        pools = null;
+
+        switch (loadStatus) {
+            case 1:
+                contestants = new ArrayList<ContestantData>();
+                in.readList(contestants, ContestantData.class.getClassLoader());
+                break;
+            case 2:
+                pools = new ArrayList<PoolData>();
+                in.readList(pools, PoolData.class.getClassLoader());
+                break;
+            case 3:
+                contestants = new ArrayList<ContestantData>();
+                pools = new ArrayList<PoolData>();
+                in.readList(contestants, ContestantData.class.getClassLoader());
+                in.readList(pools, PoolData.class.getClassLoader());
+                break;
+            default: break;
+        }
+
+        // Bracket would go here, when it is ready.
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        int loadStatus = 0;
+        if (pools == null && contestants != null) {
+            loadStatus = 1;
+        } else if (pools != null && contestants == null) {
+            loadStatus = 2;
+        } else if (pools != null) {
+            loadStatus = 3;
+        }
+
+        dest.writeInt(loadStatus);
+
+        switch (loadStatus) {
+            case 1:
+                dest.writeList(contestants);
+                break;
+            case 2:
+                dest.writeList(pools);
+                break;
+            case 3:
+                dest.writeList(contestants);
+                dest.writeList(pools);
+                break;
+            default: break;
+        }
+
+        // Bracket would go here when it is ready.
+    }
+
+    public static final Parcelable.Creator<TournamentData> CREATOR = new Parcelable.Creator<TournamentData>() {
+        @Override
+        public TournamentData createFromParcel(Parcel in) {
+            return new TournamentData(in);
+        }
+
+        @Override
+        public TournamentData[] newArray(int size) {
+            return new TournamentData[size];
+        }
+    };
 }

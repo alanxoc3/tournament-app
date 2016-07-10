@@ -63,7 +63,5 @@ public class EnterContestant extends AppCompatActivity {
         contestants = getIntent().getParcelableArrayListExtra("ContestantsArray");
         if (contestants != null)
             Log.i(beforeTag, Integer.toString(contestants.size()));
-
-
     }
 }

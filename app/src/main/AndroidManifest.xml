@@ -11,15 +11,13 @@
         <activity android:name=".screens.MainScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".screens.EnterContestant" />
         <activity android:name=".screens.PoolScreen" />
         <activity android:name=".screens.ViewContestants" />
-        <activity android:name=".screens.matchScreen"
-            android:screenOrientation="landscape"></activity>
+        <activity android:name=".screens.MatchScreen" android:screenOrientation="landscape" />
     </application>
 
 </manifest>
