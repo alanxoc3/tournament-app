@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,7 +17,10 @@ import android.os.CountDownTimer;
 
 import android.view.View.OnClickListener;
 
+import java.util.List;
+
 import cs246.fencing_tournament.R;
+import cs246.fencing_tournament.data.ContestantData;
 import cs246.fencing_tournament.data.MatchData;
 
 public class MatchScreen extends AppCompatActivity {
@@ -118,12 +122,22 @@ public class MatchScreen extends AppCompatActivity {
     }
 
 
-
+    private List<ContestantData> contestants;
+    private boolean canUpdate = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_match_screen);
+
+        contestants = getIntent().getParcelableArrayListExtra("ContestantsArray");
+        thisMatch = getIntent().getParcelableExtra("Match");
+        if (thisMatch == null) {
+            thisMatch = new MatchData(1,2); //THIS WILL HAVE TO BE CHANGED!!
+        }
+        if (contestants == null) {
+            canUpdate = false;
+        }
 
         thisMatch = new MatchData(1,2); //THIS WILL HAVE TO BE CHANGED!!
 
