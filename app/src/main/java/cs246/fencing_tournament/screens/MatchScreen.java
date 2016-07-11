@@ -4,10 +4,17 @@ import android.graphics.Color;
 import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Chronometer;
 import android.widget.TextView;
+
+
+
+import android.os.CountDownTimer;
+
+import android.view.View.OnClickListener;
 
 import cs246.fencing_tournament.R;
 import cs246.fencing_tournament.data.MatchData;
@@ -88,8 +95,30 @@ public class MatchScreen extends AppCompatActivity {
             score.setText(Integer.toString(thisMatch.getP2Score()));
     }
 
+    //Declare a variable to hold count down timer's paused status
+    private boolean isPaused = false;
+    //Declare a variable to hold count down timer's paused status
+    private boolean isCanceled = false;
 
-    Chronometer mChronometer;
+    //Declare a variable to hold CountDownTimer remaining time
+    private long timeRemaining = 0;
+
+    public void setTimeText(long millisUntilFinished, TextView tView){
+        long minutes = millisUntilFinished / 60000;
+        String seconds = "";
+        if (millisUntilFinished / 1000 - minutes * 60 < 10) {
+            seconds += "0" + (millisUntilFinished / 1000 - minutes * 60);
+        }
+        else {
+            seconds += (millisUntilFinished / 1000 - minutes * 60);
+        }
+        String time = "" + minutes + ":"
+                + seconds;
+        tView.setText(time);
+    }
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,60 +138,197 @@ public class MatchScreen extends AppCompatActivity {
         p2Yellow = false;
 
 
-        Button button;
-        mChronometer = (Chronometer) findViewById(R.id.chronometer);
+        //Get reference of the XML layout's widgets
+        final TextView tView = (TextView) findViewById(R.id.tv);
+        final Button btnStart = (Button) findViewById(R.id.start);
+        final Button btnPause = (Button) findViewById(R.id.stop);
+        final Button btnResume = (Button) findViewById(R.id.btn_resume);
+        final Button btnCancel = (Button) findViewById(R.id.btn_cancel);
+
+        //Initially disabled the pause, resume and cancel button
+        btnPause.setEnabled(false);
+        btnResume.setEnabled(false);
+        btnCancel.setEnabled(false);
 
 
+        //Set a Click Listener for start button
+        if (btnStart != null){
+            btnStart.setOnClickListener(new OnClickListener(){
+                @Override
+                public void onClick(View v){
 
-        // Watch for button clicks.
-        button = (Button) findViewById(R.id.start);
-        button.setOnClickListener(mStartListener);
+                    isPaused = false;
+                    isCanceled = false;
 
-        button = (Button) findViewById(R.id.stop);
-        button.setOnClickListener(mStopListener);
+                    //Disable the start and pause button
+                    btnStart.setEnabled(false);
+                    btnResume.setEnabled(false);
+                    //Enabled the pause and cancel button
+                    btnPause.setEnabled(true);
+                    btnCancel.setEnabled(true);
 
-        mChronometer.setFormat(null);
-        mChronometer.setBase(SystemClock.elapsedRealtime());
-        //button = (Button) findViewById(R.id.reset);
-        //button.setOnClickListener(mResetListener);
+                    CountDownTimer timer;
+                    long millisInFuture = 900000; //30 seconds
+                    long countDownInterval = 1000; //1 second
 
-        //button = (Button) findViewById(R.id.set_format);
-        //button.setOnClickListener(mSetFormatListener);
+                    //Initialize a new CountDownTimer instance
+                    timer = new CountDownTimer(millisInFuture,countDownInterval){
+                        public void onTick(long millisUntilFinished){
+                            //do something in every tick
+                            if(isPaused || isCanceled)
+                            {
+                                //If the user request to cancel or paused the
+                                //CountDownTimer we will cancel the current instance
+                                cancel();
+                            }
+                            else {
+                                //Display the remaining seconds to app interface
+                                //1 second = 1000 milliseconds
+                                setTimeText(millisUntilFinished, tView);
 
-        //button = (Button) findViewById(R.id.clear_format);
-        //button.setOnClickListener(mClearFormatListener);
+                                //Put count down timer remaining time in a variable
+                                timeRemaining = millisUntilFinished;
+                            }
+                        }
+                        public void onFinish(){
+                            //Do something when count down finished
+                            tView.setText("Done");
 
+                            //Enable the start button
+                            btnStart.setEnabled(true);
+                            //Disable the pause, resume and cancel button
+                            btnPause.setEnabled(false);
+                            btnResume.setEnabled(false);
+                            btnCancel.setEnabled(false);
+                        }
+                    }.start();
+                }
+            });
+        }
+
+        //Set a Click Listener for pause button
+        btnPause.setOnClickListener(new OnClickListener(){
+            @Override
+            public void onClick(View v){
+                //When user request to pause the CountDownTimer
+                isPaused = true;
+
+                //Enable the resume and cancel button
+                btnResume.setEnabled(true);
+                btnCancel.setEnabled(true);
+                //Disable the start and pause button
+                btnStart.setEnabled(true);
+                btnPause.setEnabled(false);
+            }
+        });
+
+        //Set a Click Listener for resume button
+        btnResume.setOnClickListener(new OnClickListener(){
+            @Override
+            public void onClick(View v){
+                //Disable the start and resume button
+                btnStart.setEnabled(false);
+                btnResume.setEnabled(false);
+                //Enable the pause and cancel button
+                btnPause.setEnabled(true);
+                btnCancel.setEnabled(true);
+
+                //Specify the current state is not paused and canceled.
+                isPaused = false;
+                isCanceled = false;
+
+                //Initialize a new CountDownTimer instance
+                long millisInFuture = timeRemaining;
+                long countDownInterval = 1000;
+                new CountDownTimer(millisInFuture, countDownInterval){
+                    public void onTick(long millisUntilFinished){
+                        //Do something in every tick
+                        if(isPaused || isCanceled)
+                        {
+                            //If user requested to pause or cancel the count down timer
+                            cancel();
+                        }
+                        else {
+                            setTimeText(millisUntilFinished, tView);
+                            //Put count down timer remaining time in a variable
+                            timeRemaining = millisUntilFinished;
+                        }
+                    }
+                    public void onFinish(){
+                        //Do something when count down finished
+                        tView.setText("Done");
+                        //Disable the pause, resume and cancel button
+                        btnPause.setEnabled(false);
+                        btnResume.setEnabled(false);
+                        btnCancel.setEnabled(false);
+                        //Enable the start button
+                        btnStart.setEnabled(true);
+                    }
+                }.start();
+
+                //Set a Click Listener for cancel/stop button
+                btnCancel.setOnClickListener(new OnClickListener(){
+                    @Override
+                    public void onClick(View v){
+                        //When user request to cancel the CountDownTimer
+                        isCanceled = true;
+
+                        //Disable the cancel, pause and resume button
+                        btnPause.setEnabled(false);
+                        btnResume.setEnabled(false);
+                        btnCancel.setEnabled(false);
+                        //Enable the start button
+                        btnStart.setEnabled(true);
+
+                        //Notify the user that CountDownTimer is canceled/stopped
+                        tView.setText("CountDownTimer Canceled/stopped.");
+                    }
+                });
+            }
+        });
+
+        //Set a Click Listener for cancel/stop button
+        btnCancel.setOnClickListener(new OnClickListener(){
+            @Override
+            public void onClick(View v){
+                //When user request to cancel the CountDownTimer
+                isCanceled = true;
+
+                //Disable the cancel, pause and resume button
+                btnPause.setEnabled(false);
+                btnResume.setEnabled(false);
+                btnCancel.setEnabled(false);
+                //Enable the start button
+                btnStart.setEnabled(true);
+
+                //Notify the user that CountDownTimer is canceled/stopped
+                tView.setText("Done");
+            }
+        });
 
     }
 
-    View.OnClickListener mStartListener = new View.OnClickListener() {
-        public void onClick(View v) {
-            mChronometer.start();
-            //mChronometer.setBase(SystemClock.elapsedRealtime());
-        }
-    };
 
-    View.OnClickListener mStopListener = new View.OnClickListener() {
-        public void onClick(View v) {
-            mChronometer.stop();
-        }
-    };
-/*
-    View.OnClickListener mResetListener = new View.OnClickListener() {
-        public void onClick(View v) {
-            mChronometer.setBase(SystemClock.elapsedRealtime());
-        }
-    };
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        //getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
 
-    View.OnClickListener mSetFormatListener = new View.OnClickListener() {
-        public void onClick(View v) {
-            mChronometer.setFormat("(%s)");
-        }
-    };
 
-    View.OnClickListener mClearFormatListener = new View.OnClickListener() {
-        public void onClick(View v) {
-            mChronometer.setFormat(null);
-        }
-    };*/
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+       // if (id == R.id.action_settings) {
+        //    return true;
+        //}
+
+        return super.onOptionsItemSelected(item);
+    }
 }
