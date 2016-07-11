@@ -217,7 +217,7 @@ public class MatchScreen extends AppCompatActivity {
                 btnResume.setEnabled(true);
                 btnCancel.setEnabled(true);
                 //Disable the start and pause button
-                btnStart.setEnabled(true);
+                btnStart.setEnabled(false);
                 btnPause.setEnabled(false);
             }
         });
