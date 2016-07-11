@@ -168,7 +168,7 @@ public class MatchScreen extends AppCompatActivity {
                     btnCancel.setEnabled(true);
 
                     CountDownTimer timer;
-                    long millisInFuture = 900000; //30 seconds
+                    long millisInFuture = 180000; //3 minutes
                     long countDownInterval = 1000; //1 second
 
                     //Initialize a new CountDownTimer instance
