@@ -79,6 +79,8 @@ public class MainScreen extends AppCompatActivity {
             action.putExtra("Tournament", tournament);
             startActivity(action);
         }
+        eContest.setEnabled(false);
+        bracketView.setEnabled(true);
     }
 
     public void startBracket(View v) {
