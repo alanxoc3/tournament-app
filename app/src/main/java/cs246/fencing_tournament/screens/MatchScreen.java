@@ -1,5 +1,6 @@
 package cs246.fencing_tournament.screens;
 
+import android.app.Activity;
 import android.graphics.Color;
 import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
@@ -28,6 +29,10 @@ public class MatchScreen extends AppCompatActivity {
     private boolean p1Yellow;
     private boolean p2Yellow;
     private MatchData thisMatch;
+    private List<ContestantData> contestants;
+    private boolean canUpdate = true;
+    private ContestantData p1;
+    private ContestantData p2;
 
     public void yellow1(View v){
         if (p1Yellow){
@@ -124,14 +129,12 @@ public class MatchScreen extends AppCompatActivity {
     public void finished(View v){
         if (canUpdate){
             thisMatch.applyResults(contestants);
-            finish();
+
         }
+        finish();
     }
 
-    private List<ContestantData> contestants;
-    private boolean canUpdate = true;
-    private ContestantData p1;
-    private ContestantData p2;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

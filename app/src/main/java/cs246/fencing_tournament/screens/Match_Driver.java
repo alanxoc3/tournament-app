@@ -1,10 +1,12 @@
 package cs246.fencing_tournament.screens;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import cs246.fencing_tournament.R;
@@ -20,7 +22,11 @@ public class Match_Driver extends AppCompatActivity {
     private MatchData thisMatch;
 
     public void callMatch(View v){
+        Intent action = new Intent(Match_Driver.this, MatchScreen.class);
 
+        action.putParcelableArrayListExtra("ContestantsArray",(ArrayList<ContestantData>)contestants);
+        startActivity(action);
+        finish();
     }
 
     @Override
