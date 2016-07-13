@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
@@ -54,7 +53,7 @@ public class Match_Driver extends AppCompatActivity {
         contestants = getIntent().getParcelableArrayListExtra("ContestantsArray");
         thisMatch = getIntent().getParcelableExtra("Match");
         if (thisMatch == null) {
-            thisMatch = new MatchData(1,2); //THIS WILL HAVE TO BE CHANGED!!
+            thisMatch = new MatchData(1,2);
             canUpdate = false;
         }
         if (contestants == null) {
