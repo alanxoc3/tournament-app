@@ -121,9 +121,17 @@ public class MatchScreen extends AppCompatActivity {
         tView.setText(time);
     }
 
+    public void finished(View v){
+        if (canUpdate){
+            thisMatch.applyResults(contestants);
+            finish();
+        }
+    }
 
     private List<ContestantData> contestants;
     private boolean canUpdate = true;
+    private ContestantData p1;
+    private ContestantData p2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -134,12 +142,22 @@ public class MatchScreen extends AppCompatActivity {
         thisMatch = getIntent().getParcelableExtra("Match");
         if (thisMatch == null) {
             thisMatch = new MatchData(1,2); //THIS WILL HAVE TO BE CHANGED!!
+            canUpdate = false;
         }
         if (contestants == null) {
             canUpdate = false;
         }
 
-        thisMatch = new MatchData(1,2); //THIS WILL HAVE TO BE CHANGED!!
+        if (canUpdate){
+            p1 = ContestantData.findById(contestants,thisMatch.getId1());
+            TextView name = (TextView) findViewById(R.id.p1Name);
+            name.setText(p1.getName());
+            p2 = ContestantData.findById(contestants,thisMatch.getId2());
+            name = (TextView) findViewById(R.id.p2Name);
+            name.setText(p2.getName());
+        }
+
+        //thisMatch = new MatchData(1,2); //THIS WILL HAVE TO BE CHANGED!!
 
         int defalt = Color.WHITE;
         Button box = (Button) findViewById(R.id.cards);
@@ -150,6 +168,7 @@ public class MatchScreen extends AppCompatActivity {
             box.setBackgroundColor(defalt);
         p1Yellow = false;
         p2Yellow = false;
+
 
 
         //Get reference of the XML layout's widgets
