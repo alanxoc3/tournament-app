@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -27,6 +29,21 @@ public class Match_Driver extends AppCompatActivity {
         action.putParcelableArrayListExtra("ContestantsArray",(ArrayList<ContestantData>)contestants);
         startActivity(action);
         finish();
+    }
+
+    public void vic1(View v){
+        CheckBox p2Vic = (CheckBox) findViewById(R.id.p2Vic);
+        if (canUpdate){
+            thisMatch.setVicId(thisMatch.getId1());
+        }
+        p2Vic.setChecked(false);
+    }
+    public void vic2(View v){
+        CheckBox p1Vic = (CheckBox) findViewById(R.id.p1Vic);
+        if (canUpdate){
+            thisMatch.setVicId(thisMatch.getId2());
+        }
+        p1Vic.setChecked(false);
     }
 
     @Override

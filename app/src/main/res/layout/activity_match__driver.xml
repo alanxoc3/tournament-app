@@ -53,15 +53,17 @@
         android:id="@+id/p1Vic"
         android:checked="false"
         android:layout_centerVertical="true"
-        android:layout_toStartOf="@+id/runMatch" />
+        android:layout_toStartOf="@+id/runMatch"
+        android:onClick="vic1" />
 
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/checkBox"
+        android:id="@+id/p2Vic"
         android:checked="false"
         android:layout_alignTop="@+id/p1Vic"
-        android:layout_toEndOf="@+id/runMatch" />
+        android:layout_toEndOf="@+id/runMatch"
+        android:onClick="vic2" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -90,7 +92,7 @@
         android:ems="10"
         android:id="@+id/editText2"
         android:layout_alignTop="@+id/editText"
-        android:layout_alignStart="@+id/checkBox"
+        android:layout_alignStart="@+id/p2Vic"
         android:layout_alignEnd="@+id/p2Name" />
 
     <TextView
