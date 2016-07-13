@@ -37,7 +37,10 @@ public class MainScreen extends AppCompatActivity {
     }
 
     public void viewContestants(View v) {
+        Intent action = new Intent(MainScreen.this, ViewContestants.class);
 
+        action.putParcelableArrayListExtra("ContestantsArray",(ArrayList<ContestantData>)tournament.getContestants());
+        startActivity(action);
     }
 
     public void startPool(View v) {
