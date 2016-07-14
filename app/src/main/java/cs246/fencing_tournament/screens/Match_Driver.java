@@ -3,6 +3,7 @@ package cs246.fencing_tournament.screens;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.TextView;
@@ -21,6 +22,10 @@ public class Match_Driver extends AppCompatActivity {
     private ContestantData p1;
     private ContestantData p2;
     private MatchData thisMatch;
+    public static final String TAG = "MatchDriver";
+
+    // These two are needed, in order to pass the match back to the pool screen.
+    private int poolNum, matchNum;
 
     public void callMatch(View v){
         Intent action = new Intent(Match_Driver.this, MatchScreen.class);
@@ -52,6 +57,14 @@ public class Match_Driver extends AppCompatActivity {
 
         contestants = getIntent().getParcelableArrayListExtra("ContestantsArray");
         thisMatch = getIntent().getParcelableExtra("Match");
+        poolNum = getIntent().getIntExtra("PoolNum", -1);
+        matchNum = getIntent().getIntExtra("MatchNum", -1);
+
+        if (poolNum == -1)  Log.e(TAG, "Pool Num didn't get passed.");
+        else Log.i(TAG, "POOL_NUM: " + poolNum);
+        if (matchNum == -1) Log.e(TAG, "Match Num didn't get passed.");
+        else Log.i(TAG, "MATCH_NUM: " + matchNum);
+
         if (thisMatch == null) {
             thisMatch = new MatchData(1,2);
             canUpdate = false;

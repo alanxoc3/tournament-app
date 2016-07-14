@@ -16,6 +16,7 @@ import java.util.List;
 
 import cs246.fencing_tournament.R;
 import cs246.fencing_tournament.data.ContestantData;
+import cs246.fencing_tournament.data.MatchData;
 import cs246.fencing_tournament.data.PoolData;
 import cs246.fencing_tournament.screens.MainScreen;
 import cs246.fencing_tournament.screens.Match_Driver;
@@ -101,9 +102,9 @@ public class PoolFragment extends Fragment {
             lockit = true;
             Intent intent = new Intent(getActivity(), Match_Driver.class);
             intent.putParcelableArrayListExtra("ContestantsArray", (ArrayList<ContestantData>) _contestantList);
-            intent.putExtra("pool_data", _pool);
-            intent.putExtra("pool_count", poolIndex);
-            intent.putExtra("match_num", matchNum);
+            intent.putExtra("Match", _pool.getMatch(matchNum));
+            intent.putExtra("PoolNum", poolIndex);
+            intent.putExtra("MatchNum", matchNum);
             getActivity().startActivity(intent);
         }
     }
