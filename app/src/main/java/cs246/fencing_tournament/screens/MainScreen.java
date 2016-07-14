@@ -61,5 +61,4 @@ public class MainScreen extends AppCompatActivity {
         action.putParcelableArrayListExtra("ContestantsArray",(ArrayList<ContestantData>)tournament.getContestants());
         startActivity(action);
     }
-
 }

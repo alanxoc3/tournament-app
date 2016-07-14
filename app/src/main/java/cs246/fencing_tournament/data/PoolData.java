@@ -40,11 +40,20 @@ public class PoolData implements Parcelable {
      */
     public MatchData getMatch(int matchNumber) {
         if (matchNumber >= matches.size() || matchNumber < 0) {
-            Log.e(TAG, "Given Match does not exist");
-            System.out.printf("Given Match does not exist, returning match 0");
-            return matches.get(0);
+            Log.e(TAG, "Given Match does not exist. Null returned.");
+            return null;
         }
         return matches.get(matchNumber);
+    }
+
+    /**
+     * Returns true if the pool contains that match. And that match isn't a "self vs self match".
+     * @param matchNumber
+     * @return
+     */
+    public boolean isValidMatch(int matchNumber) {
+        return (matchNumber < matches.size() && matchNumber >= 0)
+                && (matchNumber % (getWL() + 1) != 0);
     }
 
     /**

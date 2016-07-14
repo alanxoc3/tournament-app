@@ -40,11 +40,19 @@ public class PoolCanvas extends View {
     private float viewX = 0.0f;
     private float viewY = 0.0f;
     private int pad;
+    boolean scaleLock;
+    int didPress = 0;
 
     private static final String TAG = "PoolCanvas";
 
     int x, y;
     int incX, incY;
+
+    private PoolFragment _poolFragment;
+
+    public void setPoolFragment(PoolFragment poolFragment) {
+        _poolFragment = poolFragment;
+    }
 
     public PoolCanvas(Context context) {
         super(context);
@@ -116,10 +124,16 @@ public class PoolCanvas extends View {
         Paint p1_paint = new Paint();
         Paint p2_paint = new Paint();
         Paint vs_paint = new Paint();
+        Paint rect_paint = new Paint();
+        Paint trect_paint = new Paint();
 
         p1_paint.setColor(Color.BLUE);
         p2_paint.setColor(Color.RED);
         vs_paint.setColor(Color.BLACK);
+        rect_paint.setColor(Color.GRAY);
+        rect_paint.setStyle(Paint.Style.FILL_AND_STROKE);
+        trect_paint.setColor(Color.WHITE);
+        trect_paint.setStyle(Paint.Style.FILL_AND_STROKE);
 
         p1_paint.setTextSize(p1_text_size);
         p2_paint.setTextSize(p2_text_size);
@@ -127,13 +141,29 @@ public class PoolCanvas extends View {
 
         for (int row = 0; row < wl; ++row) {
             for (int col = 0; col < wl; ++col) {
-                // A complicated way to get the names :)
-                String p1 = ContestantData.findById(_contestants, _pool.getMatch(row * wl + col).getId1()).getName();
-                String p2 = ContestantData.findById(_contestants, _pool.getMatch(row * wl + col).getId2()).getName();
+                int x = col * cellW + pad;
+                int y = row * cellH + pad;
+                if (row != col) {
+                    // A complicated way to get the names :)
+                    String p1 = ContestantData.findById(_contestants, _pool.getMatch(row * wl + col).getId1()).getName();
+                    String p2 = ContestantData.findById(_contestants, _pool.getMatch(row * wl + col).getId2()).getName();
 
-                canvas.drawText(p1, col * cellW + pad + leftPad, row * cellH + pad + p1Pad, p1_paint);
-                canvas.drawText(vs, col * cellW + pad + leftPad, row * cellH + pad + vsPad, vs_paint);
-                canvas.drawText(p2, col * cellW + pad + leftPad, row * cellH + pad + p2Pad, p2_paint);
+                    // We don't want to allow strings that are too long.
+                    while (p1_paint.measureText(p1) > (cellW - 2*leftPad)) {
+                        p1 = p1.substring(0, p1.length() - 2);
+                    }
+
+                    while (p2_paint.measureText(p2) > (cellW - 2*leftPad)) {
+                        p2 = p2.substring(0, p2.length() - 2);
+                    }
+
+                    canvas.drawRect(x, y, x + cellW, y + cellH, trect_paint);
+                    canvas.drawText(p1, x + leftPad, y + p1Pad, p1_paint);
+                    canvas.drawText(vs, x + leftPad, y + vsPad, vs_paint);
+                    canvas.drawText(p2, x + leftPad, y + p2Pad, p2_paint);
+                } else {
+                    canvas.drawRect(x, y, x + cellW, y + cellH, rect_paint);
+                }
             }
         }
     }
@@ -154,29 +184,81 @@ public class PoolCanvas extends View {
         canvasPaint.setAntiAlias(true);
         canvasPaint.setStyle(Paint.Style.STROKE);
 
-        canvas.drawPath(createPath(getWidth(), getHeight()), canvasPaint);
 
         drawText(canvas);
 
-
-
+        canvas.drawPath(createPath(getWidth(), getHeight()), canvasPaint);
 
 
         canvas.restore();
     }
 
+    public void callDriver(float x, float y) {
+        int wl = _pool.getWL();
+        int scrW = getWidth();
+        int scrH = getHeight();
+        int altW = scrW - 2*pad;
+        int altH = scrH - 2*pad;
+        int cellW = altW / wl;
+        int cellH = altH / wl;
+
+        int col = ((int) x - pad) / cellW;
+        int row = ((int) y - pad) / cellH;
+
+        int num = row * wl + col;
+        Log.e("TAG", "Number is: " + num);
+
+        if (num >= 0 && num < _pool.size()) {
+            _poolFragment.openDriver(num);
+        } else {
+            Log.e(TAG, "The number " + num + " was not within range.");
+        }
+    }
+
     @Override
     public boolean onTouchEvent(MotionEvent motionEvent) {
-        mScaleDetector.getFocusX();
+        super.onTouchEvent(motionEvent);
+        // didPress = 0 -- Nope
+        // didPress = 1 -- Pressed
+        // didPress = 2 -- Released
+
         mScaleDetector.onTouchEvent(motionEvent);
 
-        touchX = motionEvent.getX() / mScaleFactor + viewX;
-        touchY = motionEvent.getY() / mScaleFactor + viewY;
+        final int action = motionEvent.getAction();
 
-        // Forces a view draw.
-        invalidate();
+        switch (action & MotionEvent.ACTION_MASK) {
+            case MotionEvent.ACTION_MOVE: {
+                if (mScaleDetector.isInProgress()) didPress = 0;
+                break;
+            }
 
-        // Because we handled the touch event.
+            case MotionEvent.ACTION_DOWN: {
+                didPress = 1;
+                break;
+            }
+
+            case MotionEvent.ACTION_UP: {
+                if(didPress == 1) didPress = 2;
+                break;
+            }
+
+            case MotionEvent.ACTION_CANCEL:
+            case MotionEvent.ACTION_POINTER_DOWN:
+            case MotionEvent.ACTION_POINTER_UP:
+                didPress = 0;
+                break;
+
+            default: break;
+        }
+
+        if (didPress == 2) {
+            touchX = motionEvent.getX() / mScaleFactor + viewX;
+            touchY = motionEvent.getY() / mScaleFactor + viewY;
+            callDriver(touchX, touchY);
+            didPress = 0;
+        }
+
+
         return true;
     }
 
@@ -195,6 +277,19 @@ public class PoolCanvas extends View {
 
     private class ScaleListener
             extends ScaleGestureDetector.SimpleOnScaleGestureListener {
+
+        @Override
+        public boolean onScaleBegin(ScaleGestureDetector detector) {
+            scaleLock = true;
+            return super.onScaleBegin(detector);
+        }
+
+        @Override
+        public void onScaleEnd(ScaleGestureDetector detector) {
+            super.onScaleEnd(detector);
+            scaleLock = false;
+        }
+
         @Override
         public boolean onScale(ScaleGestureDetector detector) {
             mScaleFactor *= detector.getScaleFactor();
