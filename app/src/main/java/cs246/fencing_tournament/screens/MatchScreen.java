@@ -1,9 +1,11 @@
 package cs246.fencing_tournament.screens;
 
+import android.app.Activity;
 import android.graphics.Color;
 import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,7 +18,10 @@ import android.os.CountDownTimer;
 
 import android.view.View.OnClickListener;
 
+import java.util.List;
+
 import cs246.fencing_tournament.R;
+import cs246.fencing_tournament.data.ContestantData;
 import cs246.fencing_tournament.data.MatchData;
 
 public class MatchScreen extends AppCompatActivity {
@@ -24,6 +29,10 @@ public class MatchScreen extends AppCompatActivity {
     private boolean p1Yellow;
     private boolean p2Yellow;
     private MatchData thisMatch;
+    private List<ContestantData> contestants;
+    private boolean canUpdate = true;
+    private ContestantData p1;
+    private ContestantData p2;
 
     public void yellow1(View v){
         if (p1Yellow){
@@ -117,6 +126,13 @@ public class MatchScreen extends AppCompatActivity {
         tView.setText(time);
     }
 
+    public void finished(View v){
+        if (canUpdate){
+            thisMatch.applyResults(contestants);
+
+        }
+        finish();
+    }
 
 
 
@@ -125,7 +141,26 @@ public class MatchScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_match_screen);
 
-        thisMatch = new MatchData(1,2); //THIS WILL HAVE TO BE CHANGED!!
+        contestants = getIntent().getParcelableArrayListExtra("ContestantsArray");
+        thisMatch = getIntent().getParcelableExtra("Match");
+        if (thisMatch == null) {
+            thisMatch = new MatchData(1,2); //THIS WILL HAVE TO BE CHANGED!!
+            canUpdate = false;
+        }
+        if (contestants == null) {
+            canUpdate = false;
+        }
+
+        if (canUpdate){
+            p1 = ContestantData.findById(contestants,thisMatch.getId1());
+            TextView name = (TextView) findViewById(R.id.p1Name);
+            name.setText(p1.getName());
+            p2 = ContestantData.findById(contestants,thisMatch.getId2());
+            name = (TextView) findViewById(R.id.p2Name);
+            name.setText(p2.getName());
+        }
+
+        //thisMatch = new MatchData(1,2); //THIS WILL HAVE TO BE CHANGED!!
 
         int defalt = Color.WHITE;
         Button box = (Button) findViewById(R.id.cards);
@@ -136,6 +171,7 @@ public class MatchScreen extends AppCompatActivity {
             box.setBackgroundColor(defalt);
         p1Yellow = false;
         p2Yellow = false;
+
 
 
         //Get reference of the XML layout's widgets
@@ -168,7 +204,7 @@ public class MatchScreen extends AppCompatActivity {
                     btnCancel.setEnabled(true);
 
                     CountDownTimer timer;
-                    long millisInFuture = 900000; //30 seconds
+                    long millisInFuture = 180000; //3 minutes
                     long countDownInterval = 1000; //1 second
 
                     //Initialize a new CountDownTimer instance

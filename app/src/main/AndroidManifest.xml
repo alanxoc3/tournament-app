@@ -22,7 +22,8 @@
         <activity
             android:name=".screens.MatchScreen"
             android:screenOrientation="landscape" />
-        <activity android:name=".screens.Match_Driver"></activity>
+        <activity android:name=".screens.Match_Driver"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

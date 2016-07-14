@@ -15,39 +15,44 @@
         android:layout_height="wrap_content"
         android:text="View Contestants"
         android:id="@+id/viewContestant"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
         android:onClick="viewContestants"
-        android:enabled="true" />
+        android:enabled="true"
+        android:layout_below="@+id/enterContestant"
+        android:layout_alignEnd="@+id/enterContestant"
+        android:layout_marginTop="42dp" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Bracket view"
         android:id="@+id/bracketView"
-        android:layout_below="@+id/viewContestant"
 
-        android:layout_alignParentStart="true"
         android:onClick="startBracket"
-        android:enabled="true" />
+        android:enabled="true"
+
+        android:layout_marginTop="42dp"
+        android:layout_below="@+id/poolView"
+        android:layout_centerHorizontal="true" />
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Pool View"
         android:id="@+id/poolView"
-        android:layout_below="@+id/bracketView"
-        android:layout_alignStart="@+id/enterContestant"
         android:onClick="startPool"
-        android:enabled="true" />
+        android:enabled="true"
+        android:layout_marginTop="44dp"
+        android:layout_below="@+id/viewContestant"
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Enter Contestants"
         android:id="@+id/enterContestant"
-        android:layout_below="@+id/poolView"
-        android:layout_alignParentStart="true"
         android:onClick="setContestants"
-        android:enabled="true" />
+        android:enabled="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="77dp" />
 
 </RelativeLayout>

@@ -9,4 +9,108 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="cs246.fencing_tournament.screens.Match_Driver">
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Run Match"
+        android:id="@+id/runMatch"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:onClick="callMatch" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="or"
+        android:id="@+id/textView2"
+        android:layout_below="@+id/runMatch"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="p1.Name"
+        android:id="@+id/p1Name"
+        android:layout_below="@+id/textView2"
+        android:layout_toStartOf="@+id/textView2"
+        android:layout_marginTop="35dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="p2.Name"
+        android:id="@+id/p2Name"
+        android:layout_alignTop="@+id/p1Name"
+        android:layout_toEndOf="@+id/textView2" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/p1Vic"
+        android:checked="false"
+        android:layout_centerVertical="true"
+        android:layout_toStartOf="@+id/runMatch"
+        android:onClick="vic1" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/p2Vic"
+        android:checked="false"
+        android:layout_alignTop="@+id/p1Vic"
+        android:layout_toEndOf="@+id/runMatch"
+        android:onClick="vic2" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Victor"
+        android:id="@+id/textView3"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/editText"
+        android:layout_marginTop="35dp"
+        android:layout_below="@+id/p1Vic"
+        android:layout_alignStart="@+id/p1Name"
+        android:layout_alignEnd="@+id/p1Vic" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/editText2"
+        android:layout_alignTop="@+id/editText"
+        android:layout_alignStart="@+id/p2Vic"
+        android:layout_alignEnd="@+id/p2Name" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Score"
+        android:id="@+id/textView4"
+        android:layout_alignBottom="@+id/editText2"
+        android:layout_alignEnd="@+id/textView3" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Update"
+        android:id="@+id/update"
+        android:layout_marginTop="49dp"
+        android:layout_below="@+id/textView4"
+        android:layout_centerHorizontal="true" />
+
 </RelativeLayout>
