@@ -2,9 +2,11 @@ package cs246.fencing_tournament.screens;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ListView;
 import android.widget.ArrayAdapter;
-
+import android.widget.AdapterView;
+import android.content.Intent;
 import cs246.fencing_tournament.R;
 import cs246.fencing_tournament.data.ContestantData;
 
@@ -37,5 +39,16 @@ public class ViewContestants extends AppCompatActivity {
 
         ListView listView = (ListView) findViewById(R.id.listview);
         listView.setAdapter(adapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id){
+                Intent action = new Intent(ViewContestants.this, ViewPlayer.class);
+                if (!contestants.isEmpty()) {
+                    action.putExtra("Player", contestants.get(position));
+                    startActivity(action);
+                }
+        }
+        });
     }
 }

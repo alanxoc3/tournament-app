@@ -16,14 +16,17 @@
             </intent-filter>
         </activity>
         <activity android:name=".screens.EnterContestant" />
-        <activity android:name=".screens.PoolScreen"
+        <activity
+            android:name=".screens.PoolScreen"
             android:screenOrientation="portrait" />
         <activity android:name=".screens.ViewContestants" />
         <activity
             android:name=".screens.MatchScreen"
             android:screenOrientation="landscape" />
-        <activity android:name=".screens.Match_Driver"
-            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".screens.Match_Driver"
+            android:screenOrientation="portrait" />
+        <activity android:name=".screens.ViewPlayer"></activity>
     </application>
 
 </manifest>
