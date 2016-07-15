@@ -2,6 +2,7 @@ package cs246.fencing_tournament.screens;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.ArrayAdapter;
@@ -15,27 +16,32 @@ import java.util.List;
 public class ViewContestants extends AppCompatActivity {
 
     public List <ContestantData> contestants;
-    private String[] myStringArray;
+    private String[] nameArray;
+    public static final String TAG = "ViewContestants";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_contestants);
         contestants = getIntent().getParcelableArrayListExtra("ContestantsArray");
+        if(contestants == null){
+            Log.e(TAG, "Contestants not passed");
+        }
 
         if (contestants.size() != 0) {
-            myStringArray = new String[contestants.size()];
+            nameArray = new String[contestants.size()];
             for (int i = 0; i < contestants.size(); ++i){
-                myStringArray[i] = contestants.get(i).getName();
+                nameArray[i] = contestants.get(i).getName();
             }
         }
         else {
-            myStringArray = new String[1];
-            myStringArray[0] = "There are no Contestants";
+            Log.i(TAG, "No contestants Entered");
+            nameArray = new String[1];
+            nameArray[0] = "There are no Contestants";
         }
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1, myStringArray);
+                android.R.layout.simple_list_item_1, nameArray);
 
         ListView listView = (ListView) findViewById(R.id.listview);
         listView.setAdapter(adapter);
@@ -47,6 +53,9 @@ public class ViewContestants extends AppCompatActivity {
                 if (!contestants.isEmpty()) {
                     action.putExtra("Player", contestants.get(position));
                     startActivity(action);
+                }
+                else {
+                Log.i(TAG, "Attempted to ViewPlayer with no contestants in the list");
                 }
         }
         });
