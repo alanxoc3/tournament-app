@@ -50,7 +50,10 @@ public class EnterContestant extends AppCompatActivity {
             Log.i(afterTag, Integer.toString(contestants.size()));
 
         action.putParcelableArrayListExtra("ContestantsArray",(ArrayList<ContestantData>)contestants);
-        startActivity(action);
+        setResult(RESULT_OK, action);
+        finish();
+
+        //startActivity(action);
     }
 
     /**
