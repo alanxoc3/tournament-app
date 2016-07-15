@@ -2,7 +2,7 @@ package cs246.fencing_tournament.data;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-
+import android.util.Log;
 import java.io.IOException;
 import java.io.ObjectStreamException;
 import java.io.Serializable;
@@ -16,6 +16,7 @@ public class ContestantData implements Parcelable, Comparable <ContestantData> {
 	private String _name;
 	private int _id;
 	private List<MatchData> _matchHistory;
+	public static final String TAG = "ContestantData";
 
 	// Default Constructor
 	public ContestantData() {
@@ -38,21 +39,18 @@ public class ContestantData implements Parcelable, Comparable <ContestantData> {
 		if (newMatch != null) {
 			_matchHistory.add(newMatch);
 		}
+		else {
+			Log.e(TAG, "Did not pass in a match succesfully");
+		}
 	}
 
 	public void clearHistory() {
 		_matchHistory.clear();
 	}
 
-	public List<MatchData> getMatches() {
-		return _matchHistory;
-	}
-	public int getId() {
-		return _id;
-	}
-	public String getName() {
-		return _name;
-	}
+	public List<MatchData> getMatches() { return _matchHistory; }
+	public int getId()                  { return _id;	}
+	public String getName()             { return _name;	}
 
     public void setName(String name) { this._name = name; }
 
@@ -126,7 +124,7 @@ public class ContestantData implements Parcelable, Comparable <ContestantData> {
 			else if (_id == _matchHistory.get(i).getId2())
 				points += _matchHistory.get(i).getP2Score();
 			else
-				System.out.printf("ERROR: Contestant did not participate in this match");
+				Log.e(TAG, "Contestant did not participate in this match");
 			}
 		return points;
     }
@@ -140,7 +138,7 @@ public class ContestantData implements Parcelable, Comparable <ContestantData> {
 			else if (_id == _matchHistory.get(i).getId2())
 				pointsAgainst += _matchHistory.get(i).getP1Score();
 			else
-				System.out.printf("ERROR: Contestant did not participate in this match");
+				Log.e(TAG, "Contestant did not participate in this match");
 		}
 		return pointsAgainst;
     }
@@ -166,7 +164,7 @@ public class ContestantData implements Parcelable, Comparable <ContestantData> {
 				return contestants.get(i);
 			}
 		}
-		System.out.printf("There is not contestant with the given ID");
+		Log.e(TAG, "There is no contestant with the given ID");
 		return new ContestantData();
     }
 

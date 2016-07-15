@@ -106,8 +106,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/cards"
-        android:layout_alignTop="@+id/btn_cancel"
-        android:layout_toStartOf="@+id/p1Score" />
+        android:layout_above="@+id/btn_cancel"
+        android:layout_toStartOf="@+id/stop" />
 
     <Button
         android:layout_width="wrap_content"
@@ -130,8 +130,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/cards2"
-        android:layout_alignTop="@+id/button8"
-        android:layout_alignStart="@+id/p2Name" />
+        android:layout_above="@+id/finished"
+        android:layout_alignEnd="@+id/p2Score" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -155,7 +155,7 @@
         android:id="@+id/tv"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:text="15:00"
+        android:text="3:00"
         android:layout_alignBottom="@+id/p1Name"
         android:layout_centerHorizontal="true"
         android:textSize="30dp" />
@@ -174,17 +174,17 @@
         android:id="@+id/btn_cancel"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:text="Cancel(Stop)"
+        android:text="Restart"
         android:layout_below="@+id/stop"
-        android:layout_centerHorizontal="true" />
+        android:layout_toStartOf="@+id/stop" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="finished"
         android:id="@+id/finished"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:onClick="finished" />
+        android:onClick="finished"
+        android:layout_below="@+id/stop"
+        android:layout_alignStart="@+id/cards2" />
 
 </RelativeLayout>

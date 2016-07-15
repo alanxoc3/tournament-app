@@ -128,6 +128,12 @@ public class MatchScreen extends AppCompatActivity {
 
     public void finished(View v){
         if (canUpdate){
+            if(thisMatch.getP1Score() > thisMatch.getP2Score()){
+                thisMatch.setVicId(thisMatch.getId1());
+            }
+            else if (thisMatch.getP1Score() < thisMatch.getP2Score()) {
+                thisMatch.setVicId(thisMatch.getId2());
+            }
             thisMatch.applyResults(contestants);
 
         }
