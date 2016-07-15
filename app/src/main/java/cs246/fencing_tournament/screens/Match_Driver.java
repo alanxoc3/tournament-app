@@ -59,6 +59,9 @@ public class Match_Driver extends AppCompatActivity {
         intent.putExtra("PoolNum", poolNum);
         intent.putExtra("MatchNum", matchNum);
 
+        Log.e(TAG, "----------PoolNum: " + poolNum);
+        Log.e(TAG, "----------MatchNum: " + matchNum);
+
         setResult(RESULT_OK, intent);
         finish();
     }
@@ -96,7 +99,17 @@ public class Match_Driver extends AppCompatActivity {
             p2 = ContestantData.findById(contestants,thisMatch.getId2());
             name = (TextView) findViewById(R.id.p2Name);
             name.setText(p2.getName());
-        }
 
+            CheckBox p1Vic = (CheckBox) findViewById(R.id.p1Vic);
+            CheckBox p2Vic = (CheckBox) findViewById(R.id.p2Vic);
+
+            if (thisMatch.getVicId() == p1.getId()) {
+                p1Vic.setChecked(true);
+                p2Vic.setChecked(false);
+            } else if (thisMatch.getVicId() == p2.getId()) {
+                p1Vic.setChecked(false);
+                p2Vic.setChecked(true);
+            }
+        }
     }
 }

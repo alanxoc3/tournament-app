@@ -108,7 +108,7 @@ public class PoolFragment extends Fragment {
             intent.putExtra("Match", _pool.getMatch(matchNum));
             intent.putExtra("PoolNum", poolIndex);
             intent.putExtra("MatchNum", matchNum);
-            getActivity().startActivity(intent);
+            getActivity().startActivityForResult(intent, 2);
         }
     }
 }

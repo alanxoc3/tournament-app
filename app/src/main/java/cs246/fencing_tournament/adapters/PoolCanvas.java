@@ -18,6 +18,7 @@ import java.util.List;
 
 import cs246.fencing_tournament.R;
 import cs246.fencing_tournament.data.ContestantData;
+import cs246.fencing_tournament.data.MatchData;
 import cs246.fencing_tournament.data.PoolData;
 
 /**
@@ -121,22 +122,19 @@ public class PoolCanvas extends View {
         int vsPad = cellH / 2;
         String vs = "VERSUS";
 
-        Paint p1_paint = new Paint();
-        Paint p2_paint = new Paint();
+        Paint p_paint = new Paint();
         Paint vs_paint = new Paint();
         Paint rect_paint = new Paint();
         Paint trect_paint = new Paint();
 
-        p1_paint.setColor(Color.BLUE);
-        p2_paint.setColor(Color.RED);
-        vs_paint.setColor(Color.BLACK);
+        p_paint.setColor(Color.BLACK);
+        vs_paint.setColor(Color.GRAY);
         rect_paint.setColor(Color.GRAY);
         rect_paint.setStyle(Paint.Style.FILL_AND_STROKE);
         trect_paint.setColor(Color.WHITE);
         trect_paint.setStyle(Paint.Style.FILL_AND_STROKE);
 
-        p1_paint.setTextSize(p1_text_size);
-        p2_paint.setTextSize(p2_text_size);
+        p_paint.setTextSize(p1_text_size);
         vs_paint.setTextSize(vs_text_size);
 
         for (int row = 0; row < wl; ++row) {
@@ -145,22 +143,33 @@ public class PoolCanvas extends View {
                 int y = row * cellH + pad;
                 if (row != col) {
                     // A complicated way to get the names :)
-                    String p1 = ContestantData.findById(_contestants, _pool.getMatch(row * wl + col).getId1()).getName();
-                    String p2 = ContestantData.findById(_contestants, _pool.getMatch(row * wl + col).getId2()).getName();
+                    MatchData currentMatch = _pool.getMatch(row * wl + col);
+                    ContestantData cd1 = ContestantData.findById(_contestants, currentMatch.getId1());
+                    ContestantData cd2 = ContestantData.findById(_contestants, currentMatch.getId2());
+                    String p1 = cd1.getName();
+                    String p2 = cd2.getName();
 
                     // We don't want to allow strings that are too long.
-                    while (p1_paint.measureText(p1) > (cellW - 2*leftPad)) {
+                    while (p_paint.measureText(p1) > (cellW - 2*leftPad)) {
                         p1 = p1.substring(0, p1.length() - 2);
                     }
 
-                    while (p2_paint.measureText(p2) > (cellW - 2*leftPad)) {
+                    while (p_paint.measureText(p2) > (cellW - 2*leftPad)) {
                         p2 = p2.substring(0, p2.length() - 2);
                     }
 
                     canvas.drawRect(x, y, x + cellW, y + cellH, trect_paint);
-                    canvas.drawText(p1, x + leftPad, y + p1Pad, p1_paint);
+
+                    if (currentMatch.getVicId() == cd1.getId()) p_paint.setColor(Color.rgb(10,190,10));
+                    else p_paint.setColor(Color.BLACK);
+                    canvas.drawText(p1, x + leftPad, y + p1Pad, p_paint);
+
                     canvas.drawText(vs, x + leftPad, y + vsPad, vs_paint);
-                    canvas.drawText(p2, x + leftPad, y + p2Pad, p2_paint);
+
+                    if (currentMatch.getVicId() == cd2.getId()) p_paint.setColor(Color.rgb(10,190,10));
+                    else p_paint.setColor(Color.BLACK);
+                    canvas.drawText(p2, x + leftPad, y + p2Pad, p_paint);
+
                 } else {
                     canvas.drawRect(x, y, x + cellW, y + cellH, rect_paint);
                 }
