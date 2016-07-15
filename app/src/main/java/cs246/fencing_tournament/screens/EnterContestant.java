@@ -44,12 +44,13 @@ public class EnterContestant extends AppCompatActivity {
         }
         //contestants.add(new ContestantData("Jenna"));
 
-        Intent action = new Intent(EnterContestant.this, MainScreen.class);
+        Intent action = new Intent();
 
-        if (contestants != null)
+        if (contestants != null) {
             Log.i(afterTag, Integer.toString(contestants.size()));
+        }
 
-        action.putParcelableArrayListExtra("ContestantsArray",(ArrayList<ContestantData>)contestants);
+        action.putParcelableArrayListExtra("ContestantsArray", (ArrayList<ContestantData>) contestants);
         setResult(RESULT_OK, action);
         finish();
 
@@ -64,7 +65,11 @@ public class EnterContestant extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enter_contestant);
         contestants = getIntent().getParcelableArrayListExtra("ContestantsArray");
-        if (contestants != null)
+        if (contestants != null) {
             Log.i(beforeTag, Integer.toString(contestants.size()));
+        }
+        else {
+            contestants = new ArrayList<ContestantData>();
+        }
     }
 }
