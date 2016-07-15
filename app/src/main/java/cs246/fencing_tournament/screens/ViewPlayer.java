@@ -15,18 +15,19 @@ public class ViewPlayer extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_player);
+
         player = getIntent().getParcelableExtra("Player");
 
         TextView name = (TextView) findViewById(R.id.name);
         name.setText(player.getName());
 
         TextView wins = (TextView) findViewById(R.id.wins);
-        wins.setText(Integer.toString(player.getWins()));
+        wins.setText("Wins:  " + Integer.toString(player.getWins()));
 
         TextView losses = (TextView) findViewById(R.id.losses);
-        losses.setText(Integer.toString(player.getLosses()));
+        losses.setText("Losses:  " + Integer.toString(player.getLosses()));
 
         TextView score = (TextView) findViewById(R.id.score);
-        score.setText(Integer.toString(player.getTotalPoints()));
+        score.setText("Total Score:  " + Integer.toString(player.getTotalPoints()));
     }
 }
