@@ -27,7 +27,7 @@ public class Match_Driver extends AppCompatActivity {
     // These two are needed, in order to pass the match back to the pool screen.
     private int poolNum, matchNum;
 
-    public void callMatch(View v){
+    public void callMatch(View v) {
         Intent action = new Intent(Match_Driver.this, MatchScreen.class);
 
         action.putParcelableArrayListExtra("ContestantsArray",(ArrayList<ContestantData>)contestants);
@@ -42,12 +42,25 @@ public class Match_Driver extends AppCompatActivity {
         }
         p2Vic.setChecked(false);
     }
+
     public void vic2(View v){
         CheckBox p1Vic = (CheckBox) findViewById(R.id.p1Vic);
         if (canUpdate){
             thisMatch.setVicId(thisMatch.getId2());
         }
         p1Vic.setChecked(false);
+    }
+
+    public void update(View v) {
+        Intent intent = new Intent();
+        intent.putParcelableArrayListExtra("ContestantsArray",
+                (ArrayList<ContestantData>) contestants);
+        intent.putExtra("Match", thisMatch);
+        intent.putExtra("PoolNum", poolNum);
+        intent.putExtra("MatchNum", matchNum);
+
+        setResult(RESULT_OK, intent);
+        finish();
     }
 
     @Override
@@ -61,9 +74,9 @@ public class Match_Driver extends AppCompatActivity {
         matchNum = getIntent().getIntExtra("MatchNum", -1);
 
         if (poolNum == -1)  Log.e(TAG, "Pool Num didn't get passed.");
-        else Log.i(TAG, "POOL_NUM: " + poolNum);
+        else Log.e(TAG, "POOL_NUM: " + poolNum);
         if (matchNum == -1) Log.e(TAG, "Match Num didn't get passed.");
-        else Log.i(TAG, "MATCH_NUM: " + matchNum);
+        else Log.e(TAG, "MATCH_NUM: " + matchNum);
 
         if (thisMatch == null) {
             thisMatch = new MatchData(1,2);
@@ -72,6 +85,9 @@ public class Match_Driver extends AppCompatActivity {
         if (contestants == null) {
             canUpdate = false;
         }
+
+        Log.e(TAG, "P1 SCORE = " + thisMatch.getP1Score());
+        Log.e(TAG, "P2 SCORE = " + thisMatch.getP2Score());
 
         if (canUpdate){
             p1 = ContestantData.findById(contestants,thisMatch.getId1());

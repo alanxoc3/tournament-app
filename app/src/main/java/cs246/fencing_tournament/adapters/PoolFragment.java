@@ -30,6 +30,7 @@ public class PoolFragment extends Fragment {
     private List<ContestantData> _contestantList;
     private int poolIndex;
     private boolean lockit;
+    public final static String TAG = "PoolFragment";
 
     public PoolFragment() {
         // Required empty public constructor
@@ -89,6 +90,8 @@ public class PoolFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         return super.onOptionsItemSelected(item);
     }
+
+
 
     public void openDriver(int matchNum) {
         // Intent action = new Intent(EnterContestant.this, MainScreen.class);
