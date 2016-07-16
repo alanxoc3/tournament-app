@@ -17,8 +17,8 @@ public class MatchData implements Parcelable {
 
     // Default Constructor
     public MatchData() {
-        id1 = -1;
-        id2 = -1;
+        id1 = -2;
+        id2 = -3;
         p1Score = 0;
         p2Score = 0;
         vicId = -1;

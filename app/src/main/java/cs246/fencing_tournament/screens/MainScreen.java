@@ -27,6 +27,7 @@ public class MainScreen extends AppCompatActivity {
     private Button bracketView;
     private Button poolView ;
     private Button eContest;
+    private boolean hasPools = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +46,7 @@ public class MainScreen extends AppCompatActivity {
         bracketView = (Button) findViewById(R.id.bracketView);
         poolView = (Button) findViewById(R.id.poolView);
         eContest = (Button) findViewById(R.id.enterContestant);
+
         if (vContest != null){
             vContest.setEnabled(true);
         }
@@ -73,12 +75,13 @@ public class MainScreen extends AppCompatActivity {
 
     public void startPool(View v) {
         Intent action = new Intent(MainScreen.this, PoolScreen.class);
-        tournament.generatePools();
+        if (!hasPools)
+            tournament.generatePools();
 
         if(tournament.hasPools()) {
             // action.putParcelableArrayListExtra("PoolsArray", (ArrayList<PoolData>) tournament.getPools());
             action.putExtra("Tournament", tournament);
-            startActivityForResult(action, 1);
+            startActivityForResult(action, 5);
         }
         eContest.setEnabled(false);
         bracketView.setEnabled(true);
@@ -88,6 +91,13 @@ public class MainScreen extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+        if (requestCode == 5 && resultCode == RESULT_OK && data != null) {
+            Log.i("onActivityResult", Boolean.toString(data.hasExtra("ContestantsArray")));
+            if (data.hasExtra("Tournament")) {
+                tournament = data.getParcelableExtra("Tournament");
+            }
+        }
+        
         if (requestCode == 1 && resultCode == RESULT_OK && data != null) {
             Log.i("onActivityResult", Boolean.toString(data.hasExtra("ContestantsArray")));
             if (data.hasExtra("ContestantsArray")) {

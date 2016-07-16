@@ -27,7 +27,9 @@
             android:name=".screens.Match_Driver"
             android:screenOrientation="portrait" />
         <activity android:name=".screens.ViewPlayer" />
-        <activity android:name=".screens.BracketScreen"></activity>
+        <activity
+            android:name=".screens.BracketScreen"
+            android:screenOrientation="landscape" />
     </application>
 
 </manifest>

@@ -22,7 +22,7 @@ public class BracketCanvas extends View {
     private TournamentData _tournament;
 
     private ScaleGestureDetector mScaleDetector;
-    private int numOfPeeps = 16;
+
     private float mScaleFactor = 1.f;
     private float focusX = 0.0f;
     private float focusY = 0.0f;
@@ -30,7 +30,6 @@ public class BracketCanvas extends View {
     private float touchY = 0.0f;
     private float viewX = 0.0f;
     private float viewY = 0.0f;
-    private int pad;
     boolean scaleLock;
     int didPress = 0;
 
@@ -61,14 +60,45 @@ public class BracketCanvas extends View {
         incX = 10;
         incY = 10;
         _tournament = null;
-
-        // Info for the padding and all.
-        pad = 10;
     }
 
     private Path createPath(int scrW, int scrH) {
-        // This is going to create the bounds.
-       return null;
+        Path path = new Path();
+        int pad = 30;
+
+        // Test num of contestants (people).
+        int numOfPeeps = 16;
+        int numOfLevels = (int) (Math.log(numOfPeeps) / Math.log(2));
+
+        // How wide the screen is, accounting for padding.
+        int altW = (scrW - 2 * pad);
+        int altH = (scrH - 2 * pad);
+
+        // How wide the tree levels will be.
+        int cellW = (altW / (numOfLevels + 1));
+
+        // Used for the loop below
+        int cellH;
+        int curNumOfPeeps;
+        int curHPad;
+
+        // WidthLoop and HeightLoop
+        for (int wl = 0; wl < numOfLevels + 1; ++wl) {
+            curNumOfPeeps = numOfPeeps / (int) Math.pow(2, wl);
+            cellH = (altH / curNumOfPeeps);
+            curHPad = cellH / 2;
+            for (int hl = 0; hl < curNumOfPeeps; ++hl) {
+                if (hl % 2 == 0) {
+                    path.moveTo(pad + wl*cellW,     curHPad + hl * cellH);
+                    path.lineTo(pad + (wl+1)*cellW, curHPad + hl * cellH);
+                } else {
+                    path.lineTo(pad + (wl+1)*cellW, curHPad + hl * cellH);
+                    path.lineTo(pad + wl*cellW,     curHPad + hl * cellH);
+                }
+            }
+        }
+
+        return path;
     }
 
     private void drawText(Canvas canvas) {
@@ -82,21 +112,18 @@ public class BracketCanvas extends View {
         canvas.save();
         canvas.scale(mScaleFactor, mScaleFactor, focusX, focusY);
 
-
         viewX = canvas.getClipBounds().exactCenterX() - canvas.getClipBounds().width() / 2;
         viewY = canvas.getClipBounds().exactCenterY() - canvas.getClipBounds().height() / 2;
 
         // Drawing Here.
-
         Paint canvasPaint = new Paint();
         canvasPaint.setColor(Color.BLACK);
         canvasPaint.setAntiAlias(true);
         canvasPaint.setStyle(Paint.Style.STROKE);
 
-        canvas.drawLine(0, 0, 200, 300, new Paint());
+        canvas.drawPath(createPath(getWidth(), getHeight()), canvasPaint);
 
         drawText(canvas);
-
         canvas.restore();
     }
 

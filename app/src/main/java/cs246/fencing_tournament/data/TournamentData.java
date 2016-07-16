@@ -194,6 +194,7 @@ public class TournamentData implements Parcelable {
 
         contestants = null;
         pools = null;
+        Log.i("TournamentParcing2", Integer.toString(loadStatus));
 
         switch (loadStatus) {
             case 1:
@@ -226,7 +227,7 @@ public class TournamentData implements Parcelable {
         } else if (pools != null) {
             loadStatus = 3;
         }
-
+        Log.i("TournamentParcing", Integer.toString(loadStatus));
         dest.writeInt(loadStatus);
 
         switch (loadStatus) {
