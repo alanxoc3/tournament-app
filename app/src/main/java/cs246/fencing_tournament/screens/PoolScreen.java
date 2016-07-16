@@ -25,6 +25,15 @@ public class PoolScreen extends AppCompatActivity {
     List<PoolData> pools;
     public static final String TAG = "PoolScreen";
 
+    public void onBackPressed() {
+        Intent action = new Intent();
+
+        //action.putParcelableArrayListExtra("ContestantsArray", (ArrayList<ContestantData>) contestants);
+        action.putExtra("Tournament",tournament);
+        setResult(RESULT_OK, action);
+        finish();
+    }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

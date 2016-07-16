@@ -78,7 +78,7 @@ public class MainScreen extends AppCompatActivity {
         if(tournament.hasPools()) {
             // action.putParcelableArrayListExtra("PoolsArray", (ArrayList<PoolData>) tournament.getPools());
             action.putExtra("Tournament", tournament);
-            startActivityForResult(action, 1);
+            startActivityForResult(action, 5);
         }
         eContest.setEnabled(false);
         bracketView.setEnabled(true);
@@ -88,6 +88,13 @@ public class MainScreen extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+        if (requestCode == 5 && resultCode == RESULT_OK && data != null) {
+            Log.i("onActivityResult", Boolean.toString(data.hasExtra("ContestantsArray")));
+            if (data.hasExtra("Tournament")) {
+                tournament = data.getParcelableExtra("Tournament");
+            }
+        }
+        
         if (requestCode == 1 && resultCode == RESULT_OK && data != null) {
             Log.i("onActivityResult", Boolean.toString(data.hasExtra("ContestantsArray")));
             if (data.hasExtra("ContestantsArray")) {
