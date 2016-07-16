@@ -55,7 +55,7 @@ public class PoolScreen extends AppCompatActivity {
             Log.e(TAG, "==========Victory: " + ContestantData.findById(contestants, tmpMatch.getVicId()).getName());
             Log.e(TAG, "==========MatchNum: " + matchNum);
 
-            tournament.getPools().get(poolNum).getMatches().set(matchNum, tmpMatch);
+            tournament.getPools().get(poolNum).setMatch(matchNum, tmpMatch);
         }
     }
 
