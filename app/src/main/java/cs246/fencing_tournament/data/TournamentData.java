@@ -7,6 +7,7 @@ import android.util.Log;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Vector;
 import java.util.Deque;
 import java.util.List;
@@ -147,7 +148,14 @@ public class TournamentData implements Parcelable {
      * deque is used to create a the tournament bracket, stored as a vector implemented binary tree
      * of matches.
      */
+
     public void fillBracket(){
+        LinkedList<ContestantData> contestantList;
+    }
+    /*
+    public void fillBracket(){
+
+
         Deque <ContestantData> contestantSort = new ArrayDeque<ContestantData>();
         contestantSort.addAll(contestants);
         int numMatches = ((contestantSort.size() + 1) / 2);
@@ -172,7 +180,7 @@ public class TournamentData implements Parcelable {
             MatchData newMatch = new MatchData(id1, id2);
             bracket.add(numMatches + numMatches - 1 - i, newMatch);
         }
-    }
+    }*/
 
     // PARCELABLE STUFF
 
