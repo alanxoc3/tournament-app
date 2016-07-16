@@ -43,7 +43,17 @@ public class PoolData implements Parcelable {
             Log.e(TAG, "Given Match does not exist. Null returned.");
             return null;
         }
-        return matches.get(matchNumber);
+
+        int row = matchNumber / getWL();
+        int col = matchNumber % getWL();
+
+        if (row < col) {
+            int tmp = row;
+            row = col;
+            col = tmp;
+        }
+
+        return matches.get(row * getWL() + col);
     }
 
     /**
