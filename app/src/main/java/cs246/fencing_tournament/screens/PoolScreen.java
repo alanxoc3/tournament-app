@@ -74,7 +74,7 @@ public class PoolScreen extends AppCompatActivity {
         if (pools == null) {
             Log.e("PoolScreen", "Pools are NULL");
         }
-
+        Log.i("PoolScreen", Integer.toString(pools.get(0).getMatch(1).getVicId()));
         Log.e("PoolScreen", "SIZE: " + pools.size());
 
 		viewPager = (ViewPager) findViewById(R.id.pager);

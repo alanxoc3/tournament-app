@@ -27,6 +27,7 @@ public class MainScreen extends AppCompatActivity {
     private Button bracketView;
     private Button poolView ;
     private Button eContest;
+    private boolean hasPools = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +46,7 @@ public class MainScreen extends AppCompatActivity {
         bracketView = (Button) findViewById(R.id.bracketView);
         poolView = (Button) findViewById(R.id.poolView);
         eContest = (Button) findViewById(R.id.enterContestant);
+
         if (vContest != null){
             vContest.setEnabled(true);
         }
@@ -73,7 +75,8 @@ public class MainScreen extends AppCompatActivity {
 
     public void startPool(View v) {
         Intent action = new Intent(MainScreen.this, PoolScreen.class);
-        tournament.generatePools();
+        if (!hasPools)
+            tournament.generatePools();
 
         if(tournament.hasPools()) {
             // action.putParcelableArrayListExtra("PoolsArray", (ArrayList<PoolData>) tournament.getPools());
