@@ -29,24 +29,26 @@ public class PoolScreen extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         Log.i(TAG, "Result Code is: " + resultCode + " Request is: " + requestCode);
+        if (RESULT_OK == resultCode) {
+            // Setting the contestants.
+            List<ContestantData> contestants = data.getParcelableArrayListExtra("ContestantsArray");
+            tournament.getContestants().clear();
+            tournament.getContestants().addAll(contestants);
 
-        // Setting the contestants.
-        List<ContestantData> contestants = data.getParcelableArrayListExtra("ContestantsArray");
-        tournament.getContestants().clear();
-        tournament.getContestants().addAll(contestants);
+            // Setting the pool/
+            MatchData tmpMatch = data.getParcelableExtra("Match");
+            int poolNum = data.getIntExtra("PoolNum", -1);
+            int matchNum = data.getIntExtra("MatchNum", -1);
 
-        // Setting the pool/
-        MatchData tmpMatch = data.getParcelableExtra("Match");
-        int poolNum = data.getIntExtra("PoolNum", -1);
-        int matchNum = data.getIntExtra("MatchNum", -1);
+            if (poolNum == -1) Log.e(TAG, "Pool Num is " + poolNum);
+            if (matchNum == -1) Log.e(TAG, "Match Num is " + matchNum);
 
-        if (poolNum == -1) Log.e(TAG, "Pool Num is " + poolNum);
-        if (matchNum == -1) Log.e(TAG, "Match Num is " + matchNum);
+            Log.e(TAG, "==========Victory: " + ContestantData.findById(contestants, tmpMatch.getVicId()).getName());
+            Log.e(TAG, "==========MatchNum: " + matchNum);
 
-        tournament.getPools().get(poolNum).getMatches().set(matchNum, tmpMatch);
-
+            tournament.getPools().get(poolNum).getMatches().set(matchNum, tmpMatch);
+        }
     }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
