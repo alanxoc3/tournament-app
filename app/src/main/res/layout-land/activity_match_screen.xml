@@ -52,9 +52,9 @@
         android:layout_height="wrap_content"
         android:id="@+id/p1Name"
         android:text="Player 1"
+        android:textSize="28dp"
         android:layout_alignParentTop="true"
-        android:layout_toEndOf="@+id/button2"
-        android:textSize="28dp" />
+        android:layout_toStartOf="@+id/btn_cancel" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -71,8 +71,8 @@
         android:text="Yellow"
         android:id="@+id/button5"
         android:onClick="yellow1"
-        android:layout_alignTop="@+id/button7"
-        android:layout_toStartOf="@+id/p1Name" />
+        android:layout_below="@+id/button"
+        android:layout_alignStart="@+id/button" />
 
     <Button
         android:layout_width="wrap_content"
@@ -80,8 +80,8 @@
         android:text="Red"
         android:id="@+id/button6"
         android:onClick="red1"
-        android:layout_below="@+id/button5"
-        android:layout_toStartOf="@+id/p1Name" />
+        android:layout_alignTop="@+id/btn_cancel"
+        android:layout_alignStart="@+id/button5" />
 
     <Button
         android:layout_width="wrap_content"
@@ -148,8 +148,8 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="0"
         android:id="@+id/p1Score"
-        android:layout_alignBottom="@+id/button2"
-        android:layout_alignEnd="@+id/p1Name" />
+        android:layout_alignBottom="@+id/btn_resume"
+        android:layout_alignStart="@+id/cards" />
 
     <TextView
         android:id="@+id/tv"

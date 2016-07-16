@@ -1,6 +1,7 @@
 package cs246.fencing_tournament.screens;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
@@ -18,6 +19,7 @@ import android.os.CountDownTimer;
 
 import android.view.View.OnClickListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import cs246.fencing_tournament.R;
@@ -134,9 +136,15 @@ public class MatchScreen extends AppCompatActivity {
             else if (thisMatch.getP1Score() < thisMatch.getP2Score()) {
                 thisMatch.setVicId(thisMatch.getId2());
             }
-            thisMatch.applyResults(contestants);
+            //thisMatch.applyResults(contestants);
 
         }
+
+        Intent action = new Intent();
+
+        //action.putParcelableArrayListExtra("ContestantsArray", (ArrayList<ContestantData>) contestants);
+        action.putExtra("Match",thisMatch);
+        setResult(RESULT_OK, action);
         finish();
     }
 
@@ -146,7 +154,7 @@ public class MatchScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_match_screen);
-
+        canUpdate = true;
         contestants = getIntent().getParcelableArrayListExtra("ContestantsArray");
         thisMatch = getIntent().getParcelableExtra("Match");
         if (thisMatch == null) {
