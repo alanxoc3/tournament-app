@@ -28,11 +28,12 @@ public class Match_Driver extends AppCompatActivity {
     private int poolNum, matchNum;
 
     public void callMatch(View v) {
+
         Intent action = new Intent(Match_Driver.this, MatchScreen.class);
 
         action.putParcelableArrayListExtra("ContestantsArray",(ArrayList<ContestantData>)contestants);
-        startActivity(action);
-        finish();
+        action.putExtra("Match",thisMatch);
+        startActivityForResult(action,3);
     }
 
     public void vic1(View v){
@@ -51,7 +52,8 @@ public class Match_Driver extends AppCompatActivity {
         p1Vic.setChecked(false);
     }
 
-    public void update(View v) {
+    private void done() {
+        thisMatch.applyResults(contestants);
         Intent intent = new Intent();
         intent.putParcelableArrayListExtra("ContestantsArray",
                 (ArrayList<ContestantData>) contestants);
@@ -64,6 +66,24 @@ public class Match_Driver extends AppCompatActivity {
 
         setResult(RESULT_OK, intent);
         finish();
+    }
+
+    public void update(View v) {
+
+        done();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Log.i("onActivityResult", "returns from matchscreen properly");
+        if (requestCode == 3 && resultCode == RESULT_OK && data != null) {
+
+            if (data.hasExtra("Match")) {
+                thisMatch = data.getParcelableExtra("Match");
+            }
+            done();
+        }
     }
 
     @Override
