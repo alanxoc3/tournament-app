@@ -49,7 +49,7 @@ public class MatchData implements Parcelable {
      * @return
      */
     public ContestantData getP2(List<ContestantData> conList) {
-        return ContestantData.findById(conList, id1);
+        return ContestantData.findById(conList, id2);
     }
 
     /**
