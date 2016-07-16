@@ -106,7 +106,13 @@ public class MainScreen extends AppCompatActivity {
     }
 
     public void startBracket(View v) {
+        Intent action = new Intent(MainScreen.this, BracketScreen.class);
 
+        if(tournament.hasPools()) {
+            // action.putParcelableArrayListExtra("PoolsArray", (ArrayList<PoolData>) tournament.getPools());
+            action.putExtra("Tournament", tournament);
+            startActivityForResult(action, 4);
+        }
     }
 
     public void setContestants(View v) {
