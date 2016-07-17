@@ -187,7 +187,9 @@ public class TournamentData implements Parcelable {
 
     public void fillBracket() {
         Vector<LinkedList<ContestantData>> listVector = new Vector<>();
+        System.out.println(contestants.size());
         sortContestants();
+        System.out.println(contestants.size());
 
         // Determine number of contestants and byes on the lowest level of the bracket.
         int numContestants = 1;
@@ -204,15 +206,21 @@ public class TournamentData implements Parcelable {
             numByes--;
 
         }
-
+        System.out.println("About to Create vector of lists");
+        System.out.println(contestants.size());
         // Create linked lists for each contestant playing
         for (int i = 0; i < contestants.size(); i++) {
             LinkedList<ContestantData> tempList = new LinkedList<ContestantData>();
+            System.out.println("About to add new lists");
             tempList.add(contestants.get(i));
-            listVector.setElementAt(tempList, i);
+            System.out.println("About to setElementAt");
+            listVector.add(tempList);
+            System.out.println("Just setElement");
         }
+        System.out.println("Created vector of lists");
 
         // Sort the contestants until they are sorted by pairs in the order of the bracket
+        System.out.println(listVector.size());
         while (listVector.size() > 1) {
             int j = listVector.size() - 1;
             int i;
@@ -222,18 +230,25 @@ public class TournamentData implements Parcelable {
                 listVector.get(i).addAll(listVector.get(j));
                 listVector.removeElementAt(j);
                 --j;
+                System.out.println(listVector.size());
             }
         }
-
+        System.out.println(listVector.get(0).size());
+        System.out.println("About to push empty matches");
         for (int i = 0; i <= totalMatches; ++i){
             MatchData emptyMatch = new MatchData();
             bracket.add(i,emptyMatch);
         }
+        System.out.println("Pushed empty matches");
         // Go through the sorted contestants pairing them up and adding them to the bracket
         for (int i = 0; i < listVector.firstElement().size(); i += 2) {
+            System.out.println("About to get id1");
             int id1 = listVector.firstElement().get(i).getId();
-            int id2 = listVector.firstElement().get(i + 1).getId();
+            System.out.println("About to get id2");
+            int id2 = listVector.firstElement().get(1).getId();
+            System.out.println("About to create");
             MatchData newMatch = new MatchData(id1, id2);
+            System.out.println("About to set bracket");
             bracket.set(totalMatches - (i/2) - 1, newMatch);
         }
     }

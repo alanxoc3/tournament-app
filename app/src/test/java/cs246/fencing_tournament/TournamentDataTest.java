@@ -59,6 +59,7 @@ public class TournamentDataTest {
         }
     }
 */
+    /*
     @Test
     public void testSort(){
         TournamentData tournament = new TournamentData();
@@ -166,5 +167,61 @@ public class TournamentDataTest {
             System.out.printf(Integer.toString(bracket.getMatch(z).getId1()) + "  ");
             System.out.printf(Integer.toString(bracket.getMatch(z).getId2()) + "\n");
         }
+    }
+    */
+    @Test
+    public void testFill() {
+        TournamentData tournament = new TournamentData();
+        List<ContestantData> contestants = new ArrayList<>();
+        BracketData bracket = new BracketData();
+
+        ContestantData contestant1 = new ContestantData("James");
+        ContestantData contestant2 = new ContestantData("John");
+        ContestantData contestant3 = new ContestantData("Joseph");
+        ContestantData contestant4 = new ContestantData("Jared");
+        ContestantData contestant5 = new ContestantData("Jack");
+        ContestantData contestant6 = new ContestantData("Joe");
+
+        contestants.add(contestant1);
+        contestants.add(contestant2);
+        contestants.add(contestant3);
+        contestants.add(contestant4);
+        contestants.add(contestant5);
+        contestants.add(contestant6);
+
+        MatchData match1 = new MatchData(contestant1.getId(), contestant2.getId());
+        MatchData match2 = new MatchData(contestant3.getId(), contestant4.getId());
+        MatchData match3 = new MatchData(contestant5.getId(), contestant6.getId());
+
+        match1.setP1Score(1);
+        match1.setP2Score(4);
+        match1.setVicId(match1.getId2());
+        match1.applyResults(contestants);
+
+        match2.setP1Score(2);
+        match2.setP2Score(5);
+        match2.setVicId(match2.getId2());
+        match2.applyResults(contestants);
+
+        match3.setP1Score(3);
+        match3.setP2Score(6);
+        match3.setVicId(match3.getId2());
+        match3.applyResults(contestants);
+
+        int n = contestants.size();
+        int k;
+
+        for (int m = n; m >= 0; m--) {
+            for (int i = 0; i < n - 1; i++) {
+                k = i + 1;
+                if (contestants.get(i).greaterThan(contestants.get(k))) {
+                    ContestantData temp = new ContestantData(contestants.get(i));
+                    contestants.set(i, contestants.get(k));
+                    contestants.set(k, temp);
+                }
+            }
+        }
+        System.out.println("About to call fillBracket");
+        tournament.fillBracket();
     }
 }
