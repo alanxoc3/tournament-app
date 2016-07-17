@@ -24,14 +24,11 @@ public class BracketData implements Parcelable {
         return matches.get(index);
     }
 
-    /**
-     * Returns the number of matches that the pool contains.
-     * @return
-     */
-    public int size() {
+    public int matchesSize() {
         return matches.size();
     }
 
+    // PARCELABLE STUFF
     @Override
     public int describeContents() {
         return 0;
