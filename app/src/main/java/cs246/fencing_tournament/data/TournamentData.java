@@ -194,8 +194,9 @@ public class TournamentData implements Parcelable {
         // Determine number of contestants and byes on the lowest level of the bracket.
         int numContestants = 1;
         while (numContestants < contestants.size()){
-            numContestants *=2;
+            numContestants *= 2;
         }
+
         int numByes = numContestants - contestants.size();
         int totalMatches = numContestants - 1;
 

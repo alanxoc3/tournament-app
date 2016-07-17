@@ -27,6 +27,7 @@ public class MainScreen extends AppCompatActivity {
     private Button poolView ;
     private Button eContest;
     private boolean hasPools = false;
+    private boolean hasBracket = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -126,6 +127,11 @@ public class MainScreen extends AppCompatActivity {
             for (int i = 0; i < powOf2 - 1; ++i) {
                 tournament.getBracket().add(new MatchData(tournament.getContestant(0).getId(), tournament.getContestant(1).getId()));
             }
+
+            //if (!hasBracket) {
+            //    tournament.fillBracket();
+            //    hasBracket = true;
+            //}
 
             // Fill bracket would be called here I think.
             // action.putParcelableArrayListExtra("PoolsArray", (ArrayList<PoolData>) tournament.getPools());
