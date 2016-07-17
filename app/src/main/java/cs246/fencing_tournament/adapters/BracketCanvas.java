@@ -16,6 +16,8 @@ import android.view.View;
 import java.util.ArrayList;
 import java.util.List;
 
+import cs246.fencing_tournament.data.ContestantData;
+import cs246.fencing_tournament.data.MatchData;
 import cs246.fencing_tournament.data.TournamentData;
 import cs246.fencing_tournament.screens.BracketScreen;
 import cs246.fencing_tournament.screens.PoolScreen;
@@ -160,6 +162,30 @@ public class BracketCanvas extends View {
     }
 
     private void drawText(Canvas canvas) {
+        List<ContestantData> contestants = _tournament.getContestants();
+        Paint p_paint = new Paint();
+        int len = _collisionBracketRects.size() - 1;
+        for(int i = 0; i < _collisionBracketRects.size(); ++i) {
+            Rect curRect = _collisionBracketRects.get(len - i);
+            int height = curRect.height();
+            int textH = height / 3;
+            int pad = 7;
+            MatchData currentMatch = _tournament.getBracket().getMatch(i);
+            ContestantData cd1 = ContestantData.findById(contestants, currentMatch.getId1());
+            ContestantData cd2 = ContestantData.findById(contestants, currentMatch.getId2());
+            String p1 = cd1.getName();
+            String p2 = cd2.getName();
+
+            p_paint.setTextSize(textH);
+
+            if (currentMatch.getVicId() == cd1.getId()) p_paint.setColor(Color.rgb(10,190,10));
+            else p_paint.setColor(Color.BLACK);
+            canvas.drawText(p1, curRect.centerX() - p_paint.measureText(p1) / 2, curRect.top - pad, p_paint);
+
+            if (currentMatch.getVicId() == cd2.getId()) p_paint.setColor(Color.rgb(10,190,10));
+            else p_paint.setColor(Color.BLACK);
+            canvas.drawText(p2, curRect.centerX() - p_paint.measureText(p2) / 2, curRect.bottom - pad, p_paint);
+        }
 
     }
 
@@ -196,6 +222,7 @@ public class BracketCanvas extends View {
         canvasPaint.setStyle(Paint.Style.STROKE);
 
         canvas.drawPath(createPath(getWidth(), getHeight()), canvasPaint);
+        drawText(canvas);
 
         drawText(canvas);
         canvas.restore();
