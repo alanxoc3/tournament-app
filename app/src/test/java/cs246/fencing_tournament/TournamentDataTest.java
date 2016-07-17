@@ -117,7 +117,7 @@ public class TournamentDataTest {
                             contestants.get(4).getName() + ", " +
                             contestants.get(5).getName() + "\n");
                     //contestants.set(j,contestants.get(j - 1));
-                    //contestants.set(j - 1, temp);
+                    //contestants.set(j - 1, temp); //ok
                 }
             }
         }*/
