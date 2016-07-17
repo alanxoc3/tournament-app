@@ -23,10 +23,12 @@ public class TournamentData implements Parcelable {
     private List <PoolData> pools;
     private List <ContestantData> contestants;
     private BracketData bracket;
+    private String TAG = "TournamentData";
 
     // Default Constructor
     public TournamentData() {
-        contestants = new ArrayList<ContestantData>();
+        contestants = new ArrayList<>();
+        bracket = new BracketData();
     }
 
     public void addContestant(ContestantData newContestant) {
@@ -223,61 +225,22 @@ public class TournamentData implements Parcelable {
     }
 
     protected TournamentData(Parcel in) {
-        int loadStatus = in.readInt();
-
-        contestants = null;
-        pools = null;
-        Log.i("TournamentParcing2", Integer.toString(loadStatus));
-
-        switch (loadStatus) {
-            case 1:
-                contestants = new ArrayList<ContestantData>();
-                in.readList(contestants, ContestantData.class.getClassLoader());
-                break;
-            case 2:
-                pools = new ArrayList<PoolData>();
-                in.readList(pools, PoolData.class.getClassLoader());
-                break;
-            case 3:
-                contestants = new ArrayList<ContestantData>();
-                pools = new ArrayList<PoolData>();
-                in.readList(contestants, ContestantData.class.getClassLoader());
-                in.readList(pools, PoolData.class.getClassLoader());
-                break;
-            default: break;
-        }
-
-        // Bracket would go here, when it is ready.
+        contestants = new ArrayList<ContestantData>();
+        pools = new ArrayList<PoolData>();
+        in.readList(contestants, ContestantData.class.getClassLoader());
+        in.readList(pools, PoolData.class.getClassLoader());
+        in.readParcelable(BracketData.class.getClassLoader());
     }
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        int loadStatus = 0;
-        if (pools == null && contestants != null) {
-            loadStatus = 1;
-        } else if (pools != null && contestants == null) {
-            loadStatus = 2;
-        } else if (pools != null) {
-            loadStatus = 3;
-        }
-        Log.i("TournamentParcing", Integer.toString(loadStatus));
-        dest.writeInt(loadStatus);
+        dest.writeList(contestants);
+        dest.writeList(pools);
+        dest.writeParcelable(bracket, flags);
 
-        switch (loadStatus) {
-            case 1:
-                dest.writeList(contestants);
-                break;
-            case 2:
-                dest.writeList(pools);
-                break;
-            case 3:
-                dest.writeList(contestants);
-                dest.writeList(pools);
-                break;
-            default: break;
+        if (contestants == null || pools == null) {
+            Log.e(TAG, "WE ARE NULL HERE IN THE TOURNAMENT!!!!");
         }
-
-        // Bracket would go here when it is ready.
     }
 
     public static final Parcelable.Creator<TournamentData> CREATOR = new Parcelable.Creator<TournamentData>() {

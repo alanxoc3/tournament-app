@@ -28,7 +28,7 @@ public class BracketCanvas extends View {
 
     private ScaleGestureDetector mScaleDetector;
 
-    int numOfPeeps = 256;
+    int numOfPeeps = 64;
 
     private float mScaleFactor = 1.f;
     private float focusX = 0.0f;
