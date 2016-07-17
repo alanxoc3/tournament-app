@@ -153,20 +153,20 @@ public class TournamentData implements Parcelable {
     }
 
     public void sortContestants(){
-            int n = contestants.size();
-            int k;
-            for (int m = n; m >= 0; m--) {
-                for (int i = 0; i < n - 1; i++) {
-                    k = i + 1;
-                    if (contestants.get(i).greaterThan(contestants.get(k))) {
-                        ContestantData temp;
-                        temp = contestants.get(i);
-                        contestants.set(i,contestants.get(k));
-                        contestants.set(k, temp);
-                    }
+        int n = contestants.size();
+        int k;
+
+        for (int m = n; m >= 0; m--) {
+            for (int i = 0; i < n - 1; i++) {
+                k = i + 1;
+                if (contestants.get(i).greaterThan(contestants.get(k))) {
+                    ContestantData temp = new ContestantData(contestants.get(i));
+                    contestants.set(i,contestants.get(k));
+                    contestants.set(k, temp);
                 }
             }
         }
+    }
 
     /**
      * Creates the Tournament Bracket based on results from the Pool
@@ -219,10 +219,14 @@ public class TournamentData implements Parcelable {
 
         // Go through the sorted contestants pairing them up and adding them to the bracket
         for (int i = 0; i < listVector.firstElement().size(); i += 2) {
+            for (int j = 0; j <= totalMatches; ++j){
+                MatchData emptyMatch = new MatchData();
+                bracket.add(i,emptyMatch);
+            }
             int id1 = listVector.firstElement().get(i).getId();
             int id2 = listVector.firstElement().get(i + 1).getId();
             MatchData newMatch = new MatchData(id1, id2);
-            bracket.add(totalMatches - i/2, newMatch);
+            bracket.set(totalMatches - i/2, newMatch);
         }
     }
 

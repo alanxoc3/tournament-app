@@ -23,6 +23,7 @@ public class BracketData implements Parcelable {
 
     public boolean isEmpty() { return matches.isEmpty(); }
     public void add(int index, MatchData match) {matches.add(index, match);}
+    public void set(int index, MatchData match) {matches.set(index, match);}
 
     public MatchData getMatch(int index) {
         return matches.get(index);
