@@ -20,11 +20,14 @@ public class BracketData implements Parcelable {
     public boolean isEmpty() { return matches.isEmpty(); }
 
     public void add(int index, MatchData match) {matches.add(index, match);}
+    public void add(MatchData match) {matches.add(match);}
     public void set(int index, MatchData match) {matches.set(index, match);}
+
 
     public MatchData getMatch(int index) {
         return matches.get(index);
     }
+    public void setMatch(int index, MatchData md) { matches.set(index, md); }
 
     public int matchesSize() {
         return matches.size();

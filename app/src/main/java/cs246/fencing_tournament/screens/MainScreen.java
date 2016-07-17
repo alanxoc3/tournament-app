@@ -13,6 +13,7 @@ import java.util.List;
 
 import cs246.fencing_tournament.R;
 import cs246.fencing_tournament.data.ContestantData;
+import cs246.fencing_tournament.data.MatchData;
 import cs246.fencing_tournament.data.PoolData;
 import cs246.fencing_tournament.data.TournamentData;
 
@@ -120,6 +121,12 @@ public class MainScreen extends AppCompatActivity {
         Intent action = new Intent(MainScreen.this, BracketScreen.class);
 
         if(tournament.hasPools()) {
+            // ALAN TEST FOR BRACKETDATA
+            int powOf2 = (int) Math.pow(2, (int) Math.ceil( Math.log(tournament.getContestants().size()) / Math.log(2)));
+            for (int i = 0; i < powOf2 - 1; ++i) {
+                tournament.getBracket().add(new MatchData(tournament.getContestant(0).getId(), tournament.getContestant(1).getId()));
+            }
+
             // Fill bracket would be called here I think.
             // action.putParcelableArrayListExtra("PoolsArray", (ArrayList<PoolData>) tournament.getPools());
             action.putExtra("Tournament", tournament);

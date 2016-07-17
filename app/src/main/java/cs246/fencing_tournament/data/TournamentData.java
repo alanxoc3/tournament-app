@@ -31,6 +31,14 @@ public class TournamentData implements Parcelable {
         bracket = new BracketData();
     }
 
+    public BracketData getBracket() {
+        return bracket;
+    }
+
+    public void setBracket(BracketData bracket2) {
+        bracket = bracket2;
+    }
+
     public void addContestant(ContestantData newContestant) {
         if (contestants == null) {
             Log.e("TournamentData", "Contestants is null");

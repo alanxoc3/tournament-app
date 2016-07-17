@@ -1,5 +1,6 @@
 package cs246.fencing_tournament.adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -16,6 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cs246.fencing_tournament.data.TournamentData;
+import cs246.fencing_tournament.screens.BracketScreen;
+import cs246.fencing_tournament.screens.PoolScreen;
 
 /**
  * Created by alanxoc3 on 6/11/16.
@@ -41,6 +44,7 @@ public class BracketCanvas extends View {
     int didPress = 0;
     int pad = 30;
 
+    BracketScreen daddy;
     List<Rect> _collisionBracketRects;
 
     private static final String TAG = "BracketCanvas";
@@ -73,6 +77,10 @@ public class BracketCanvas extends View {
         _collisionBracketRects = null;
     }
 
+    public void setBracketScreen(BracketScreen bS) {
+        daddy = bS;
+    }
+
     private List<Rect> createRects(int scrW, int scrH) {
         // This algorithm is similar to the create paths one.
         List<Rect> rects = new ArrayList<Rect>();
@@ -99,7 +107,7 @@ public class BracketCanvas extends View {
             midCellH = cellH / 2;
             curHPad = midCellH / 2;
 
-            for (int hl = 0; hl < curNumOfMatches; ++hl) {
+            for (int hl = curNumOfMatches - 1; hl >= 0; --hl) {
                 Rect tmpRect = new Rect(
                     pad + wl*cellW,
                     curHPad + hl * cellH,
@@ -171,8 +179,6 @@ public class BracketCanvas extends View {
         Paint blob = new Paint();
         blob.setStyle(Paint.Style.FILL_AND_STROKE);
 
-
-
         for (int i = 0; i < _collisionBracketRects.size(); ++i) {
             if (didPress == 1 && _collisionBracketRects.get(i).contains((int) touchX, (int) touchY)) {
                 blob.setARGB(255, 190, 190, 190);
@@ -196,7 +202,15 @@ public class BracketCanvas extends View {
     }
 
     public void callDriver(float x, float y) {
-
+        // Bracket has opposite order of rects, need to fix that here.
+        int lastInd = _collisionBracketRects.size() - 1;
+        for (int i = 0; i < _collisionBracketRects.size(); ++i) {
+            if (_collisionBracketRects.get(i).contains((int) x, (int) y)) {
+                int openNum = lastInd - i;
+                Log.e(TAG, "the open num is: " + openNum);
+                daddy.openDriver(lastInd - i);
+            }
+        }
     }
 
     @Override
