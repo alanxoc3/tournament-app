@@ -163,7 +163,6 @@ public class PoolCanvas extends View {
                     if (currentMatch.getVicId() == cd1.getId()) p_paint.setColor(Color.rgb(10,190,10));
                     else p_paint.setColor(Color.BLACK);
                     canvas.drawText(p1, x + leftPad, y + p1Pad, p_paint);
-
                     canvas.drawText(vs, x + leftPad, y + vsPad, vs_paint);
 
                     if (currentMatch.getVicId() == cd2.getId()) p_paint.setColor(Color.rgb(10,190,10));

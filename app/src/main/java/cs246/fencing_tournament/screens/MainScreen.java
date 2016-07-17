@@ -118,20 +118,20 @@ public class MainScreen extends AppCompatActivity {
         }
     }
 
-    public void startBracket(View v) {
+     public void startBracket(View v) {
         Intent action = new Intent(MainScreen.this, BracketScreen.class);
 
         if(tournament.hasPools()) {
             // ALAN TEST FOR BRACKETDATA
-            int powOf2 = (int) Math.pow(2, (int) Math.ceil( Math.log(tournament.getContestants().size()) / Math.log(2)));
-            for (int i = 0; i < powOf2 - 1; ++i) {
-                tournament.getBracket().add(new MatchData(tournament.getContestant(0).getId(), tournament.getContestant(1).getId()));
-            }
-
-            //if (!hasBracket) {
-            //    tournament.fillBracket();
-            //    hasBracket = true;
+            //int powOf2 = (int) Math.pow(2, (int) Math.ceil( Math.log(tournament.getContestants().size()) / Math.log(2)));
+            //for (int i = 0; i < powOf2 - 1; ++i) {
+            //    tournament.getBracket().add(new MatchData(tournament.getContestant(0).getId(), tournament.getContestant(1).getId()));
             //}
+
+            if (!hasBracket) {
+                tournament.fillBracket();
+                hasBracket = true;
+            }
 
             // Fill bracket would be called here I think.
             // action.putParcelableArrayListExtra("PoolsArray", (ArrayList<PoolData>) tournament.getPools());
