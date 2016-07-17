@@ -148,16 +148,23 @@ public class TournamentDataTest {
                 --j;
             }
         }
+
+        for (int i = 0; i < totalMatches; ++i){
+            MatchData emptyMatch = new MatchData();
+            bracket.add(i,emptyMatch);
+        }
         // Go through the sorted contestants pairing them up and adding them to the bracket
         for (int i = 0; i < listVector.firstElement().size(); i += 2) {
             int id1 = listVector.firstElement().get(i).getId();
             int id2 = listVector.firstElement().get(i + 1).getId();
             MatchData newMatch = new MatchData(id1, id2);
-            for (int j = 0; j <= totalMatches; ++j){
-                MatchData emptyMatch = new MatchData();
-                bracket.add(i,emptyMatch);
-            }
-            bracket.set(totalMatches - i / 2, newMatch);
+            bracket.set(totalMatches - (i / 2) - 1, newMatch);
+        }
+
+        for (int z = 0; z < bracket.matchesSize(); z ++){
+            System.out.printf("Match number " + z + "\n");
+            System.out.printf(Integer.toString(bracket.getMatch(z).getId1()) + "  ");
+            System.out.printf(Integer.toString(bracket.getMatch(z).getId2()) + "\n");
         }
     }
 }
