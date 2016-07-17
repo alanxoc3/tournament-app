@@ -222,6 +222,7 @@ public class TournamentDataTest {
             }
         }
         System.out.println("About to call fillBracket");
+        tournament.setContestants(contestants);
         tournament.fillBracket();
     }
 }
