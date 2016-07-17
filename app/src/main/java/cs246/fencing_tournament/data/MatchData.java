@@ -60,8 +60,14 @@ public class MatchData implements Parcelable {
         ContestantData con1 = getP1(conList);
         ContestantData con2 = getP2(conList);
 
-        con1.addMatch(this);
-        con2.addMatch(this);
+        int m1 = con1.getMatchIndex(con1.getId(), con2.getId());
+        int m2 = con2.getMatchIndex(con1.getId(), con2.getId());
+
+        if (m1 == -1) con1.addMatch(this);
+        else con1.getMatches().set(m1, this);
+
+        if (m2 == -1) con2.addMatch(this);
+        else con2.getMatches().set(m2, this);
     }
 
     /**
@@ -125,24 +131,20 @@ public class MatchData implements Parcelable {
     }
 
     protected MatchData(Parcel in) {
-        int[] data = in.createIntArray();
-
-        id1 = data[0];
-        id2 = data[1];
-        p1Score = data[2];
-        p2Score = data[3];
-        vicId = data[4];
+        id1 = in.readInt();
+        id2 = in.readInt();
+        p1Score = in.readInt();
+        p2Score = in.readInt();
+        vicId = in.readInt();
 	}
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        int[] data = new int[5];
-        data[0] = id1;
-        data[1] = id2;
-        data[2] = p1Score;
-        data[3] = p2Score;
-        data[4] = vicId;
-        dest.writeIntArray(data);
+        dest.writeInt(id1);
+        dest.writeInt(id2);
+        dest.writeInt(p1Score);
+        dest.writeInt(p2Score);
+        dest.writeInt(vicId);
     }
 
     public static final Parcelable.Creator<MatchData> CREATOR = new Parcelable.Creator<MatchData>() {

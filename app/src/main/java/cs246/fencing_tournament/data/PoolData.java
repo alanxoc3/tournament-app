@@ -29,6 +29,15 @@ public class PoolData implements Parcelable {
     public void addMatch(MatchData newMatch) {
         matches.add(newMatch);
     }
+    public void addSameMatch(int id) { matches.add(new MatchData(id, id)); }
+    public void syncMatches() {
+        // Make the top right corners equal to the bottom left ones.
+        for (int r = 0; r < getWL() - 1; ++r) {
+            for (int c = r + 1; c < getWL(); ++c) {
+                matches.set(r * getWL() + c, matches.get(c * getWL() + r));
+            }
+        }
+    }
 
     /**
      * Get a given match.
