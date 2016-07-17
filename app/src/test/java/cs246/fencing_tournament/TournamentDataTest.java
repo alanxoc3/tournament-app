@@ -145,26 +145,33 @@ public class TournamentDataTest {
 
         // Sort the contestants until they are sorted by pairs in the order of the bracket
 
+        System.out.printf(Integer.toString(listVector.size()-1));
+        listVector.trimToSize();
+        for (int i = 0; i < listVector.get(listVector.size()-1).size(){
+            listVector.get(0).add(listVector.get(listVector.size()-1).get(i));
+        }
+
+        System.out.printf(listVector.get(0).get(0).getName() + " \n");
+        System.out.printf(listVector.get(0).get(1).getName() + " \n");
+
+        /*
         while (listVector.size() > 1) {
             int j = listVector.size() - 1;
             int i;
             int m = listVector.size() / 2;
             for (i = 0; i < m; ++i) {
+                listVector.trimToSize();
                 listVector.get(i).addAll(listVector.get(j));
-                listVector.removeElementAt(j);
                 --j;
+                listVector.removeElementAt(j);
             }
         }
-
+        */
         System.out.printf("Sorted by Pairs \n");
         System.out.printf(listVector.get(0).get(0).getName() + " \n");
         System.out.printf(listVector.get(0).get(1).getName() + " \n");
         System.out.printf(listVector.get(0).get(2).getName() + " \n");
         System.out.printf(listVector.get(0).get(3).getName() + " \n");
-        System.out.printf(listVector.get(0).get(4).getName() + " \n");
-        System.out.printf(listVector.get(0).get(5).getName() + " \n");
-        System.out.printf(listVector.get(0).get(6).getName() + " \n");
-        System.out.printf(listVector.get(0).get(7).getName() + " \n");
 
         // Go through the sorted contestants pairing them up and adding them to the bracket
         for (int i = 0; i < listVector.firstElement().size(); i += 2) {

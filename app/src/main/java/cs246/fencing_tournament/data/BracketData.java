@@ -17,6 +17,10 @@ public class BracketData implements Parcelable {
         matches = new ArrayList<MatchData>();
     }
 
+    public BracketData(int size) {
+        matches = new ArrayList<MatchData>(size);
+    }
+
     public boolean isEmpty() { return matches.isEmpty(); }
     public void add(int index, MatchData match) {matches.add(index, match);}
 
