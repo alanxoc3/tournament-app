@@ -27,8 +27,6 @@ public class PoolScreen extends AppCompatActivity {
 
     public void onBackPressed() {
         Intent action = new Intent();
-
-        //action.putParcelableArrayListExtra("ContestantsArray", (ArrayList<ContestantData>) contestants);
         action.putExtra("Tournament",tournament);
         setResult(RESULT_OK, action);
         finish();

@@ -198,7 +198,6 @@ public class PoolCanvas extends View {
 
         canvas.drawPath(createPath(getWidth(), getHeight()), canvasPaint);
 
-
         canvas.restore();
     }
 
