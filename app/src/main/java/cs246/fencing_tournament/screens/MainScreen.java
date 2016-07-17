@@ -91,12 +91,11 @@ public class MainScreen extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == 5 && resultCode == RESULT_OK && data != null) {
+        // Both bracket and pool just take in a tournament.
+        if ((requestCode == 5 || requestCode == 4) && resultCode == RESULT_OK && data != null) {
             if (data.hasExtra("Tournament")) {
                 tournament = data.getParcelableExtra("Tournament");
                 Log.e(TAG, "Got the Tournament");
-
-                Log.e(TAG, "NUM OF ID THING: " + tournament.getPools().get(0).getMatch(1).getVicId());
             }
         }
         
@@ -121,6 +120,7 @@ public class MainScreen extends AppCompatActivity {
         Intent action = new Intent(MainScreen.this, BracketScreen.class);
 
         if(tournament.hasPools()) {
+            // Fill bracket would be called here I think.
             // action.putParcelableArrayListExtra("PoolsArray", (ArrayList<PoolData>) tournament.getPools());
             action.putExtra("Tournament", tournament);
             startActivityForResult(action, 4);

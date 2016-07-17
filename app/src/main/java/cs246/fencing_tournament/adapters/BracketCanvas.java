@@ -255,6 +255,7 @@ public class BracketCanvas extends View {
     public void setTournament(TournamentData tournament) {
         _tournament = tournament;
         Log.i(TAG, "SETTING THE TOURNAMENT");
+        numOfPeeps = _tournament.getContestants().size();
     }
 
     public TournamentData getTournament() {

@@ -179,7 +179,6 @@ public class TournamentData implements Parcelable {
 
     public void fillBracket() {
         Vector<LinkedList<ContestantData>> listVector = new Vector<>();
-
         sortContestants();
 
         // Determine number of contestants and byes on the lowest level of the bracket.
@@ -213,8 +212,8 @@ public class TournamentData implements Parcelable {
             for (i = 0; i < k; ++i) {
                 listVector.trimToSize();
                 listVector.get(i).addAll(listVector.get(j));
-                --j;
                 listVector.removeElementAt(j);
+                --j;
             }
         }
 
