@@ -4,7 +4,9 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.v4.util.Pools;
 import android.util.Log;
+import android.widget.ListView;
 
+import java.lang.reflect.Array;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -140,47 +142,78 @@ public class TournamentData implements Parcelable {
         }
     }
 
-    // TODO Check to make certain the bracket is filled in the proper order
+    public void sortContestants(){
+            int n = contestants.size();
+            int k;
+            for (int m = n; m >= 0; m--) {
+                for (int i = 0; i < n - 1; i++) {
+                    k = i + 1;
+                    if (contestants.get(i).greaterThan(contestants.get(k))) {
+                        ContestantData temp;
+                        temp = contestants.get(i);
+                        contestants.set(i,contestants.get(k));
+                        contestants.set(k, temp);
+                    }
+                }
+            }
+        }
+
     /**
      * Creates the Tournament Bracket based on results from the Pool
      * <p>
-     * Copies the Contestant Data for all participants into a Deque and ranks them. The ranked
-     * deque is used to create a the tournament bracket, stored as a vector implemented binary tree
+     * Copies the Contestant Data for all participants into a vector of linked lists. The linked
+     * lists are connected together to sort them into the pairs for the bracket. This final list
+     * is used to create a the tournament bracket, stored as a vector implemented binary tree
      * of matches.
      */
 
-    public void fillBracket(){
-        LinkedList<ContestantData> contestantList;
+    public void fillBracket() {
+        Vector<LinkedList<ContestantData>> listVector = new Vector<>();
+
+        sortContestants();
+
+        // Determine number of contestants and byes on the lowest level of the bracket.
+        int numContestants = 1;
+        while (numContestants < contestants.size()){
+            numContestants *=2;
+        }
+        int numByes = numContestants - contestants.size();
+        int totalMatches = numContestants - 1;
+
+        // Add the byes to the end of the sorted contestant list
+        while (numByes > 0){
+            ContestantData bye = new ContestantData("bye");
+            contestants.add(bye);
+        }
+
+        // Create linked lists for each contestant playing
+        for (int i = 0; i < contestants.size(); i++) {
+            LinkedList<ContestantData> tempList = new LinkedList<ContestantData>();
+            tempList.add(contestants.get(i));
+            listVector.setElementAt(tempList, i);
+        }
+
+        // Sort the contestants until they are sorted by pairs in the order of the bracket
+        while (listVector.size() > 1) {
+            int j = listVector.size() - 1;
+            int i;
+            int k = listVector.size() / 2;
+            for (i = 0; i < k; ++i) {
+                listVector.trimToSize();
+                listVector.get(i).addAll(listVector.get(j));
+                --j;
+                listVector.removeElementAt(j);
+            }
+        }
+
+        // Go through the sorted contestants pairing them up and adding them to the bracket
+        for (int i = 0; i < listVector.firstElement().size(); i += 2) {
+            int id1 = listVector.firstElement().get(i).getId();
+            int id2 = listVector.firstElement().get(i + 1).getId();
+            MatchData newMatch = new MatchData(id1, id2);
+            bracket.add(totalMatches - i/2, newMatch);
+        }
     }
-    /*
-    public void fillBracket(){
-
-
-        Deque <ContestantData> contestantSort = new ArrayDeque<ContestantData>();
-        contestantSort.addAll(contestants);
-        int numMatches = ((contestantSort.size() + 1) / 2);
-
-        // If there is an even number of contestants, create the first match normally
-        if ( (contestantSort.size() & 1) == 0 ) {
-            int id1 = contestantSort.pollFirst().getId();
-            int id2 = contestantSort.pollFirst().getId();
-            MatchData newMatch = new MatchData(id1, id2);
-            bracket.add(numMatches + numMatches -1, newMatch);
-        }
-        // Else create the first match with the best contestant and an empty contestant
-        else {
-            int id1 = contestantSort.pollFirst().getId();
-            MatchData newMatch = new MatchData(id1, -1);
-            bracket.add(numMatches + numMatches -1, newMatch);
-        }
-        // Loop through the rest of the deque, creating a match with the current best and worst players
-        for (int i = 1; i < numMatches; ++i) {
-            int id1 = contestantSort.pollFirst().getId();
-            int id2 = contestantSort.pollFirst().getId();
-            MatchData newMatch = new MatchData(id1, id2);
-            bracket.add(numMatches + numMatches - 1 - i, newMatch);
-        }
-    }*/
 
     // PARCELABLE STUFF
 
