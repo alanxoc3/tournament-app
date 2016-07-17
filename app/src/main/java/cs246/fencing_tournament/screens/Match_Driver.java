@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -41,7 +42,8 @@ public class Match_Driver extends AppCompatActivity {
         if (canUpdate){
             thisMatch.setVicId(thisMatch.getId1());
         }
-        p2Vic.setChecked(false);
+        if (p2Vic != null)
+            p2Vic.setChecked(false);
     }
 
     public void vic2(View v){
@@ -49,10 +51,31 @@ public class Match_Driver extends AppCompatActivity {
         if (canUpdate){
             thisMatch.setVicId(thisMatch.getId2());
         }
-        p1Vic.setChecked(false);
+        if (p1Vic != null)
+            p1Vic.setChecked(false);
     }
 
     private void done() {
+
+        TextView score = (TextView) findViewById(R.id.score1);
+        int p1S = 0;
+        int p2S = 0;
+        if (score != null && score.getText() != null)
+            p1S = Integer.parseInt(score.getText().toString());
+        score = (TextView) findViewById(R.id.score2);
+        if (score != null && score.getText() != null)
+            p2S = Integer.parseInt(score.getText().toString());
+        Log.i("p2Score",Integer.toString(p2S));
+        if (p1S > 15)
+            p1S = 15;
+        else if (p1S < 0)
+            p1S = 0;
+        if (p2S > 15)
+            p2S = 15;
+        else if (p2S < 0)
+            p2S = 0;
+        thisMatch.setP1Score(p1S);
+        thisMatch.setP2Score(p2S);
         thisMatch.applyResults(contestants);
         Intent intent = new Intent();
         intent.putParcelableArrayListExtra("ContestantsArray",
