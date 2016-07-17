@@ -60,10 +60,10 @@ public class Match_Driver extends AppCompatActivity {
         TextView score = (TextView) findViewById(R.id.score1);
         int p1S = 0;
         int p2S = 0;
-        if (score != null && score.getText() != null)
+        if (score != null && score.getText() != null && !score.getText().toString().equals(""))
             p1S = Integer.parseInt(score.getText().toString());
         score = (TextView) findViewById(R.id.score2);
-        if (score != null && score.getText() != null)
+        if (score != null && score.getText() != null && !score.getText().toString().equals(""))
             p2S = Integer.parseInt(score.getText().toString());
         Log.i("p2Score",Integer.toString(p2S));
         if (p1S > 15)
