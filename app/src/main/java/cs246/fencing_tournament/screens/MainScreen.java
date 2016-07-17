@@ -2,7 +2,6 @@ package cs246.fencing_tournament.screens;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -19,9 +18,8 @@ import cs246.fencing_tournament.data.TournamentData;
 
 public class MainScreen extends AppCompatActivity {
     //List<ContestantData> transfer; // THIS IS JUST UNTIL WE HAVE TOURNAMENTDATA UP AND RUNNING
-    List<PoolData> pools;
-
     TournamentData tournament;
+    public String TAG = "MainScreen";
 
     private TextView vContest;
     private Button bracketView;
@@ -83,6 +81,7 @@ public class MainScreen extends AppCompatActivity {
             action.putExtra("Tournament", tournament);
             startActivityForResult(action, 5);
         }
+
         eContest.setEnabled(false);
         bracketView.setEnabled(true);
     }
@@ -92,9 +91,11 @@ public class MainScreen extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == 5 && resultCode == RESULT_OK && data != null) {
-            Log.i("onActivityResult", Boolean.toString(data.hasExtra("ContestantsArray")));
             if (data.hasExtra("Tournament")) {
                 tournament = data.getParcelableExtra("Tournament");
+                Log.e(TAG, "Got the Tournament");
+
+                Log.e(TAG, "NUM OF ID THING: " + tournament.getPools().get(0).getMatch(1).getVicId());
             }
         }
         

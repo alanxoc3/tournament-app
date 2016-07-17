@@ -56,7 +56,6 @@ public class Match_Driver extends AppCompatActivity {
     }
 
     private void done() {
-
         TextView score = (TextView) findViewById(R.id.score1);
         int p1S = 0;
         int p2S = 0;

@@ -125,24 +125,20 @@ public class MatchData implements Parcelable {
     }
 
     protected MatchData(Parcel in) {
-        int[] data = in.createIntArray();
-
-        id1 = data[0];
-        id2 = data[1];
-        p1Score = data[2];
-        p2Score = data[3];
-        vicId = data[4];
+        id1 = in.readInt();
+        id2 = in.readInt();
+        p1Score = in.readInt();
+        p2Score = in.readInt();
+        vicId = in.readInt();
 	}
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        int[] data = new int[5];
-        data[0] = id1;
-        data[1] = id2;
-        data[2] = p1Score;
-        data[3] = p2Score;
-        data[4] = vicId;
-        dest.writeIntArray(data);
+        dest.writeInt(id1);
+        dest.writeInt(id2);
+        dest.writeInt(p1Score);
+        dest.writeInt(p2Score);
+        dest.writeInt(vicId);
     }
 
     public static final Parcelable.Creator<MatchData> CREATOR = new Parcelable.Creator<MatchData>() {

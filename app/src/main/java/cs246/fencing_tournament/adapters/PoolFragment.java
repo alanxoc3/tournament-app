@@ -1,6 +1,5 @@
 package cs246.fencing_tournament.adapters;
 
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -16,9 +15,7 @@ import java.util.List;
 
 import cs246.fencing_tournament.R;
 import cs246.fencing_tournament.data.ContestantData;
-import cs246.fencing_tournament.data.MatchData;
 import cs246.fencing_tournament.data.PoolData;
-import cs246.fencing_tournament.screens.MainScreen;
 import cs246.fencing_tournament.screens.Match_Driver;
 
 /**
@@ -91,16 +88,7 @@ public class PoolFragment extends Fragment {
         return super.onOptionsItemSelected(item);
     }
 
-
-
     public void openDriver(int matchNum) {
-        // Intent action = new Intent(EnterContestant.this, MainScreen.class);
-
-        // if (contestants != null)
-        //    Log.i(afterTag, Integer.toString(contestants.size()));
-
-        // action.putParcelableArrayListExtra("ContestantsArray",(ArrayList<ContestantData>)contestants);
-        // startActivity(action);
         if (_pool.isValidMatch(matchNum) && !lockit) {
             lockit = true;
             Intent intent = new Intent(getActivity(), Match_Driver.class);

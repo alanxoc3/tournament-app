@@ -183,7 +183,7 @@ public class TournamentData implements Parcelable {
         int totalMatches = numContestants - 1;
 
         // Add the byes to the end of the sorted contestant list
-        while (numByes > 0){
+        while (numByes > 0) {
             ContestantData bye = new ContestantData("bye");
             contestants.add(bye);
         }
@@ -225,11 +225,11 @@ public class TournamentData implements Parcelable {
     }
 
     protected TournamentData(Parcel in) {
-        contestants = new ArrayList<ContestantData>();
-        pools = new ArrayList<PoolData>();
+        contestants = new ArrayList<>();
+        pools = new ArrayList<>();
         in.readList(contestants, ContestantData.class.getClassLoader());
         in.readList(pools, PoolData.class.getClassLoader());
-        in.readParcelable(BracketData.class.getClassLoader());
+        bracket = in.readParcelable(BracketData.class.getClassLoader());
     }
 
     @Override
