@@ -258,7 +258,7 @@ public class TournamentData implements Parcelable {
         public TournamentData createFromParcel(Parcel in) {
             return new TournamentData(in);
         }
-g
+
         @Override
         public TournamentData[] newArray(int size) {
             return new TournamentData[size];
