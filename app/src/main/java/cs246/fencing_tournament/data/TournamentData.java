@@ -194,6 +194,8 @@ public class TournamentData implements Parcelable {
         while (numByes > 0) {
             ContestantData bye = new ContestantData("bye");
             contestants.add(bye);
+            numByes--;
+
         }
 
         // Create linked lists for each contestant playing
@@ -256,7 +258,7 @@ public class TournamentData implements Parcelable {
         public TournamentData createFromParcel(Parcel in) {
             return new TournamentData(in);
         }
-
+g
         @Override
         public TournamentData[] newArray(int size) {
             return new TournamentData[size];
