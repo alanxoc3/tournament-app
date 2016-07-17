@@ -56,6 +56,19 @@ public class PoolData implements Parcelable {
         return matches.get(row * getWL() + col);
     }
 
+    public void setMatch(int matchNumber, MatchData md) {
+        int row = matchNumber / getWL();
+        int col = matchNumber % getWL();
+
+        if (row < col) {
+            int tmp = row;
+            row = col;
+            col = tmp;
+        }
+
+        matches.set(row * getWL() + col, md);
+    }
+
     /**
      * Returns true if the pool contains that match. And that match isn't a "self vs self match".
      * @param matchNumber
