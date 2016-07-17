@@ -35,6 +35,12 @@ public class ContestantData implements Parcelable, Comparable <ContestantData> {
 		this._name = rhs.getName();
 	}
 
+	public void copy(ContestantData rhs){
+		_id = rhs.getId();
+		_matchHistory = rhs.getMatches();
+		this._name = rhs.getName();
+	}
+
 	public void addMatch(MatchData newMatch) {
 		if (newMatch != null) {
 			_matchHistory.add(newMatch);
@@ -67,6 +73,15 @@ public class ContestantData implements Parcelable, Comparable <ContestantData> {
 
     // Returns true if this guy is greater than that guy
     public boolean greaterThan(ContestantData contestant) {
+		if (getWinRate() != contestant.getWinRate())
+			return getWinRate() < contestant.getWinRate();
+		if (getPointDifference() != contestant.getPointDifference())
+			return getPointDifference() < contestant.getPointDifference();
+		if (getTotalPoints() != contestant.getTotalPoints())
+			return getTotalPoints() < contestant.getTotalPoints();
+		return false;
+
+		/*
 		if (getWinRate() > contestant.getWinRate())
 			return true;
 		else if (getWinRate() < contestant.getWinRate())
@@ -81,7 +96,7 @@ public class ContestantData implements Parcelable, Comparable <ContestantData> {
 			return false;
 		else
 			// Tie case, return true by default
-			return true;
+			return true;*/
 	}
 
 	public int compareTo(ContestantData rhs) {
