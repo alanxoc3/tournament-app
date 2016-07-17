@@ -100,14 +100,42 @@ public class TournamentDataTest {
 
         int n = contestants.size();
         int k;
+/*
+        for (int i = 0; i + 1 < n; i++){
+            if (contestants.get(i).greaterThan(contestants.get(i + 1))){
+                for (int j = i; j > 1 && contestants.get(i).greaterThan(contestants.get(i + 1)); j--){
+
+                    ContestantData temp = new ContestantData(contestants.get(j));
+                    contestants.set(j,new ContestantData(contestants.get(j-1)));
+                    contestants.set(j - 1, temp);
+                    contestants.get(j).copy(contestants.get(j-1));
+                    contestants.get(j-1).copy(temp);
+                    System.out.printf(contestants.get(0).getName() + ", " +
+                            contestants.get(1).getName() + ", " +
+                            contestants.get(2).getName() + ", " +
+                            contestants.get(3).getName() + ", " +
+                            contestants.get(4).getName() + ", " +
+                            contestants.get(5).getName() + "\n");
+                    //contestants.set(j,contestants.get(j - 1));
+                    //contestants.set(j - 1, temp);
+                }
+            }
+        }*/
+
         for (int m = n; m >= 0; m--) {
             for (int i = 0; i < n - 1; i++) {
                 k = i + 1;
                 if (contestants.get(i).greaterThan(contestants.get(k))) {
-                    ContestantData temp;
-                    temp = contestants.get(i);
+                    ContestantData temp = new ContestantData(contestants.get(i));
+                    //temp = contestants.get(i);
                     contestants.set(i,contestants.get(k));
                     contestants.set(k, temp);
+                    System.out.printf(contestants.get(0).getName() + ", " +
+                            contestants.get(1).getName() + ", " +
+                            contestants.get(2).getName() + ", " +
+                            contestants.get(3).getName() + ", " +
+                            contestants.get(4).getName() + ", " +
+                            contestants.get(5).getName() + "\n");
                 }
             }
         }
