@@ -73,6 +73,11 @@ public class TournamentData implements Parcelable {
         pools = null;
     }
 
+    public void updatePools() {
+        for (int i = 0; i < pools.size(); ++i) {
+            pools.get(i).syncMatches();
+        }
+    }
     /**
      * Uses the contestant list to create the pools. The more contestants there are, the more pools
      * will be created. This will not run if there are less than 2 contestants.
@@ -120,19 +125,19 @@ public class TournamentData implements Parcelable {
                     // If you were to uncomment this, then there would be no me vs me matches in the
                     // pool.
                     //if (i != j) {
-                        int id1 = contestants.get(i).getId();
-                        int id2 = contestants.get(j).getId();
-                        MatchData newMatch = new MatchData(id1, id2);
-                        pools.get(poolSpot).addMatch(newMatch);
-                        contestants.get(i).addMatch(newMatch);
-                        contestants.get(j).addMatch(newMatch);
+                    int id1 = contestants.get(i).getId();
+                    int id2 = contestants.get(j).getId();
+                    MatchData newMatch = new MatchData(id1, id2);
+                    pools.get(poolSpot).addMatch(newMatch);
+                    contestants.get(i).addMatch(newMatch);
+                    contestants.get(j).addMatch(newMatch);
                     //}
                 }
             }
 
             // Make sure that you are continuing on the contestant streak.
             prevContestantCount += poolLens.get(poolSpot);
-
+        }
             /*
             Algorithm Explained.
             The first part figures out how large each pool will be, and how many pools there will
@@ -141,6 +146,9 @@ public class TournamentData implements Parcelable {
             The second part uses the data from the first part to create a match, add the match to
             the correct pool and both contestants.
             */
+
+        for (int i = 0; i < pools.size(); ++i) {
+            pools.get(i).syncMatches();
         }
     }
 

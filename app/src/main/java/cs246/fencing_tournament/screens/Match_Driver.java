@@ -29,7 +29,6 @@ public class Match_Driver extends AppCompatActivity {
     private int poolNum, matchNum;
 
     public void callMatch(View v) {
-
         Intent action = new Intent(Match_Driver.this, MatchScreen.class);
 
         action.putParcelableArrayListExtra("ContestantsArray",(ArrayList<ContestantData>)contestants);
@@ -76,9 +75,11 @@ public class Match_Driver extends AppCompatActivity {
         thisMatch.setP1Score(p1S);
         thisMatch.setP2Score(p2S);
         thisMatch.applyResults(contestants);
+
         Intent intent = new Intent();
         intent.putParcelableArrayListExtra("ContestantsArray",
                 (ArrayList<ContestantData>) contestants);
+
         intent.putExtra("Match", thisMatch);
         intent.putExtra("PoolNum", poolNum);
         intent.putExtra("MatchNum", matchNum);
@@ -91,7 +92,6 @@ public class Match_Driver extends AppCompatActivity {
     }
 
     public void update(View v) {
-
         done();
     }
 

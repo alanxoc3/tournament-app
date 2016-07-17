@@ -73,11 +73,12 @@ public class MainScreen extends AppCompatActivity {
 
     public void startPool(View v) {
         Intent action = new Intent(MainScreen.this, PoolScreen.class);
-        if (!hasPools)
+        if (!hasPools) {
             tournament.generatePools();
+            hasPools = true;
+        }
 
         if(tournament.hasPools()) {
-            // action.putParcelableArrayListExtra("PoolsArray", (ArrayList<PoolData>) tournament.getPools());
             action.putExtra("Tournament", tournament);
             startActivityForResult(action, 5);
         }

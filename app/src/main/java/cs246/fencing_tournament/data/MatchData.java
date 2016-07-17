@@ -60,8 +60,14 @@ public class MatchData implements Parcelable {
         ContestantData con1 = getP1(conList);
         ContestantData con2 = getP2(conList);
 
-        con1.addMatch(this);
-        con2.addMatch(this);
+        int m1 = con1.getMatchIndex(con1.getId(), con2.getId());
+        int m2 = con2.getMatchIndex(con1.getId(), con2.getId());
+
+        if (m1 == -1) con1.addMatch(this);
+        else con1.getMatches().set(m1, this);
+
+        if (m2 == -1) con2.addMatch(this);
+        else con2.getMatches().set(m2, this);
     }
 
     /**

@@ -44,6 +44,16 @@ public class ContestantData implements Parcelable, Comparable <ContestantData> {
 		}
 	}
 
+	public int getMatchIndex(int id1, int id2) {
+		for (int i = 0; i < _matchHistory.size(); ++i) {
+			if (_matchHistory.get(i).getId1() == id1 && _matchHistory.get(i).getId2() == id2
+					|| _matchHistory.get(i).getId1() == id2 && _matchHistory.get(i).getId2() == id1)
+				return i;
+		}
+
+		return -1;
+	}
+
 	public void clearHistory() {
 		_matchHistory.clear();
 	}
