@@ -40,7 +40,8 @@ public class ContestantData implements Parcelable, Comparable <ContestantData> {
 			_matchHistory.add(newMatch);
 		}
 		else {
-			Log.e(TAG, "Did not pass in a match succesfully");
+            //TODO COMMENT THIS BACK IN
+			//Log.e(TAG, "Did not pass in a match succesfully");
 		}
 	}
 
@@ -99,7 +100,8 @@ public class ContestantData implements Parcelable, Comparable <ContestantData> {
 				wins++;
 			}
 		}
-		Log.i("getWins", Integer.toString(wins));
+        //TODO COMMENT THIS BACK IN
+		//Log.i("getWins", Integer.toString(wins));
 		return wins;
     }
 
@@ -125,8 +127,9 @@ public class ContestantData implements Parcelable, Comparable <ContestantData> {
 				points += _matchHistory.get(i).getP1Score();
 			else if (_id == _matchHistory.get(i).getId2())
 				points += _matchHistory.get(i).getP2Score();
-			else
-				Log.e(TAG, "Contestant did not participate in this match");
+			// TODO COMMENT THIS BACK IN BEFORE PUSHING!!!!!!!
+            //else
+				//Log.e(TAG, "Contestant did not participate in this match");
 			}
 		return points;
     }
@@ -139,8 +142,9 @@ public class ContestantData implements Parcelable, Comparable <ContestantData> {
 				pointsAgainst += _matchHistory.get(i).getP2Score();
 			else if (_id == _matchHistory.get(i).getId2())
 				pointsAgainst += _matchHistory.get(i).getP1Score();
-			else
-				Log.e(TAG, "Contestant did not participate in this match");
+			// TODO COMMENT THIS BACK IN BEFORE PUSHING
+            //else
+			//	Log.e(TAG, "Contestant did not participate in this match");
 		}
 		return pointsAgainst;
     }
@@ -166,7 +170,8 @@ public class ContestantData implements Parcelable, Comparable <ContestantData> {
 				return contestants.get(i);
 			}
 		}
-		Log.e(TAG, "There is no contestant with the given ID");
+        // TODO COMMENT THIS BACK IN
+		// Log.e(TAG, "There is no contestant with the given ID");
 		return new ContestantData();
     }
 
